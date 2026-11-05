@@ -22,8 +22,8 @@
       <button class="rx-tab is-active" role="tab" aria-selected="true" aria-controls="rx-p-flow" id="rx-t-flow" data-tab="flow">
         <span class="rx-tab-num">01</span>Сайт → бот → CRM
       </button>
-      <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-ai" id="rx-t-ai" data-tab="ai" tabindex="-1">
-        <span class="rx-tab-num">02</span>ИИ-помощник
+      <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-book" id="rx-t-book" data-tab="book" tabindex="-1">
+        <span class="rx-tab-num">02</span>Онлайн-запись
       </button>
       <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-calc" id="rx-t-calc" data-tab="calc" tabindex="-1">
         <span class="rx-tab-num">03</span>Калькуляторы
@@ -101,55 +101,38 @@
       </div>
     </article>
 
-    <!-- ============ 02 AI ============ -->
-    <article class="rx-panel" role="tabpanel" id="rx-p-ai" aria-labelledby="rx-t-ai" hidden>
+    <!-- ============ 02 BOOKING ============ -->
+    <article class="rx-panel" role="tabpanel" id="rx-p-book" aria-labelledby="rx-t-book" hidden>
       <div class="rx-info">
-        <span class="rx-tag">ИИ-интеграция</span>
-        <h3>ИИ отвечает клиентам и разбирает отзывы</h3>
-        <p>Консультант отвечает на типовые вопросы по вашей базе знаний круглосуточно. Отзывы он сам раскладывает по категориям и готовит черновик ответа, вам остаётся проверить и отправить.</p>
-        <p class="rx-hint"><b>Попробуйте:</b> задайте вопрос или переключитесь на «Разбор отзыва». В демо ответы заготовлены заранее.</p>
+        <span class="rx-tag">Сайт · Бот · Автоматизация</span>
+        <h3>Онлайн-запись без звонков</h3>
+        <p>Клиент сам выбирает услугу, день и свободное время. Занятые слоты не показываются, двойных записей не бывает, а за два часа до визита бот присылает напоминание.</p>
+        <p class="rx-hint"><b>Попробуйте:</b> выберите услугу, день и время, затем нажмите «Записаться».</p>
       </div>
 
-      <div class="rx-stage rx-ai">
-        <div class="rx-seg" role="tablist" aria-label="Режим">
-          <button class="rx-seg-btn is-on" type="button" data-mode="chat" aria-pressed="true">Консультант</button>
-          <button class="rx-seg-btn" type="button" data-mode="review" aria-pressed="false">Разбор отзыва</button>
-        </div>
-
-        <div class="rx-ai-mode" data-mode="chat">
-          <div class="rx-win rx-chat">
-            <div class="rx-win-bar rx-win-bar--tg">
-              <span class="rx-ava rx-ava--bot">ИИ</span>
-              <div><b>Помощник цветочной «Флора»</b><small>онлайн</small></div>
-            </div>
-            <div class="rx-chat-feed" id="rx-chat-feed" aria-live="polite">
-              <div class="rx-bubble rx-bubble--bot">Здравствуйте! Я помощник «Флоры». Подскажу про доставку, цены и заказ.</div>
-            </div>
-            <div class="rx-chat-suggest" id="rx-chat-suggest">
-              <button type="button" class="rx-chip">Сколько стоит доставка?</button>
-              <button type="button" class="rx-chip">Успеете к 18:00 сегодня?</button>
-              <button type="button" class="rx-chip">Можно оплатить при получении?</button>
-            </div>
-            <form class="rx-chat-input" id="rx-chat-form">
-              <input id="rx-chat-text" placeholder="Напишите вопрос…" autocomplete="off" maxlength="160" aria-label="Ваш вопрос">
-              <button class="rx-btn rx-btn--accent rx-btn--icon" type="submit" aria-label="Отправить"><svg viewBox="0 0 24 24"><path d="M4 12h14m-6-6 6 6-6 6"/></svg></button>
-            </form>
-          </div>
-        </div>
-
-        <div class="rx-ai-mode" data-mode="review" hidden>
-          <div class="rx-review">
-            <div class="rx-review-in">
-              <div class="rx-chips rx-chips--sm" id="rx-review-samples">
-                <button type="button" class="rx-chip" data-i="0">Жалоба</button>
-                <button type="button" class="rx-chip" data-i="1">Похвала</button>
-                <button type="button" class="rx-chip" data-i="2">Вопрос</button>
+      <div class="rx-stage rx-book">
+        <div class="rx-book-grid">
+          <div class="rx-win rx-book-form">
+            <div class="rx-win-bar"><i></i><i></i><i></i><span>lokon-studio.ru/zapis</span></div>
+            <div class="rx-win-body">
+              <div class="rx-mini-brand">Студия «Локон»</div>
+              <div class="rx-field-label">Услуга</div>
+              <div class="rx-chips rx-chips--sm" role="radiogroup" id="rx-book-svc">
+                <button type="button" class="rx-chip is-on" role="radio" aria-checked="true" data-name="Стрижка" data-min="45" data-price="1500">Стрижка · 45 мин</button>
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-name="Окрашивание" data-min="120" data-price="4500">Окрашивание · 2 ч</button>
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-name="Укладка" data-min="30" data-price="1200">Укладка · 30 мин</button>
               </div>
-              <textarea id="rx-review-text" rows="4" maxlength="400" aria-label="Текст отзыва">Заказывал букет на день рождения жены, курьер опоздал на полтора часа и никто не перезвонил. Цветы красивые, но настроение испорчено.</textarea>
-              <button class="rx-btn rx-btn--primary" type="button" id="rx-review-go">Разобрать отзыв</button>
+              <div class="rx-field-label">День</div>
+              <div class="rx-days" id="rx-book-days" role="radiogroup" aria-label="День"></div>
+              <div class="rx-field-label">Время</div>
+              <div class="rx-slots" id="rx-book-slots" role="radiogroup" aria-label="Время"></div>
+              <button class="rx-btn rx-btn--accent rx-btn--block" type="button" id="rx-book-go" disabled>Выберите время</button>
             </div>
-            <div class="rx-review-out" id="rx-review-out" aria-live="polite">
-              <div class="rx-review-empty">Здесь появится разбор: тональность, тема, срочность и черновик ответа.</div>
+          </div>
+
+          <div class="rx-book-side">
+            <div class="rx-book-card" id="rx-book-card" aria-live="polite">
+              <div class="rx-review-empty">Здесь появится подтверждение записи и напоминание от бота.</div>
             </div>
           </div>
         </div>
@@ -255,7 +238,7 @@
         <span class="rx-tag">Сайты · Дизайн</span>
         <h3>Было и стало</h3>
         <p>Старый сайт не открывается нормально с телефона, а с компьютера выглядит как из 2007 года. Новый удобен на любом экране и ведёт клиента к заказу.</p>
-        <p class="rx-hint"><b>Попробуйте:</b> потяните ползунок и переключитесь на «Телефон».</p>
+        <p class="rx-hint"><b>Попробуйте:</b> потяните ползунок<span class="rx-desk-only"> и переключитесь на «Телефон»</span>.</p>
       </div>
 
       <div class="rx-stage rx-ba-wrap">

@@ -58,6 +58,7 @@
       var p = document.getElementById(x.getAttribute('aria-controls'));
       p.hidden = !on; p.classList.toggle('is-active', on);
     });
+    window.dispatchEvent(new Event('resize'));
     if (focus) t.focus();
     t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
   }
@@ -99,8 +100,22 @@
         m.appendChild(document.createTextNode(name + ' · ' + phone));
         m.appendChild(el('br'));
         m.appendChild(document.createTextNode(service + ' уборка'));
-        var acts = el('div', 'rx-tg-acts'); acts.appendChild(el('span', null, 'Принять')); acts.appendChild(el('span', null, 'Позвонить'));
-        m.appendChild(acts); m.appendChild(el('time', null, t));
+        var acts = el('div', 'rx-tg-acts');
+        var accept = el('button', null, 'Принять'), call = el('button', null, 'Позвонить');
+        accept.type = call.type = 'button'; accept.dataset.id = id;
+        acts.appendChild(accept); acts.appendChild(call);
+        var reply = el('div', 'rx-tg-reply'); reply.hidden = true;
+        m.appendChild(acts); m.appendChild(reply); m.appendChild(el('time', null, t));
+        accept.addEventListener('click', function () {
+          accept.textContent = 'Принята ✓'; accept.classList.add('is-done'); accept.disabled = true;
+          reply.hidden = false; reply.textContent = 'Клиенту отправлено: «Заявка принята, менеджер свяжется в течение 15 минут»';
+          var st = rows.querySelector('.rx-status[data-id="' + id + '"]');
+          if (st && st.dataset.s === '0') { st.dataset.s = 1; st.textContent = STAT[1]; }
+        });
+        call.addEventListener('click', function () {
+          call.textContent = 'Звоним…'; call.disabled = true;
+          setTimeout(function () { call.textContent = 'Позвонить'; call.disabled = false; }, 1600);
+        });
         feed.appendChild(m);
         while (feed.children.length > 3) feed.removeChild(feed.firstElementChild);
         arrows[0].classList.remove('is-hot'); arrows[1].classList.add('is-hot');
@@ -109,7 +124,7 @@
       setTimeout(function () {
         var r = el('div', 'rx-crm-row is-new');
         var who = el('div'); who.appendChild(el('b', null, name)); who.appendChild(el('small', null, service + ' · №' + id)); r.appendChild(who);
-        var s = el('button', 'rx-status', STAT[0]); s.type = 'button'; s.dataset.s = 0; r.appendChild(s);
+        var s = el('button', 'rx-status', STAT[0]); s.type = 'button'; s.dataset.s = 0; s.dataset.id = id; r.appendChild(s);
         rows.insertBefore(r, rows.firstChild);
         while (rows.children.length > 5) rows.removeChild(rows.lastElementChild);
         arrows[1].classList.remove('is-hot');
@@ -119,133 +134,100 @@
     });
   })();
 
-  /* ================= 02 ИИ-помощник ================= */
+  /* ================= 02 Онлайн-запись ================= */
   (function () {
-    var stage = $('.rx-ai'); if (!stage) return;
-    segment($('.rx-seg', stage), 'mode', stage);
+    var stage = $('.rx-book'); if (!stage) return;
+    var DAYS = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    var MONTHS = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    var TIMES = ['10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
+    var daysBox = $('#rx-book-days'), slotsBox = $('#rx-book-slots'), go = $('#rx-book-go'), card = $('#rx-book-card');
+    var svc = $('#rx-book-svc .rx-chip.is-on'), dayIdx = 0, time = null, mine = {};
 
-    /* --- консультант (ответы заготовлены) --- */
-    var FAQ = [
-      { k: ['достав', 'привез', 'курьер'], a: 'Доставка по городу 300 ₽, от 3000 ₽ бесплатно. Привезём за 1,5–2 часа или к точному времени.' },
-      { k: ['успе', 'сегодня', '18', 'срочн', 'быстр', '~когда'], a: 'Да, если оформить заказ до 16:00, привезём к 18:00. Оформить сейчас?' },
-      { k: ['оплат', 'карт', 'налич', 'получени', 'перевод'], a: 'Можно картой на сайте, по СБП или наличными курьеру при получении.' },
-      { k: ['цен', '~стои', '~сколько', 'дорог', 'бюджет'], a: 'Букеты от 1500 ₽. Хотите, подберу варианты под ваш бюджет?' },
-      { k: ['роз', 'тюльпан', 'пион', 'букет', 'цвет'], a: 'Сейчас в наличии розы, тюльпаны и сезонные пионы. Могу показать готовые букеты или собрать под ваш вкус.' },
-      { k: ['адрес', 'где', 'самовывоз', 'забрать'], a: 'Самовывоз: ул. Лесная, 12, ежедневно с 8:00 до 22:00.' },
-      { k: ['открытк', 'подпис', 'записк'], a: 'Открытку с вашим текстом добавим бесплатно, просто напишите его в комментарии к заказу.' },
-      { k: ['привет', 'здравств', 'добр'], a: 'Здравствуйте! Чем могу помочь?' }
-    ];
-    var fallback = 'Хороший вопрос! Точно ответить не могу, поэтому передал его менеджеру. Он напишет вам в течение 10 минут.';
-    var chat = $('#rx-chat-feed'), form = $('#rx-chat-form'), input = $('#rx-chat-text'), busy = false;
+    /* «Занятость» детерминирована от даты, чтобы при перерисовке не прыгала */
+    function busy(date, t) {
+      var n = date.getDate() * 31 + date.getMonth() * 7 + parseInt(t, 10) * 13;
+      return (n % 5 === 0) || (n % 7 === 0) || (n % 11 === 0);
+    }
+    var dates = [];
+    for (var i = 0; i < 7; i++) { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + i); dates.push(d); }
 
-    function answer(q) {
-      var s = q.toLowerCase(), best = null, score = 0;
-      FAQ.forEach(function (f) {
-        var c = f.k.reduce(function (sum, k) { var w = k[0] === '~' ? .5 : 1; return sum + (s.indexOf(k.replace('~', '')) !== -1 ? w : 0); }, 0);
-        if (c > score) { score = c; best = f; }
+    function renderDays() {
+      daysBox.innerHTML = '';
+      dates.forEach(function (d, i) {
+        var b = el('button', 'rx-day' + (i === dayIdx ? ' is-on' : '') + (i === 0 ? ' is-today' : '')); b.type = 'button';
+        b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', i === dayIdx);
+        b.setAttribute('aria-label', (i === 0 ? 'Сегодня, ' : '') + d.getDate() + ' ' + MONTHS[d.getMonth()]);
+        b.appendChild(el('small', null, DAYS[d.getDay()]));
+        b.appendChild(el('b', null, d.getDate()));
+        if (d.getDay() === 1) { b.disabled = true; b.title = 'Выходной'; }
+        b.addEventListener('click', function () { dayIdx = i; time = null; renderDays(); renderSlots(); });
+        daysBox.appendChild(b);
       });
-      return best ? best.a : fallback;
     }
-    function ask(q) {
-      q = q.trim(); if (!q || busy) return;
-      busy = true;
-      chat.appendChild(el('div', 'rx-bubble rx-bubble--me', q));
-      var typing = el('div', 'rx-bubble rx-bubble--bot rx-typing');
-      typing.innerHTML = '<i></i><i></i><i></i>';
-      chat.appendChild(typing); chat.scrollTop = chat.scrollHeight;
-      setTimeout(function () {
-        typing.remove();
-        var a = answer(q), b = el('div', 'rx-bubble rx-bubble--bot', a);
-        if (a !== fallback) b.appendChild(el('small', null, 'Ответ из базы знаний магазина'));
-        chat.appendChild(b); chat.scrollTop = chat.scrollHeight; busy = false;
-      }, reduce ? 50 : 900);
-    }
-    form.addEventListener('submit', function (e) { e.preventDefault(); ask(input.value); input.value = ''; });
-    $('#rx-chat-suggest').addEventListener('click', function (e) {
-      var b = e.target.closest('.rx-chip'); if (!b) return; ask(b.textContent);
-    });
-
-    /* --- разбор отзыва (простой разбор по ключевым словам) --- */
-    var SAMPLES = [
-      'Заказывал букет на день рождения жены, курьер опоздал на полтора часа и никто не перезвонил. Цветы красивые, но настроение испорчено.',
-      'Спасибо огромное! Букет свежий, собран со вкусом, привезли точно ко времени. Жена в восторге, будем заказывать ещё.',
-      'Подскажите, можно ли заказать букет заранее на 8 марта и оплатить при получении?'
-    ];
-    var NEG = ['опозд', 'не перезвон', 'никто не', 'плох', 'ужас', 'испорч', 'грязн', 'хам', 'груб', 'долго', 'вял', 'разочар', 'верните', 'обман', 'не приш', 'не привез', 'недоволен', 'отврат', 'кошмар'];
-    var POS = ['спасибо', 'отличн', 'понрав', 'красив', 'свеж', 'вкус', 'восторг', 'рекоменд', 'супер', 'лучш', 'вовремя', 'точно ко времени', 'прекрас', 'молодц', 'благодар'];
-    var CAT = [
-      { n: 'Доставка', k: ['курьер', 'достав', 'опозд', 'привез', 'ко времени', 'вовремя'] },
-      { n: 'Качество товара', k: ['букет', 'цвет', 'свеж', 'вял', 'роз', 'собран'] },
-      { n: 'Сервис', k: ['перезвон', 'менеджер', 'оператор', 'хам', 'груб', 'ответ'] },
-      { n: 'Оплата', k: ['оплат', 'цен', 'дорог', 'деньг', 'верните'] }
-    ];
-    var ta = $('#rx-review-text'), out = $('#rx-review-out'), go = $('#rx-review-go');
-
-    function count(s, list) { return list.filter(function (k) { return s.indexOf(k) !== -1; }).length; }
-
-    function analyze(text) {
-      var s = text.toLowerCase(), neg = count(s, NEG), pos = count(s, POS);
-      var question = /\?/.test(s) || /^(подскаж|можно|как |сколько|есть ли)/.test(s);
-      var tone, score;
-      if (neg > pos) { tone = 'Негатив'; score = Math.max(.08, .35 - .08 * (neg - pos)); }
-      else if (pos > neg) { tone = 'Позитив'; score = Math.min(.94, .68 + .08 * (pos - neg)); }
-      else { tone = question ? 'Нейтрально' : (neg ? 'Смешанный' : 'Нейтрально'); score = .5; }
-      var cats = CAT.filter(function (c) { return count(s, c.k) > 0; }).map(function (c) { return c.n; });
-      if (question) cats.unshift('Вопрос');
-      if (!cats.length) cats = ['Общее'];
-      var urgent = tone === 'Негатив' ? 'Ответить сегодня' : question ? 'Ответить в течение часа' : 'Не срочно';
-      var draft;
-      if (tone === 'Негатив') {
-        draft = 'Здравствуйте! Нам очень жаль, что так вышло' + (cats.indexOf('Доставка') !== -1 ? ' с доставкой' : '') +
-          '. Мы уже разбираемся с ситуацией. В качестве извинения дарим скидку 20% на следующий заказ, промокод ПРОСТИТЕ20. Менеджер свяжется с вами сегодня.';
-      } else if (question) {
-        draft = 'Здравствуйте! Да, конечно: заказ можно оформить заранее на любую дату, а оплатить картой, по СБП или наличными при получении. Подсказать с выбором букета?';
-      } else if (tone === 'Позитив') {
-        draft = 'Спасибо за тёплые слова! Очень рады, что букет понравился. Будем ждать вас снова, а на следующий заказ дарим скидку 10%.';
-      } else {
-        draft = 'Здравствуйте! Спасибо, что поделились мнением. Расскажите, пожалуйста, подробнее, что нам улучшить?';
-      }
-      return { tone: tone, score: score, cats: cats, urgent: urgent, draft: draft };
+    function renderSlots() {
+      var d = dates[dayIdx], nowH = new Date().getHours(), key = d.toDateString();
+      slotsBox.innerHTML = '';
+      var free = 0;
+      TIMES.forEach(function (t) {
+        var past = dayIdx === 0 && parseInt(t, 10) <= nowH;
+        var isMine = mine[key + t];
+        var b = el('button', 'rx-slot' + (t === time ? ' is-on' : '') + (isMine ? ' is-mine' : ''), t); b.type = 'button';
+        b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', t === time);
+        if (past || busy(d, t) || isMine) { b.disabled = true; b.setAttribute('aria-label', t + ', занято'); }
+        else free++;
+        if (isMine) b.title = 'Ваша запись';
+        b.addEventListener('click', function () { time = t; renderSlots(); });
+        slotsBox.appendChild(b);
+      });
+      if (!free) slotsBox.appendChild(el('div', 'rx-slots-empty', 'На этот день всё занято, выберите другой.'));
+      go.disabled = !time;
+      go.textContent = time ? 'Записаться на ' + time : 'Выберите время';
     }
 
-    function render(r) {
-      out.innerHTML = '';
-      var wrap = el('div', 'rx-an');
-
-      var t = el('div'); t.appendChild(el('div', 'rx-an-label', 'Тональность'));
-      var m = el('div', 'rx-meter'), dot = el('i'); dot.style.left = '50%'; m.appendChild(dot); t.appendChild(m);
-      wrap.appendChild(t);
-
-      var row = el('div', 'rx-an-row');
-      row.appendChild(el('span', 'rx-pill ' + (r.tone === 'Негатив' ? 'rx-pill--neg' : r.tone === 'Позитив' ? 'rx-pill--pos' : ''), r.tone));
-      r.cats.forEach(function (c) { row.appendChild(el('span', 'rx-pill', c)); });
-      row.appendChild(el('span', 'rx-pill ' + (r.tone === 'Негатив' ? 'rx-pill--warn' : ''), r.urgent));
-      wrap.appendChild(row);
-
-      var d = el('div'); d.appendChild(el('div', 'rx-an-label', 'Черновик ответа'));
-      d.appendChild(el('div', 'rx-draft', r.draft)); wrap.appendChild(d);
-
-      var acts = el('div', 'rx-draft-acts');
-      var send = el('button', 'rx-btn rx-btn--accent', 'Отправить'); send.type = 'button';
-      var edit = el('button', 'rx-btn rx-btn--ghost', 'Изменить'); edit.type = 'button';
-      send.addEventListener('click', function () { send.textContent = 'Отправлено ✓'; send.disabled = true; });
-      edit.addEventListener('click', function () { var dr = $('.rx-draft', wrap); dr.contentEditable = true; dr.focus(); });
-      acts.appendChild(send); acts.appendChild(edit); wrap.appendChild(acts);
-
-      out.appendChild(wrap);
-      requestAnimationFrame(function () { requestAnimationFrame(function () { dot.style.left = (r.score * 100) + '%'; }); });
-    }
+    radioGroup($('#rx-book-svc'), function (b) { svc = b; });
 
     go.addEventListener('click', function () {
-      if (!ta.value.trim()) { ta.focus(); return; }
-      go.disabled = true; go.textContent = 'Анализирую…';
-      out.innerHTML = ''; var ty = el('div', 'rx-typing'); ty.innerHTML = '<i></i><i></i><i></i>'; out.appendChild(ty);
-      setTimeout(function () { render(analyze(ta.value)); go.disabled = false; go.textContent = 'Разобрать отзыв'; }, reduce ? 50 : 800);
+      if (!time) return;
+      var d = dates[dayIdx], t = time;
+      mine[d.toDateString() + t] = true; time = null;
+      var dateStr = d.getDate() + ' ' + MONTHS[d.getMonth()] + ', ' + DAYS[d.getDay()];
+      var remindH = ('0' + (parseInt(t, 10) - 2)).slice(-2) + ':00';
+      if (dayIdx === 0 && parseInt(t, 10) - 2 <= new Date().getHours()) remindH = now();
+
+      card.innerHTML = '';
+      var c = el('div', 'rx-conf');
+      var head = el('div', 'rx-conf-head');
+      var ok = el('span', 'rx-conf-ok'); ok.innerHTML = '<svg viewBox="0 0 24 24"><path d="m5 12 5 5 9-10"/></svg>';
+      head.appendChild(ok); head.appendChild(el('b', null, 'Вы записаны'));
+      c.appendChild(head);
+      var dl = el('dl');
+      [['Услуга', svc.dataset.name], ['Когда', dateStr + ', ' + t], ['Мастер', 'Ольга'], ['Стоимость', rub(+svc.dataset.price)]].forEach(function (r) {
+        dl.appendChild(el('dt', null, r[0])); dl.appendChild(el('dd', null, r[1]));
+      });
+      c.appendChild(dl);
+      var rem = el('div', 'rx-remind');
+      rem.appendChild(el('div', 'rx-remind-label', 'Telegram, ' + (dayIdx === 0 ? 'сегодня' : d.getDate() + ' ' + MONTHS[d.getMonth()]) + ' в ' + remindH));
+      var m = el('div', 'rx-tg-msg is-new');
+      m.appendChild(el('b', null, 'Напоминание о записи'));
+      m.appendChild(document.createTextNode(svc.dataset.name + ' сегодня в ' + t + '. Ждём вас по адресу ул. Лесная, 12.'));
+      var acts = el('div', 'rx-tg-acts');
+      var yes = el('button', null, 'Приду'), move = el('button', null, 'Перенести');
+      yes.type = move.type = 'button';
+      yes.addEventListener('click', function () { yes.textContent = 'Подтверждено ✓'; yes.classList.add('is-done'); yes.disabled = move.disabled = true; });
+      move.addEventListener('click', function () {
+        delete mine[d.toDateString() + t]; renderSlots();
+        move.textContent = 'Слот освобождён'; move.classList.add('is-done'); yes.disabled = move.disabled = true;
+      });
+      acts.appendChild(yes); acts.appendChild(move); m.appendChild(acts);
+      m.appendChild(el('time', null, remindH));
+      rem.appendChild(m); c.appendChild(rem);
+      card.appendChild(c);
+      renderSlots();
+      if (window.innerWidth < 820) card.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
     });
-    $('#rx-review-samples').addEventListener('click', function (e) {
-      var b = e.target.closest('.rx-chip'); if (!b) return;
-      ta.value = SAMPLES[+b.dataset.i]; go.click();
-    });
+
+    if (dates[0].getDay() === 1) dayIdx = 1;
+    renderDays(); renderSlots();
   })();
 
   /* ================= 03 Калькуляторы ================= */
@@ -318,8 +300,15 @@
     var ba = $('#rx-ba'); if (!ba) return;
     var range = $('.rx-ba-range', ba);
     range.addEventListener('input', function () { ba.style.setProperty('--pos', range.value + '%'); });
-    var seg = $('.rx-ba-wrap .rx-seg');
+    var seg = $('.rx-ba-wrap .rx-seg'), scaleBox = $('.rx-bf-scale', ba), choice = 'desk';
+    var mobile = window.matchMedia('(max-width: 560px)');
+    function fitBefore() { if (!ba.clientWidth) return; scaleBox.style.transform = ba.dataset.dev === 'phone' ? 'scale(' + (ba.clientWidth / 760) + ')' : ''; }
+    function apply() { ba.dataset.dev = mobile.matches ? 'phone' : choice; fitBefore(); }
     segment(seg, 'dev');
-    seg.addEventListener('rx:change', function (e) { ba.dataset.dev = e.detail; });
+    seg.addEventListener('rx:change', function (e) { choice = e.detail; apply(); setTimeout(fitBefore, 480); });
+    if (mobile.addEventListener) mobile.addEventListener('change', apply); else mobile.addListener(apply);
+    window.addEventListener('resize', fitBefore);
+    ba.addEventListener('transitionend', fitBefore);
+    apply();
   })();
 })();

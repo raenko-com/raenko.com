@@ -54,10 +54,34 @@ const PALETTES = [
     c: { bg: '#F7FBF9', surface: '#FFFFFF', ink: '#10211B', muted: '#55665F', primary: '#0E9F73', accent: '#8B5CF6', deep: '#0E3B2E' },
   },
   {
-    id: 'night', name: 'Ночной неон', tag: 'Тёмная тема',
-    why: 'Тёмный фон, светлый текст, яркий синий и наш оранжевый. Самый «вау» вариант для hero и примеров, но тяжелее в поддержке. Можно использовать как тёмную тему к варианту «Чистый синий».',
-    c: { bg: '#0B1020', surface: '#151B2E', ink: '#EEF2FF', muted: '#9AA4BF', primary: '#5B8CFF', accent: '#FF6B3D', deep: '#070B16' },
-    dark: true,
+    id: 'azure-peach', name: 'Лазурь + персик', tag: 'Воздушно и светло',
+    why: 'Светлый лазурный вместо тёмно-синего и мягкий персиковый вместо резкого оранжевого. Самая «воздушная» палитра: много света, ничего не давит. Хорошо для сайта, где главное спокойствие и доверие.',
+    c: { bg: '#F5FAFF', surface: '#FFFFFF', ink: '#0B1B2B', muted: '#536273', primary: '#0A7BC9', accent: '#FFB38A', deep: '#0B3A66' },
+  },
+  {
+    id: 'raspberry-mint', name: 'Малина + мята', tag: 'Ярко и запоминается',
+    why: 'Малиновый основным и мятный акцентом. Нестандартно для IT, поэтому сайт легко запомнить среди синих конкурентов. Энергично, но без кислотности.',
+    c: { bg: '#FFF8FA', surface: '#FFFFFF', ink: '#1F1020', muted: '#6B5A66', primary: '#D61F5E', accent: '#2DD4BF', deep: '#4A0E2A' },
+  },
+  {
+    id: 'blue-mint', name: 'Синий + мятный', tag: 'Финтех-стиль',
+    why: 'Яркий синий и свежий мятно-зелёный, как у банков и сервисов оплаты. Зелёный хорошо подсвечивает результат: «заявка пришла», «оплата прошла», «бот ответил».',
+    c: { bg: '#F5F8FF', surface: '#FFFFFF', ink: '#0B1430', muted: '#525C78', primary: '#1F5BFF', accent: '#34D399', deep: '#0F2A6B' },
+  },
+  {
+    id: 'orange-violet', name: 'Оранжевый + фиолет', tag: 'Наш оранжевый главный',
+    why: 'Оставляем фирменный #FF5A1F основным цветом, а тёмно-синий меняем на яркий фиолетовый. Логотип остаётся почти прежним, а сайт становится заметно живее и современнее.',
+    c: { bg: '#FFFFFF', surface: '#FFF7F2', ink: '#1B1530', muted: '#625B72', primary: '#FF5A1F', accent: '#6D5DFC', deep: '#2B1F5C' },
+  },
+  {
+    id: 'ocean-coral', name: 'Океан + коралл', tag: 'Сбалансированно',
+    why: 'Насыщенный морской синий и тёплый коралловый. Похоже на нашу текущую пару, но оба цвета светлее и чище, поэтому без тяжести. Безопасный вариант, если не хочется рисковать.',
+    c: { bg: '#F4F9FC', surface: '#FFFFFF', ink: '#0A2233', muted: '#4E6372', primary: '#0077B6', accent: '#FF7F6B', deep: '#023E5C' },
+  },
+  {
+    id: 'lavender-orange', name: 'Лаванда + апельсин', tag: 'Мягко и современно',
+    why: 'Мягкий сине-фиолетовый (как у Notion, Linear, Stripe) и апельсиновый акцент. Современно и дружелюбно, при этом оранжевый связывает с текущим логотипом.',
+    c: { bg: '#F8F8FF', surface: '#FFFFFF', ink: '#17183B', muted: '#5A5C7A', primary: '#5457E8', accent: '#FF8A3D', deep: '#262A6E' },
   },
 ];
 
@@ -98,32 +122,40 @@ const ICONS = {
   bot: '<path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4 4v-4h0A2 2 0 0 1 5 14z"/><path d="M9.5 10.5h.01M14.5 10.5h.01"/>',
   auto: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/>',
   ai: '<path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/>',
+  shield: '<path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/>',
+  promo: '<path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/>',
+  check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+  plus: '<path d="M12 5v14M5 12h14"/>',
 };
 const icon = (k) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg>`;
 
+const SERVICES = [
+  ['site', 'Сайт', 'Лендинги и сайты с каталогом', 'от 50 000 ₽'],
+  ['bot', 'Боты', 'Telegram и MAX, заявки 24/7', 'от 40 000 ₽'],
+  ['auto', 'Автоматизация', 'Заявки сразу в CRM и таблицы', 'от 35 000 ₽'],
+  ['ai', 'ИИ для бизнеса', 'Разбор заявок, черновики ответов', 'по запросу'],
+  ['shield', 'Поддержка', 'Хостинг, бэкапы, обновления', 'от 25 000 ₽/мес'],
+  ['promo', 'Продвижение', 'Директ, Карты, 2ГИС, SEO', 'от 10 000 ₽'],
+];
+
 function preview(p) {
   const c = p.c;
-  const onPrimary = onColor(c.primary, p.dark ? '#0B1020' : c.ink);
-  const onAccent = onColor(c.accent, p.dark ? '#0B1020' : c.ink);
+  const onPrimary = onColor(c.primary, c.ink);
+  const onAccent = onColor(c.accent, c.ink);
   const btnBg = p.gradient ? `linear-gradient(100deg, ${c.primary}, ${c.accent})` : c.primary;
-  // логотип: буква основным цветом (или текстом, если основной слишком светлый), тумблер акцентом
-  const letter = p.current ? c.ink : (p.id === 'graphite' ? c.ink : c.primary);
-  const track = p.current ? c.primary : (p.id === 'graphite' ? c.primary : c.accent);
-  const knob = p.dark ? c.bg : '#FFFFFF';
-  const cardsDark = p.current;
+  // логотип: буква основным цветом, тумблер акцентом; у «Графита» и текущего буква тёмная, тумблер оранжевый
+  const special = p.current || p.id === 'graphite';
+  const letter = special ? c.ink : c.primary;
+  const track = special ? c.primary : c.accent;
   const style = Object.entries(c).map(([k, v]) => `--${k}:${v}`).join(';')
     + `;--on-primary:${onPrimary};--on-accent:${onAccent};--btn:${btnBg}`;
-  const services = [
-    ['site', 'Сайт', 'Лендинги и сайты с каталогом'],
-    ['bot', 'Боты', 'Telegram и MAX, заявки 24/7'],
-    ['auto', 'Автоматизация', 'Заявки сразу в CRM'],
-  ];
-  return `<div class="pv ${cardsDark ? 'pv-dark-cards' : ''}" style="${style}">
+  return `<div class="pv ${p.current ? 'pv-dark-cards' : ''}" style="${style}">
     <div class="pv-head">
-      <span class="pv-logo">${logo(letter, track, knob)}<b>RAENKO</b></span>
+      <span class="pv-logo">${logo(letter, track, '#FFFFFF')}<b>RAENKO</b></span>
       <span class="pv-nav"><i>Услуги</i><i>Примеры</i><i>Вопросы</i></span>
       <span class="pv-phone">+7 928 128-88-08</span>
     </div>
+
     <div class="pv-hero">
       <div>
         <span class="pv-chip">ИИ · боты · автоматизация</span>
@@ -138,19 +170,67 @@ function preview(p) {
         <svg class="pv-ring" viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke-width="2.4" stroke-dasharray="7 6"/></svg>
       </div>
     </div>
-    <div class="pv-cards">
-      ${services.map(([k, t, d], i) => `<div class="pv-card ${i === 1 ? 'hl' : ''}">
-        <span class="pv-ic">${icon(k)}</span><b>${t}</b><small>${d}</small>
-        <span class="pv-price">от ${[50, 40, 35][i]} 000 ₽</span></div>`).join('')}
+
+    <div class="pv-sec">
+      <h4>Услуги и стоимость</h4>
+      <div class="pv-cards">
+        ${SERVICES.map(([k, t, d, price], i) => `<div class="pv-card ${i === 1 ? 'hl' : ''}">
+          <span class="pv-ic">${icon(k)}</span><b>${t}</b><small>${d}</small>
+          <span class="pv-price">${price}</span></div>`).join('')}
+      </div>
     </div>
-    <div class="pv-cta"><span>Обсудим задачу за 15 минут</span><span class="pv-btn acc">Рассчитать</span></div>
+
+    <div class="pv-sec pv-alt">
+      <h4>Примеры работ</h4>
+      <div class="pv-ex">
+        <div class="pv-chat">
+          <div class="pv-chat-h"><span class="pv-av">${icon('bot')}</span><b>Бот салона «Лето»</b><small>онлайн</small></div>
+          <p class="msg in">Здравствуйте! Хочу записаться на стрижку в субботу</p>
+          <p class="msg out">Свободно в субботу:</p>
+          <div class="pv-slots"><span>11:00</span><span class="on">13:30</span><span>16:00</span></div>
+          <p class="msg out">Готово ✓ Записал на 13:30, напомню за 2 часа</p>
+        </div>
+        <div class="pv-crm">
+          <div class="pv-crm-h"><b>Заявки</b><span class="pv-new">+3 новых</span></div>
+          <div class="row"><span>Анна, стрижка</span><i class="st s-new">Новая</i></div>
+          <div class="row"><span>ООО «Вектор», сайт</span><i class="st s-work">В работе</i></div>
+          <div class="row"><span>Игорь, доставка</span><i class="st s-done">Оплачено</i></div>
+          <div class="pv-bar"><span>Конверсия из заявки</span><b>68%</b><em><s style="width:68%"></s></em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-sec">
+      <h4>Частые вопросы</h4>
+      <div class="pv-faq">
+        <div class="q open"><b>Сколько стоит сайт с ботом?</b><span class="pm">${icon('plus')}</span>
+          <p>Считаем по задаче, цену и сроки фиксируем в договоре. Сайт от 50 000 ₽, бот от 40 000 ₽.</p></div>
+        <div class="q"><b>Можно ли подключить нашу CRM?</b><span class="pm">${icon('plus')}</span></div>
+      </div>
+    </div>
+
+    <div class="pv-sec pv-alt pv-form-sec">
+      <div>
+        <h4>Обсудим задачу за 15 минут</h4>
+        <p class="pv-muted">Ответим в течение часа в рабочее время</p>
+      </div>
+      <div class="pv-form">
+        <span class="pv-input">Имя</span>
+        <span class="pv-input focus">+7 (928) 000-00-00</span>
+        <span class="pv-check"><i>${icon('check')}</i>Согласен на обработку персональных данных</span>
+        <span class="pv-btn">Отправить заявку</span>
+      </div>
+    </div>
+
+    <div class="pv-cta"><span>Не знаете, с чего начать?</span><span class="pv-btn acc">Рассчитать стоимость</span></div>
+    <div class="pv-foot"><span class="pv-logo">${logo('#FFFFFF', c.accent === c.deep ? c.primary : (special ? c.primary : c.accent), c.deep)}<b>RAENKO</b></span><small>Сайты · Боты · Автоматизация · ИИ · Поддержка · Продвижение</small></div>
   </div>`;
 }
 
 function card(p, i) {
   const c = p.c;
-  const onPrimary = onColor(c.primary, p.dark ? '#0B1020' : c.ink);
-  const onAccent = onColor(c.accent, p.dark ? '#0B1020' : c.ink);
+  const onPrimary = onColor(c.primary, c.ink);
+  const onAccent = onColor(c.accent, c.ink);
   const sw = ROLES.map(([k, label]) => `<button class="sw" data-hex="${c[k]}" title="Скопировать ${c[k]}">
       <span class="chip" style="background:${c[k]}"></span><span class="sw-t"><b>${label}</b><code>${c[k]}</code></span></button>`).join('');
   const checks = [

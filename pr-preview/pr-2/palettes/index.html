@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="palettes.css?v=2">
+<link rel="stylesheet" href="palettes.css?v=3">
 </head>
 <body>
 <header class="page-head">
@@ -15,11 +15,17 @@
     <p class="eyebrow">RAE-29 · подбор цветов</p>
     <h1>15 светлых палитр для raenko.com</h1>
     <p class="lead">Сверху текущие цвета для сравнения. В каждой палитре: роли цветов, мини-превью сайта (услуги, примеры бота и CRM, FAQ, форма заявки) с логотипом и проверка контраста по WCAG. Клик по цвету копирует HEX.</p>
-    <nav class="jump" id="jump"></nav>
   </div>
 </header>
 
-<main class="wrap" id="list"></main>
+<div class="layout wrap">
+  <aside class="side" aria-label="Варианты">
+    <p class="side-t">Варианты</p>
+    <nav class="jump" id="jump"></nav>
+    <a class="vote" id="vote" href="#" target="_blank" rel="noopener" hidden>Проголосовать</a>
+  </aside>
+  <main id="list"></main>
+</div>
 
 <footer class="page-foot wrap">
   <p>Роли: <b>Фон</b> страницы, <b>Поверхность</b> карточек, <b>Текст</b>, <b>Вторичный</b> текст, <b>Основной</b> (кнопки, ссылки, логотип), <b>Акцент</b> (выделения, «тумблер» в логотипе), <b>Глубокий</b> (футер, CTA-блоки).</p>
@@ -27,6 +33,6 @@
 </footer>
 
 <div class="toast" id="toast">Скопировано</div>
-<script src="palettes.js?v=2"></script>
+<script src="palettes.js?v=3"></script>
 </body>
 </html>

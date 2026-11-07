@@ -254,8 +254,39 @@ function card(p, i) {
 }
 
 document.getElementById('list').innerHTML = PALETTES.map(card).join('');
-document.getElementById('jump').innerHTML = PALETTES.map((p, i) =>
-  `<a href="#${p.id}"><span style="background:${p.c.primary}"></span><span style="background:${p.c.accent}"></span>${p.current ? 'Сейчас' : i + '. ' + p.name}</a>`).join('');
+const jump = document.getElementById('jump');
+jump.innerHTML = PALETTES.map((p, i) =>
+  `<a href="#${p.id}" data-id="${p.id}"><span class="n">${p.current ? '—' : i}</span><span class="dots"><span style="background:${p.c.primary}"></span><span style="background:${p.c.accent}"></span></span>${p.current ? 'Сейчас' : p.name}</a>`).join('');
+
+// подсветка текущего варианта в навигации
+const links = Object.fromEntries([...jump.querySelectorAll('a')].map(a => [a.dataset.id, a]));
+let activeId = null;
+function setActive(id) {
+  if (id === activeId || !links[id]) return;
+  if (activeId) links[activeId].classList.remove('active');
+  links[id].classList.add('active');
+  activeId = id;
+  const a = links[id];
+  if (jump.scrollWidth > jump.clientWidth) {
+    jump.scrollTo({ left: a.offsetLeft - jump.clientWidth / 2 + a.offsetWidth / 2, behavior: 'smooth' });
+  } else if (jump.parentElement.scrollHeight > jump.parentElement.clientHeight) {
+    a.scrollIntoView({ block: 'nearest' });
+  }
+}
+const cards = [...document.querySelectorAll('.pal')];
+function onScroll() {
+  const line = window.innerHeight * 0.35;
+  let cur = cards[0];
+  for (const c of cards) { if (c.getBoundingClientRect().top <= line) cur = c; else break; }
+  setActive(cur.id);
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll);
+onScroll();
+
+// ссылка на Google-форму голосования (вставить после создания формы)
+const VOTE_URL = '';
+if (VOTE_URL) { const v = document.getElementById('vote'); v.href = VOTE_URL; v.hidden = false; }
 
 const toast = document.getElementById('toast');
 document.addEventListener('click', (e) => {

@@ -20,6 +20,7 @@ h1,h2,h3{margin:0;line-height:1.15}
 .num{margin:0 0 6px;font-weight:800;color:var(--soft);font-size:13px;letter-spacing:.05em}
 .pal h2{font-size:26px;font-weight:800;letter-spacing:-.01em}
 .tag{margin:6px 0 12px;font-weight:600;color:#3F4450}
+.pal-info{position:sticky;top:16px}
 .why{margin:0 0 18px;color:#4B5160}
 
 .sws{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -69,7 +70,11 @@ h1,h2,h3{margin:0;line-height:1.15}
 .n2{left:4%;top:56%;background:var(--btn);color:var(--on-primary)}
 .n3{right:4%;top:56%;background:var(--accent);color:var(--on-accent)}
 
-.pv-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}
+.pv-sec{padding:22px}
+.pv-sec h4{margin:0 0 14px;font-size:19px;font-weight:800;letter-spacing:-.01em}
+.pv-alt{background:color-mix(in srgb,var(--primary) 5%,var(--bg))}
+.pv-muted{margin:0;color:var(--muted)}
+.pv-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 .pv-card{display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:14px;background:var(--surface);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 8%,transparent)}
 .pv-card small{color:var(--muted);font-size:12px;line-height:1.35}
 .pv-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;margin-bottom:4px;background:color-mix(in srgb,var(--primary) 13%,transparent);color:var(--primary)}
@@ -90,9 +95,53 @@ h1,h2,h3{margin:0;line-height:1.15}
 .pv-dark-cards .pv-ring{stroke:var(--primary)}
 .pv-dark-cards .n2{background:var(--deep);color:#fff}
 
-.pv-cta{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;background:var(--deep);color:#fff;font-weight:700}
+.pv-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;background:var(--deep);color:#fff;font-weight:700}
+
+/* примеры: бот + CRM */
+.pv-ex{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pv-chat,.pv-crm{background:var(--surface);border-radius:14px;padding:12px;box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 8%,transparent);font-size:12.5px}
+.pv-chat-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.pv-chat-h small{margin-left:auto;color:var(--primary);font-weight:700}
+.pv-av{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--btn);color:var(--on-primary)}
+.pv-av svg{width:15px;height:15px}
+.msg{margin:6px 0;padding:7px 10px;border-radius:12px;max-width:88%;line-height:1.35}
+.msg.in{margin-left:auto;background:var(--btn);color:var(--on-primary);border-bottom-right-radius:4px}
+.msg.out{background:color-mix(in srgb,var(--ink) 6%,var(--surface));border-bottom-left-radius:4px}
+.pv-slots{display:flex;gap:6px;margin:4px 0}
+.pv-slots span{padding:4px 9px;border-radius:8px;font-weight:700;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--primary) 45%,transparent);color:var(--primary)}
+.pv-slots span.on{background:var(--accent);color:var(--on-accent);box-shadow:none}
+.pv-crm-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.pv-new{padding:2px 8px;border-radius:999px;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:11px}
+.pv-crm .row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--ink) 8%,transparent)}
+.st{font-style:normal;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.s-new{background:color-mix(in srgb,var(--accent) 25%,transparent)}
+.s-work{background:color-mix(in srgb,var(--primary) 14%,transparent);color:var(--primary)}
+.s-done{background:var(--btn);color:var(--on-primary)}
+.pv-bar{display:grid;grid-template-columns:1fr auto;gap:6px;margin-top:10px;font-size:12px}
+.pv-bar span{color:var(--muted)}
+.pv-bar em{grid-column:1/-1;height:7px;border-radius:9px;background:color-mix(in srgb,var(--primary) 12%,transparent);overflow:hidden}
+.pv-bar s{display:block;height:100%;border-radius:9px;background:var(--btn)}
+/* FAQ */
+.pv-faq{display:grid;gap:8px}
+.pv-faq .q{position:relative;padding:12px 44px 12px 14px;border-radius:12px;background:var(--surface);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 8%,transparent)}
+.pv-faq .q p{margin:6px 0 0;color:var(--muted);font-size:13px}
+.pm{position:absolute;right:12px;top:10px;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:color-mix(in srgb,var(--primary) 12%,transparent);color:var(--primary)}
+.pm svg{width:14px;height:14px}
+.q.open .pm{background:var(--accent);color:var(--on-accent);transform:rotate(45deg)}
+/* форма */
+.pv-form-sec{display:grid;grid-template-columns:1fr 1.1fr;gap:16px;align-items:center}
+.pv-form{display:grid;gap:8px;padding:14px;border-radius:14px;background:var(--surface);box-shadow:0 0 0 1px color-mix(in srgb,var(--ink) 8%,transparent)}
+.pv-input{padding:9px 12px;border-radius:10px;font-size:13px;color:var(--muted);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.pv-input.focus{color:var(--ink);box-shadow:inset 0 0 0 2px var(--primary)}
+.pv-check{display:flex;gap:8px;align-items:center;font-size:11.5px;color:var(--muted)}
+.pv-check i{flex:none;display:grid;place-items:center;width:18px;height:18px;border-radius:5px;background:var(--btn);color:var(--on-primary)}
+.pv-check svg{width:12px;height:12px}
+.pv-form .pv-btn{text-align:center}
+.pv-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 22px;background:var(--deep);color:#fff;border-top:1px solid rgba(255,255,255,.08)}
+.pv-foot small{opacity:.7;font-size:11.5px;text-align:right}
 
 @media (max-width:900px){
+  .pal-info{position:static}
   .pal{grid-template-columns:1fr;padding:18px;gap:18px}
 }
 @media (max-width:560px){
@@ -101,7 +150,12 @@ h1,h2,h3{margin:0;line-height:1.15}
   .pv-nav,.pv-phone{display:none}
   .pv-hero{grid-template-columns:1fr;padding:22px 16px 16px}
   .pv-art{max-width:150px}
-  .pv-cards{grid-template-columns:1fr;padding:0 16px 16px}
+  .pv-sec{padding:18px 16px}
+  .pv-cards{grid-template-columns:1fr 1fr}
+  .pv-card{padding:12px}
+  .pv-ex,.pv-form-sec{grid-template-columns:1fr}
+  .pv-foot{flex-direction:column;align-items:flex-start;padding:14px 16px}
+  .pv-foot small{text-align:left}
   .pv-cta{padding:14px 16px;font-size:13px}
   .sws{grid-template-columns:1fr 1fr}
 }

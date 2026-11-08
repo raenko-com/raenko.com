@@ -85,6 +85,8 @@ const PALETTES = [
   },
 ];
 
+const CROWN = '<svg class="crown" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F5B301" d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 11H5z"/><rect x="5" y="19" width="14" height="2" rx="1" fill="#F5B301"/></svg>';
+
 const ROLES = [
   ['bg', 'Фон'], ['surface', 'Поверхность'], ['ink', 'Текст'], ['muted', 'Вторичный'],
   ['primary', 'Основной'], ['accent', 'Акцент'], ['deep', 'Глубокий'],
@@ -240,10 +242,11 @@ function card(p, i) {
     badge('Акцент-кнопка', ratio(onAccent, c.accent), true),
     badge('Основной / фон', ratio(c.primary, c.bg), true),
   ].join('');
-  return `<article class="pal ${p.current ? 'is-current' : ''}" id="${p.id}">
+  return `<article class="pal ${p.current ? 'is-current' : ''} ${p.top ? 'is-top' : ''}" id="${p.id}">
     <div class="pal-info">
-      <p class="num">${p.current ? 'Сейчас' : String(i).padStart(2, '0')}</p>
+      <p class="num">${p.current ? 'Сейчас' : String(p.num).padStart(2, '0')}${p.top ? `<span class="crown-badge">${CROWN} Топ-${p.rank} по голосам</span>` : ''}</p>
       <h2>${p.name}</h2>
+      ${p.votes ? `<p class="votes"><span title="Понравился">👍 ${p.votes.l}</span><span title="Самый лучший">⭐ ${p.votes.b}</span><span title="Не понравился">👎 ${p.votes.d}</span><b>${p.votes.score > 0 ? '+' : ''}${p.votes.score} балл.</b></p>` : ''}
       <p class="tag">${p.tag}</p>
       <p class="why">${p.why}</p>
       <div class="sws">${sw}</div>
@@ -253,10 +256,27 @@ function card(p, i) {
   </article>`;
 }
 
+// Итоги голосования (Google-форма, 15 ответов, 07–08.11.2026).
+// [понравился, лучший, не понравился]; баллы = понравился + 2 × лучший − не понравился.
+const VOTES = {
+  1: [4, 1, 4], 2: [0, 0, 5], 3: [6, 4, 2], 4: [4, 0, 3], 5: [4, 3, 2],
+  6: [5, 1, 2], 7: [4, 0, 2], 8: [3, 1, 2], 9: [1, 0, 4], 10: [2, 1, 2],
+  11: [4, 3, 3], 12: [4, 1, 2], 13: [1, 0, 4], 14: [2, 0, 2], 15: [1, 0, 2],
+};
+const TOP = 3;
+PALETTES.forEach((p, i) => {
+  p.num = i;
+  if (!p.current) { const [l, b, d] = VOTES[i]; p.votes = { l, b, d, score: l + 2 * b - d }; }
+});
+const ranked = PALETTES.filter(p => !p.current).sort((a, b) => b.votes.score - a.votes.score || a.num - b.num);
+ranked.forEach((p, i) => { p.rank = i + 1; p.top = i < TOP; });
+const current = PALETTES.find(p => p.current);
+PALETTES.splice(0, PALETTES.length, ...ranked.slice(0, TOP), current, ...ranked.slice(TOP));
+
 document.getElementById('list').innerHTML = PALETTES.map(card).join('');
 const jump = document.getElementById('jump');
-jump.innerHTML = PALETTES.map((p, i) =>
-  `<a href="#${p.id}" data-id="${p.id}"><span class="n">${p.current ? '—' : i}</span><span class="dots"><span style="background:${p.c.primary}"></span><span style="background:${p.c.accent}"></span></span>${p.current ? 'Сейчас' : p.name}</a>`).join('');
+jump.innerHTML = PALETTES.map((p) =>
+  `<a href="#${p.id}" data-id="${p.id}" class="${p.top ? 'top' : ''}"><span class="n">${p.top ? CROWN : (p.current ? '—' : p.num)}</span><span class="dots"><span style="background:${p.c.primary}"></span><span style="background:${p.c.accent}"></span></span>${p.current ? 'Сейчас' : (p.top ? p.num + '. ' : '') + p.name}</a>${p.current ? '<div class="sep"></div>' : ''}`).join('');
 
 // подсветка текущего варианта в навигации
 const links = Object.fromEntries([...jump.querySelectorAll('a')].map(a => [a.dataset.id, a]));

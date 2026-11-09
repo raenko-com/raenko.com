@@ -11,6 +11,19 @@
   var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
   var now = function () { var d = new Date(); return ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2); };
 
+  /* На mobile FAB не должен закрывать интерактивную сцену примеров. */
+  var examplesSection = document.getElementById('examples');
+  function updateExamplesFab() {
+    if (!examplesSection) return;
+    var box = examplesSection.getBoundingClientRect();
+    document.body.classList.toggle('rx-examples-visible', box.bottom > 0 && box.top < window.innerHeight);
+  }
+  if (examplesSection) {
+    window.addEventListener('scroll', updateExamplesFab, { passive: true });
+    window.addEventListener('resize', updateExamplesFab);
+    updateExamplesFab();
+  }
+
   /* плавная анимация числа */
   function tween(node, to, fmt) {
     var from = parseFloat(node.dataset.v || '0');

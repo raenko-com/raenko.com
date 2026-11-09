@@ -309,8 +309,10 @@ def steps_section(dark=True):
 </section>'''
 
 
-def rx_examples(tabs):
+def rx_examples(tabs, keep_id=False):
     """Блок интерактивных примеров RAE-21 (вкладки фильтруются через data-tabs)."""
+    if keep_id:
+        return RX_HTML.replace('<section class="rx" id="examples"', f'<section class="rx" id="examples" data-tabs="{tabs}"', 1)
     return RX_HTML.replace('<section class="rx" id="examples"', f'<section class="rx" data-tabs="{tabs}"', 1)
 
 
@@ -378,11 +380,8 @@ def page_index():
   </div>
 </section>
 
-<section class="section section--soft" id="examples">
-  <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("zap")} Живые демо</span><h2 class="h2">Примеры решений</h2><p class="lead">Нажимайте и пробуйте. Клиенты и данные придуманы, ничего никуда не отправляется.</p></div>
-    <div class="demo-wrap reveal">{rx_examples("flow,book,calc,ba")}</div>
-  </div>
+<section class="section section--soft">
+  {rx_examples("flow,book,calc,ba", keep_id=True)}
 </section>
 
 <section class="section" id="team">

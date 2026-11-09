@@ -176,13 +176,13 @@ svg.brand{transform:scale(.9)}
 @container (max-width:330px){.svc-foot{grid-template-columns:1fr}.svc-action{grid-column:1;justify-self:end}}
 .svc-note{margin-top:28px;text-align:center;color:var(--muted);font-weight:600}.svc-note a{color:var(--primary);font-weight:800}
 
-/* ---------- примеры (RAE-21) в цветах схемы ---------- */
-body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#fff);--rx-orange:var(--primary);--rx-orange-soft:var(--tint);--rx-bg:var(--soft);--rx-line:var(--line);--rx-text:var(--ink);--rx-muted:var(--muted);font-family:Onest,system-ui,sans-serif!important;background:transparent!important;padding:0!important}
-.rx .rx-container{padding:0!important;max-width:none!important}
-.rx .rx-head{display:none}
+/* ---------- совместимость старых demo-блоков на service-страницах ---------- */
+body .rx:not(#examples){--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#fff);--rx-orange:var(--primary);--rx-orange-soft:var(--tint);--rx-bg:var(--soft);--rx-line:var(--line);--rx-text:var(--ink);--rx-muted:var(--muted);font-family:Onest,system-ui,sans-serif!important;background:transparent!important;padding:0!important}
+.rx:not(#examples) .rx-container{padding:0!important;max-width:none!important}
+.rx:not(#examples) .rx-head{display:none}
 .rx-tab[hidden]{display:none!important}
-.rx .rx-tab.is-active .rx-tab-num{color:var(--accent)}
-.rx .rx-ba-tag{z-index:6}
+ .rx:not(#examples) .rx-tab.is-active .rx-tab-num{color:var(--accent)}
+.rx:not(#examples) .rx-ba-tag{z-index:6}
 
 /* ---------- команда ---------- */
 .team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -482,9 +482,9 @@ body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#f
 @media (max-width:960px){.rc-bar{right:88px!important;left:12px!important}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}.reveal{opacity:1;transform:none}}
 
-/* примеры на телефоне: вкладки сеткой внутри блока, без вылезания за край */
+/* старые demo-блоки на service-страницах */
 @media (max-width:820px){
-  .rx .rx-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px;padding:0;overflow:visible}
-  .rx .rx-tab{justify-content:flex-start;gap:8px;padding:11px 12px;border-radius:14px;white-space:normal;text-align:left;line-height:1.2;font-size:13.5px}
-  .rx .rx-stage{margin:0;padding:12px}
+  .rx:not(#examples) .rx-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 18px;padding:0;overflow:visible}
+  .rx:not(#examples) .rx-tab{justify-content:flex-start;gap:8px;padding:11px 12px;border-radius:14px;white-space:normal;text-align:left;line-height:1.2;font-size:13.5px}
+  .rx:not(#examples) .rx-stage{margin:0;padding:12px}
 }

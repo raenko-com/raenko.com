@@ -153,23 +153,28 @@ svg.brand{transform:scale(.9)}
 .s-ai .ico{width:34px;height:34px;border-radius:50%;background:var(--accent);color:var(--on-accent)}
 
 /* ---------- услуги ---------- */
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.svc{position:relative;display:flex;flex-direction:column;gap:14px;padding:28px;border-radius:var(--r);background:var(--card);box-shadow:0 0 0 1px var(--line);text-decoration:none;overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s}
-.svc:hover{transform:translateY(-4px);box-shadow:var(--shadow),0 0 0 2px var(--primary)}
-.svc .ico{transition:background .25s,color .25s}
-.svc:hover .ico{background:var(--primary);color:#fff}
-.svc h3{font-size:23px;font-weight:800}
-.svc p{color:var(--muted);font-weight:500}
-.svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.svc-tags span{padding:4px 10px;border-radius:999px;background:var(--soft);font-size:13px;font-weight:700;color:var(--muted)}
-.svc-foot{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--line)}
-.price{font-weight:800;font-size:18px}
-.price small{color:var(--muted);font-weight:700;font-size:14px}
-.arrow{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:var(--soft);color:var(--primary);transition:.25s var(--ease)}
-.arrow svg{width:20px;height:20px}
-.svc:hover .arrow{background:var(--primary);color:#fff;transform:rotate(-45deg)}
-.svc-note{margin-top:28px;text-align:center;color:var(--muted);font-weight:600}
-.svc-note a{color:var(--primary);font-weight:800}
+.svc-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:18px}
+.svc{position:relative;display:flex;flex-direction:column;min-width:0;min-height:322px;padding:26px;border:1px solid rgba(255,255,255,.78);border-radius:28px;color:#fff;background:linear-gradient(145deg,#243fa9 0%,#17266f 56%,#101b5a 100%);box-shadow:0 18px 30px -18px rgba(38,44,153,.6),inset 0 1px rgba(255,255,255,.75),0 0 0 1px rgba(255,61,158,.16);overflow:hidden;isolation:isolate;container-type:inline-size;transition:transform .25s var(--ease),box-shadow .25s}
+.svc::before{content:"";position:absolute;inset:-35% -20% auto;height:65%;background:radial-gradient(ellipse at 12% 60%,rgba(255,62,161,.62),transparent 44%),radial-gradient(ellipse at 86% 30%,rgba(75,117,255,.65),transparent 48%);opacity:.9;z-index:-1;transform:rotate(-7deg)}
+.svc::after{content:"";position:absolute;right:-14%;bottom:-28%;width:70%;height:60%;border-radius:50%;background:radial-gradient(ellipse,rgba(255,68,188,.34),transparent 66%);filter:blur(10px);z-index:-1}
+.svc:nth-child(2n){background:linear-gradient(145deg,#1b318d,#16276e 60%,#141c5d)}
+.svc:nth-child(3n){background:linear-gradient(145deg,#274bbd,#17266d 62%,#111a5a)}
+.svc--site{grid-column:span 5}.svc--bots{grid-column:span 4}.svc--automation{grid-column:span 3}.svc--ai{grid-column:span 3}.svc--support{grid-column:span 5}.svc--promo{grid-column:span 4}
+.svc:hover{transform:translateY(-4px);box-shadow:0 22px 34px -18px rgba(38,44,153,.7),inset 0 1px rgba(255,255,255,.8),0 0 0 2px rgba(255,61,158,.3)}
+.svc-icon{display:grid;place-items:center;width:62px;height:62px;margin-bottom:20px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.86),rgba(141,153,255,.72));color:#203faf;box-shadow:0 10px 20px rgba(5,17,92,.4),inset 0 1px rgba(255,255,255,.9);transition:background .25s,color .25s}
+.svc-icon svg{width:32px;height:32px}
+.svc:hover .svc-icon{background:linear-gradient(145deg,#fff,#d4d8ff);color:#172e9c}
+.svc h3{margin:0;color:#fff;font-size:clamp(22px,2vw,30px);line-height:1.1;letter-spacing:-.035em;font-weight:700}
+.svc p{margin:12px 0 0;color:rgba(255,255,255,.9);font-weight:500;font-size:16px;line-height:1.38}
+.svc-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:auto;padding-top:18px}
+.svc-tags span{padding:6px 10px;border-radius:999px;background:rgba(247,245,255,.94);font-size:12px;line-height:1.15;font-weight:700;color:#202a73}
+.svc-foot{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-width:0;margin-top:16px;padding-top:15px;border-top:1px solid rgba(255,255,255,.22)}
+.svc-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;min-width:0}.price{flex:none;color:#fff;font-weight:700;font-size:18px;white-space:nowrap}.price small{font-size:13px;font-weight:600}
+.svc-days{flex:none;padding:7px 10px;border-radius:999px;color:#202a73;background:rgba(247,245,255,.94);font-size:13px;line-height:1.15;font-weight:700;white-space:nowrap}
+.svc-action{display:inline-flex;align-self:end;align-items:center;justify-content:center;gap:6px;min-width:126px;height:38px;margin-left:auto;padding:0 14px;border-radius:999px;color:#fff;background:linear-gradient(135deg,#ff65ae,#e90083);font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 9px 18px -10px #ff3d9e;transition:transform .2s var(--ease),box-shadow .2s}
+.svc-action:hover{transform:translateY(-2px);box-shadow:0 12px 22px -10px #ff3d9e}
+@container (max-width:330px){.svc-foot{grid-template-columns:1fr}.svc-action{grid-column:1;justify-self:end}}
+.svc-note{margin-top:28px;text-align:center;color:var(--muted);font-weight:600}.svc-note a{color:var(--primary);font-weight:800}
 
 /* ---------- примеры (RAE-21) в цветах схемы ---------- */
 body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#fff);--rx-orange:var(--primary);--rx-orange-soft:var(--tint);--rx-bg:var(--soft);--rx-line:var(--line);--rx-text:var(--ink);--rx-muted:var(--muted);font-family:Onest,system-ui,sans-serif!important;background:transparent!important;padding:0!important}
@@ -405,7 +410,8 @@ body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#f
   .hero-in{padding-left:32px;padding-right:32px}
   .hero h1{white-space:normal}
   .hero-art{max-width:650px;justify-self:center}
-  .svc-grid,.feat{grid-template-columns:1fr 1fr}
+  .svc-grid,.feat{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc--site,.svc--bots,.svc--automation,.svc--ai,.svc--support,.svc--promo{grid-column:span 1}
   .team{grid-template-columns:1fr 1fr}
   .steps{grid-template-columns:1fr 1fr;gap:32px 20px}
   .steps::before{display:none}
@@ -437,6 +443,11 @@ body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#f
   .hero-art{width:calc(100% + 24px);max-width:none;margin-left:-12px;filter:drop-shadow(0 14px 22px rgba(100,67,201,.2))}
   .hero-waves{height:120px}
   .svc-grid,.feat,.team,.gar{grid-template-columns:1fr}
+  .svc{min-height:0;padding:22px;border-radius:24px}
+  .svc--site,.svc--bots,.svc--automation,.svc--ai,.svc--support,.svc--promo{grid-column:auto}
+  .svc-icon{width:54px;height:54px;margin-bottom:16px;border-radius:17px}.svc-icon svg{width:28px;height:28px}
+  .svc h3{max-width:calc(100% - 62px);font-size:24px}.svc p{max-width:calc(100% - 62px);font-size:15px}.svc-tags{max-width:calc(100% - 62px);padding-top:20px}
+  .svc-foot{grid-template-columns:minmax(0,1fr) auto}.svc-meta{align-items:flex-start}.svc-action{min-width:126px}
   .g--f{grid-column:span 1;flex-direction:column;align-items:flex-start}
   .g-dev{gap:14px}
   .g-dev svg{height:70px}

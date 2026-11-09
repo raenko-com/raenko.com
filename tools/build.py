@@ -334,13 +334,13 @@ def page_index():
     cards = []
     for i, s in enumerate(SERVICES):
         tags = "".join(f"<span>{t}</span>" for t in s["tags"])
-        cards.append(f'''<a class="svc reveal" href="services/{s["slug"]}.html">
-  <span class="ico">{ico(s["icon"])}</span>
+        cards.append(f'''<article class="svc svc--{s["slug"]} reveal">
+  <span class="svc-icon ico">{ico(s["icon"])}</span>
   <h3>{s["full"]}</h3>
   <p>{s["short"]}</p>
   <div class="svc-tags">{tags}</div>
-  <div class="svc-foot"><span class="price">{s["price"]}<small>{s.get("price_note", "")}</small></span><span class="arrow">{ico("arrow")}</span></div>
-</a>''')
+  <div class="svc-foot"><div class="svc-meta"><span class="price">{s["price"]}<small>{s.get("price_note", "")}</small></span><span class="svc-days">{s["days"]}</span></div><a class="svc-action" href="services/{s["slug"]}.html">Подробнее <span aria-hidden="true">→</span></a></div>
+</article>''')
     faq = "".join(f'''<details class="reveal"><summary>{q}<span class="pm">{ico("plus")}</span></summary><div class="ans">{"".join(f"<p>{p}</p>" for p in a)}</div></details>''' for q, a in FAQ)
 
     body = f'''{head("RAENKO — сайты, боты, автоматизация и ИИ для бизнеса", "Разрабатываем сайты, ботов в Telegram и MAX, автоматизацию и ИИ для бизнеса. Фиксированная цена и сроки по договору.", d, ["calc.css", "examples.css"])}{header(d)}
@@ -372,7 +372,7 @@ def page_index():
 
 <section class="section" id="services">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("ruble")} Услуги</span><h2 class="h2">Услуги и стоимость</h2><p class="lead">Фиксированная цена и сроки по договору. Нажмите на услугу, чтобы посмотреть подробности и живые примеры.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Услуги и стоимость</h2><p class="lead">Фиксированная цена и сроки по договору. Нажмите на услугу, чтобы посмотреть подробности и живые примеры.</p></div>
     <div class="svc-grid">{"".join(cards)}</div>
     <p class="svc-note reveal">Не знаете, что выбрать? <a href="#calculator">Посчитайте в калькуляторе</a> или <a href="#contact">напишите нам</a></p>
   </div>

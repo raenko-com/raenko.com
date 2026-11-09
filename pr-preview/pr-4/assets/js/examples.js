@@ -60,7 +60,12 @@
     });
     window.dispatchEvent(new Event('resize'));
     if (focus) t.focus();
-    t.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    // прокручиваем только ленту вкладок по горизонтали, страницу не двигаем
+    var bar = t.parentElement;
+    if (bar && bar.scrollWidth > bar.clientWidth) {
+      var x = t.offsetLeft - (bar.clientWidth - t.offsetWidth) / 2;
+      bar.scrollTo({ left: Math.max(0, x), behavior: reduce ? 'auto' : 'smooth' });
+    }
   }
   tabs.forEach(function (t, i) {
     t.addEventListener('click', function () { openTab(t); });

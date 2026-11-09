@@ -159,7 +159,7 @@ def head(title, desc, depth, extra_css=()):
 <link rel="icon" href="{r}assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={V}">{css}
 </head>
 <body data-theme="indigo">
@@ -359,8 +359,7 @@ def page_index():
       <div class="hero-rule" aria-hidden="true"></div>
       <p class="lead reveal">Решения, которые берут рутинные задачи бизнеса на себя</p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="#contact">Написать {ico("arrow")}</a>
-        <a class="btn btn-ghost" href="#examples">Смотреть примеры {ico("arrow")}</a>
+        <a class="btn btn-primary" href="#contact">Написать</a>
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">

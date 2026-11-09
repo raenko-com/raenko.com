@@ -12,8 +12,8 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 V = "2"  # версия статики для сброса кэша
 
-PHONE = "+7 928 128-88-08"
-PHONE_HREF = "tel:+79281288808"
+PHONE = "+7 928 178-88-08"
+PHONE_HREF = "tel:+79281788808"
 EMAIL = "info@raenko.com"
 TG_HREF = "#"   # TODO: ссылка на Telegram
 MAX_HREF = "#"  # TODO: ссылка на MAX

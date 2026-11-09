@@ -311,9 +311,20 @@ def steps_section(dark=True):
 
 def rx_examples(tabs, keep_id=False):
     """Блок интерактивных примеров RAE-21 (вкладки фильтруются через data-tabs)."""
-    if keep_id:
-        return RX_HTML.replace('<section class="rx" id="examples"', f'<section class="rx" id="examples" data-tabs="{tabs}"', 1)
-    return RX_HTML.replace('<section class="rx" id="examples"', f'<section class="rx" data-tabs="{tabs}"', 1)
+    html = RX_HTML
+    if not keep_id:
+        # Service-страницы используют legacy-вариант demo-блока; новые controls
+        # и графическая сцена предназначены только для главного #examples.
+        html = html.replace('<h2 class="rx-title" id="rx-title">Примеры решений</h2>', '<h2 class="rx-title" id="rx-title">Примеры работ</h2>', 1)
+        html = re.sub(r'\n    <div class="rx-scenario-arrows".*?</div>', '', html, count=1, flags=re.S)
+        html = re.sub(r'\n      <div class="rx-flow-mobile-tabs".*?</div>', '', html, count=1, flags=re.S)
+        html = html.replace(' class="rx-win rx-flow-site" id="rx-flow-site" role="tabpanel"', ' class="rx-win rx-flow-site"', 1)
+        html = html.replace(' class="rx-win rx-flow-tg" id="rx-flow-tg" role="tabpanel"', ' class="rx-win rx-flow-tg"', 1)
+        html = html.replace(' class="rx-win rx-flow-crm" id="rx-flow-crm" role="tabpanel"', ' class="rx-win rx-flow-crm"', 1)
+        html = html.replace('            <div class="rx-flow-robot" aria-hidden="true"></div>\n', '', 1)
+    marker = '<section class="rx" id="examples"'
+    replacement = f'<section class="rx" id="examples" data-tabs="{tabs}"' if keep_id else f'<section class="rx" data-tabs="{tabs}"'
+    return html.replace(marker, replacement, 1)
 
 
 DEVICES_SVG = '''<div class="g-dev" aria-hidden="true">

@@ -127,7 +127,7 @@
   <section class="rx" id="examples" data-tabs="flow,book,calc,ba" aria-labelledby="rx-title">
   <div class="rx-container">
     <header class="rx-head">
-      <h2 class="rx-title" id="rx-title">Примеры работ</h2>
+      <h2 class="rx-title" id="rx-title">Примеры решений</h2>
       <p class="rx-lead">Это живые демо: нажимайте и пробуйте. Клиенты и данные придуманы, ничего никуда не отправляется.</p>
     </header>
 
@@ -145,6 +145,10 @@
         <span class="rx-tab-num">04</span>Сайт до/после
       </button>
     </div>
+    <div class="rx-scenario-arrows" aria-label="Переключение сценариев">
+      <button class="rx-scenario-arrow rx-scenario-arrow--prev" type="button" data-rx-nav="prev" aria-label="Предыдущий сценарий">‹</button>
+      <button class="rx-scenario-arrow rx-scenario-arrow--next" type="button" data-rx-nav="next" aria-label="Следующий сценарий">›</button>
+    </div>
 
     <!-- ============ 01 FLOW ============ -->
     <article class="rx-panel is-active" role="tabpanel" id="rx-p-flow" aria-labelledby="rx-t-flow">
@@ -155,9 +159,14 @@
         <p class="rx-hint"><b>Попробуйте:</b> выберите услугу, нажмите «Записаться», затем поменяйте статус заявки в CRM.</p>
       </div>
 
+      <div class="rx-flow-mobile-tabs" role="tablist" aria-label="Этап первого сценария">
+        <button type="button" class="rx-flow-mobile-tab is-active" role="tab" aria-selected="true" aria-controls="rx-flow-site" data-rx-flow-window="site">Сайт</button>
+        <button type="button" class="rx-flow-mobile-tab" role="tab" aria-selected="false" aria-controls="rx-flow-tg" data-rx-flow-window="tg">Бот</button>
+        <button type="button" class="rx-flow-mobile-tab" role="tab" aria-selected="false" aria-controls="rx-flow-crm" data-rx-flow-window="crm">CRM</button>
+      </div>
       <div class="rx-stage rx-flow">
         <!-- site -->
-        <div class="rx-win rx-flow-site">
+        <div class="rx-win rx-flow-site" id="rx-flow-site" role="tabpanel">
           <div class="rx-win-bar"><i></i><i></i><i></i><span>chisto-dom.ru</span></div>
           <form class="rx-win-body rx-form" id="rx-flow-form" novalidate>
             <div class="rx-mini-brand">Клининг «Чистый дом»</div>
@@ -177,12 +186,13 @@
         <div class="rx-flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h12m-5-5 5 5-5 5"/></svg></div>
 
         <!-- telegram -->
-        <div class="rx-win rx-flow-tg">
+        <div class="rx-win rx-flow-tg" id="rx-flow-tg" role="tabpanel">
           <div class="rx-win-bar rx-win-bar--tg">
             <span class="rx-ava">ЧД</span>
             <div><b>Бот заявок</b><small>бот</small></div>
           </div>
           <div class="rx-win-body rx-tg-feed" id="rx-tg-feed" aria-live="polite">
+            <div class="rx-flow-robot" aria-hidden="true"></div>
             <div class="rx-tg-msg">
               <b>Новая заявка №1041</b>
               Мария · +7 900 444-55-66<br>Генеральная уборка
@@ -194,7 +204,7 @@
         <div class="rx-flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h12m-5-5 5 5-5 5"/></svg></div>
 
         <!-- crm -->
-        <div class="rx-win rx-flow-crm">
+        <div class="rx-win rx-flow-crm" id="rx-flow-crm" role="tabpanel">
           <div class="rx-win-bar"><i></i><i></i><i></i><span>CRM · Заявки</span></div>
           <div class="rx-win-body rx-crm">
             <div class="rx-crm-head"><span>Клиент и услуга</span><span>Статус</span></div>

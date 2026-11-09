@@ -74,6 +74,39 @@
       if (d) { e.preventDefault(); openTab(tabs[(i + d + tabs.length) % tabs.length], true); }
     });
   });
+  $$('[data-rx-nav]').forEach(function (button) {
+    button.addEventListener('click', function () {
+      if (!tabs.length) return;
+      var current = tabs.findIndex(function (tab) { return tab.getAttribute('aria-selected') === 'true'; });
+      var step = button.dataset.rxNav === 'next' ? 1 : -1;
+      openTab(tabs[(current + step + tabs.length) % tabs.length], false);
+    });
+  });
+
+  /* Мобильные этапы первого сценария: одновременно видимо одно окно. */
+  (function () {
+    var flowTabs = $$('.rx-flow-mobile-tab');
+    var flowWindows = [$('.rx-flow-site'), $('.rx-flow-tg'), $('.rx-flow-crm')];
+    if (!flowTabs.length || flowWindows.some(function (w) { return !w; })) return;
+    function openFlowWindow(tab, focus) {
+      flowTabs.forEach(function (x) {
+        var on = x === tab;
+        x.classList.toggle('is-active', on);
+        x.setAttribute('aria-selected', on);
+        x.tabIndex = on ? 0 : -1;
+      });
+      flowWindows.forEach(function (win) { win.classList.toggle('is-mobile-active', win.id === tab.getAttribute('aria-controls')); });
+      if (focus) tab.focus();
+    }
+    flowTabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { openFlowWindow(tab, false); });
+      tab.addEventListener('keydown', function (e) {
+        var d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); openFlowWindow(flowTabs[(i + d + flowTabs.length) % flowTabs.length], true); }
+      });
+    });
+    openFlowWindow(flowTabs[0], false);
+  }());
 
   /* ================= 01 Сайт → бот → CRM ================= */
   (function () {

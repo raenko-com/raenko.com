@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Примеры работ — RAENKO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="examples.css">
+</head>
+<body class="rx-page">
+
+<section class="rx" id="examples" aria-labelledby="rx-title">
+  <div class="rx-container">
+    <header class="rx-head">
+      <h2 class="rx-title" id="rx-title">Примеры работ</h2>
+      <p class="rx-lead">Это живые демо: нажимайте и пробуйте. Клиенты и данные придуманы, ничего никуда не отправляется.</p>
+    </header>
+
+    <div class="rx-tabs" role="tablist" aria-label="Примеры">
+      <button class="rx-tab is-active" role="tab" aria-selected="true" aria-controls="rx-p-flow" id="rx-t-flow" data-tab="flow">
+        <span class="rx-tab-num">01</span>Сайт → бот → CRM
+      </button>
+      <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-book" id="rx-t-book" data-tab="book" tabindex="-1">
+        <span class="rx-tab-num">02</span>Онлайн-запись
+      </button>
+      <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-calc" id="rx-t-calc" data-tab="calc" tabindex="-1">
+        <span class="rx-tab-num">03</span>Калькуляторы
+      </button>
+      <button class="rx-tab" role="tab" aria-selected="false" aria-controls="rx-p-ba" id="rx-t-ba" data-tab="ba" tabindex="-1">
+        <span class="rx-tab-num">04</span>Сайт до/после
+      </button>
+    </div>
+
+    <!-- ============ 01 FLOW ============ -->
+    <article class="rx-panel is-active" role="tabpanel" id="rx-p-flow" aria-labelledby="rx-t-flow">
+      <div class="rx-info">
+        <span class="rx-tag">Сайт · Бот · Автоматизация</span>
+        <h3>Заявка сама доходит до владельца</h3>
+        <p>Клиент оставляет заявку на сайте. Владелец сразу получает её в Telegram, а в CRM появляется карточка со статусом. Ничего не теряется, ничего не нужно переписывать вручную.</p>
+        <p class="rx-hint"><b>Попробуйте:</b> выберите услугу, нажмите «Записаться», затем поменяйте статус заявки в CRM.</p>
+      </div>
+
+      <div class="rx-stage rx-flow">
+        <!-- site -->
+        <div class="rx-win rx-flow-site">
+          <div class="rx-win-bar"><i></i><i></i><i></i><span>chisto-dom.ru</span></div>
+          <form class="rx-win-body rx-form" id="rx-flow-form" novalidate>
+            <div class="rx-mini-brand">Клининг «Чистый дом»</div>
+            <div class="rx-form-title">Запись на уборку</div>
+            <div class="rx-chips" role="radiogroup" aria-label="Услуга">
+              <button type="button" class="rx-chip is-on" role="radio" aria-checked="true" data-val="Поддерживающая">Поддерживающая</button>
+              <button type="button" class="rx-chip" role="radio" aria-checked="false" data-val="Генеральная">Генеральная</button>
+              <button type="button" class="rx-chip" role="radio" aria-checked="false" data-val="После ремонта">После ремонта</button>
+            </div>
+            <label class="rx-field"><span>Имя</span><input name="name" value="Анна" autocomplete="off" maxlength="24"></label>
+            <label class="rx-field"><span>Телефон</span><input name="phone" value="+7 900 123-45-67" autocomplete="off" maxlength="20"></label>
+            <button class="rx-btn rx-btn--accent" type="submit">Записаться</button>
+            <p class="rx-form-note" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="rx-flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h12m-5-5 5 5-5 5"/></svg></div>
+
+        <!-- telegram -->
+        <div class="rx-win rx-flow-tg">
+          <div class="rx-win-bar rx-win-bar--tg">
+            <span class="rx-ava">ЧД</span>
+            <div><b>Бот заявок</b><small>бот</small></div>
+          </div>
+          <div class="rx-win-body rx-tg-feed" id="rx-tg-feed" aria-live="polite">
+            <div class="rx-tg-msg">
+              <b>Новая заявка №1041</b>
+              Мария · +7 900 444-55-66<br>Генеральная уборка
+              <time>09:12</time>
+            </div>
+          </div>
+        </div>
+
+        <div class="rx-flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h12m-5-5 5 5-5 5"/></svg></div>
+
+        <!-- crm -->
+        <div class="rx-win rx-flow-crm">
+          <div class="rx-win-bar"><i></i><i></i><i></i><span>CRM · Заявки</span></div>
+          <div class="rx-win-body rx-crm">
+            <div class="rx-crm-head"><span>Клиент и услуга</span><span>Статус</span></div>
+            <div class="rx-crm-rows" id="rx-crm-rows">
+              <div class="rx-crm-row">
+                <div><b>Мария</b><small>Генеральная · №1041</small></div>
+                <button class="rx-status" data-s="1" type="button">В работе</button>
+              </div>
+              <div class="rx-crm-row">
+                <div><b>Олег</b><small>После ремонта · №1038</small></div>
+                <button class="rx-status" data-s="2" type="button">Выполнена</button>
+              </div>
+            </div>
+            <p class="rx-crm-note">Статус можно менять кликом</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ 02 BOOKING ============ -->
+    <article class="rx-panel" role="tabpanel" id="rx-p-book" aria-labelledby="rx-t-book" hidden>
+      <div class="rx-info">
+        <span class="rx-tag">Сайт · Бот · Автоматизация</span>
+        <h3>Онлайн-запись без звонков</h3>
+        <p>Клиент сам выбирает услугу, день и свободное время. Занятые слоты не показываются, двойных записей не бывает, а за два часа до визита бот присылает напоминание.</p>
+        <p class="rx-hint"><b>Попробуйте:</b> выберите услугу, день и время, затем нажмите «Записаться».</p>
+      </div>
+
+      <div class="rx-stage rx-book">
+        <div class="rx-book-grid">
+          <div class="rx-win rx-book-form">
+            <div class="rx-win-bar"><i></i><i></i><i></i><span>lokon-studio.ru/zapis</span></div>
+            <div class="rx-win-body">
+              <div class="rx-mini-brand">Студия «Локон»</div>
+              <div class="rx-field-label">Услуга</div>
+              <div class="rx-chips rx-chips--sm" role="radiogroup" id="rx-book-svc">
+                <button type="button" class="rx-chip is-on" role="radio" aria-checked="true" data-name="Стрижка" data-min="45" data-price="1500">Стрижка · 45 мин</button>
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-name="Окрашивание" data-min="120" data-price="4500">Окрашивание · 2 ч</button>
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-name="Укладка" data-min="30" data-price="1200">Укладка · 30 мин</button>
+              </div>
+              <div class="rx-field-label">День</div>
+              <div class="rx-days" id="rx-book-days" role="radiogroup" aria-label="День"></div>
+              <div class="rx-field-label">Время</div>
+              <div class="rx-slots" id="rx-book-slots" role="radiogroup" aria-label="Время"></div>
+              <button class="rx-btn rx-btn--accent rx-btn--block" type="button" id="rx-book-go" disabled>Выберите время</button>
+            </div>
+          </div>
+
+          <div class="rx-book-side">
+            <div class="rx-book-card" id="rx-book-card" aria-live="polite">
+              <div class="rx-review-empty">Здесь появится подтверждение записи и напоминание от бота.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ 03 CALC ============ -->
+    <article class="rx-panel" role="tabpanel" id="rx-p-calc" aria-labelledby="rx-t-calc" hidden>
+      <div class="rx-info">
+        <span class="rx-tag">Сайт · Программные решения</span>
+        <h3>Калькулятор, который продаёт</h3>
+        <p>Клиент сам считает стоимость и сразу получает коммерческое предложение. А второй калькулятор показывает, сколько денег уходит на рутину, которую можно отдать автоматике.</p>
+        <p class="rx-hint"><b>Попробуйте:</b> подвигайте ползунки и нажмите «Получить КП».</p>
+      </div>
+
+      <div class="rx-stage rx-calc">
+        <div class="rx-seg" aria-label="Калькулятор">
+          <button class="rx-seg-btn is-on" type="button" data-calc="est" aria-pressed="true">Смета ремонта</button>
+          <button class="rx-seg-btn" type="button" data-calc="save" aria-pressed="false">Экономия на рутине</button>
+        </div>
+
+        <div class="rx-calc-mode" data-calc="est">
+          <div class="rx-calc-grid">
+            <div class="rx-calc-form">
+              <label class="rx-range">
+                <span>Площадь квартиры <output id="rx-area-out">54 м²</output></span>
+                <input type="range" id="rx-area" min="20" max="150" step="1" value="54">
+              </label>
+              <div class="rx-field-label">Тип ремонта</div>
+              <div class="rx-chips rx-chips--sm" role="radiogroup" id="rx-est-type">
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-k="cosm">Косметический</button>
+                <button type="button" class="rx-chip is-on" role="radio" aria-checked="true" data-k="cap">Капитальный</button>
+                <button type="button" class="rx-chip" role="radio" aria-checked="false" data-k="des">Дизайнерский</button>
+              </div>
+              <div class="rx-field-label">Дополнительно</div>
+              <div class="rx-checks" id="rx-est-opts">
+                <label><input type="checkbox" data-k="demo" checked><span>Демонтаж</span></label>
+                <label><input type="checkbox" data-k="el"><span>Электрика</span></label>
+                <label><input type="checkbox" data-k="pl"><span>Сантехника</span></label>
+                <label><input type="checkbox" data-k="clean"><span>Уборка после</span></label>
+              </div>
+            </div>
+            <div class="rx-calc-res">
+              <div class="rx-res-label">Примерная стоимость</div>
+              <div class="rx-res-big" id="rx-est-total">0 ₽</div>
+              <ul class="rx-res-list" id="rx-est-list"></ul>
+              <button class="rx-btn rx-btn--accent rx-btn--block" type="button" id="rx-kp-btn">Получить КП</button>
+            </div>
+          </div>
+          <div class="rx-kp" id="rx-kp" hidden>
+            <div class="rx-kp-doc" role="document" aria-label="Коммерческое предложение">
+              <div class="rx-kp-top">
+                <div><b>Коммерческое предложение</b><small id="rx-kp-num"></small></div>
+                <span class="rx-kp-logo">РемСтрой</span>
+              </div>
+              <table class="rx-kp-table"><tbody id="rx-kp-rows"></tbody></table>
+              <div class="rx-kp-sum"><span>Итого</span><b id="rx-kp-total"></b></div>
+              <p class="rx-kp-foot">Документ собран автоматически. В реальном проекте он уходит клиенту на почту или в мессенджер в PDF.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="rx-calc-mode" data-calc="save" hidden>
+          <div class="rx-calc-grid">
+            <div class="rx-calc-form">
+              <label class="rx-range">
+                <span>Заявок в день <output id="rx-s-req-out">25</output></span>
+                <input type="range" id="rx-s-req" min="1" max="200" value="25">
+              </label>
+              <label class="rx-range">
+                <span>Минут на одну заявку вручную <output id="rx-s-min-out">6 мин</output></span>
+                <input type="range" id="rx-s-min" min="1" max="30" value="6">
+              </label>
+              <label class="rx-range">
+                <span>Стоимость часа сотрудника <output id="rx-s-rate-out">400 ₽</output></span>
+                <input type="range" id="rx-s-rate" min="200" max="2000" step="50" value="400">
+              </label>
+              <label class="rx-range">
+                <span>Можно автоматизировать <output id="rx-s-auto-out">70%</output></span>
+                <input type="range" id="rx-s-auto" min="10" max="95" step="5" value="70">
+              </label>
+            </div>
+            <div class="rx-calc-res">
+              <div class="rx-res-label">Рутина съедает в месяц</div>
+              <div class="rx-res-big" id="rx-s-hours">0 ч</div>
+              <div class="rx-bars" aria-hidden="true">
+                <div class="rx-bar"><span>Сейчас <b id="rx-bar-now-l"></b></span><i id="rx-bar-now"></i></div>
+                <div class="rx-bar rx-bar--after"><span>С автоматизацией <b id="rx-bar-after-l"></b></span><i id="rx-bar-after"></i></div>
+              </div>
+              <div class="rx-save-sum">
+                <div><small>Экономия в месяц</small><b id="rx-s-month">0 ₽</b></div>
+                <div><small>За год</small><b id="rx-s-year">0 ₽</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ 04 BEFORE / AFTER ============ -->
+    <article class="rx-panel" role="tabpanel" id="rx-p-ba" aria-labelledby="rx-t-ba" hidden>
+      <div class="rx-info">
+        <span class="rx-tag">Сайты · Дизайн</span>
+        <h3>Было и стало</h3>
+        <p>Старый сайт не открывается нормально с телефона, а с компьютера выглядит как из 2007 года. Новый удобен на любом экране и ведёт клиента к заказу.</p>
+        <p class="rx-hint"><b>Попробуйте:</b> потяните ползунок<span class="rx-desk-only"> и переключитесь на «Телефон»</span>.</p>
+      </div>
+
+      <div class="rx-stage rx-ba-wrap">
+        <div class="rx-seg" aria-label="Устройство">
+          <button class="rx-seg-btn is-on" type="button" data-dev="desk" aria-pressed="true">Компьютер</button>
+          <button class="rx-seg-btn" type="button" data-dev="phone" aria-pressed="false">Телефон</button>
+        </div>
+        <div class="rx-ba" id="rx-ba" data-dev="desk" style="--pos:50%">
+          <!-- AFTER (base layer) -->
+          <div class="rx-ba-layer rx-after">
+            <div class="rx-af">
+              <nav class="rx-af-nav"><b>Хлебная лавка</b><span class="rx-af-links"><a>Меню</a><a>Доставка</a><a>Контакты</a></span><span class="rx-af-burger" aria-hidden="true"><i></i><i></i><i></i></span></nav>
+              <div class="rx-af-hero">
+                <div class="rx-af-text">
+                  <small>Пекарня у дома · с 7:00</small>
+                  <h4>Свежий хлеб к завтраку</h4>
+                  <p>Печём каждое утро на закваске. Привезём горячим за 40 минут.</p>
+                  <span class="rx-af-btn">Заказать доставку</span>
+                </div>
+                <div class="rx-af-pic" aria-hidden="true">
+                  <svg viewBox="0 0 120 90"><ellipse cx="60" cy="58" rx="46" ry="22" fill="#E9A15F"/><ellipse cx="60" cy="52" rx="44" ry="22" fill="#F2B877"/><path d="M34 46c6-6 12-6 18 0M52 42c6-6 12-6 18 0M70 46c6-6 12-6 18 0" stroke="#C97A35" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+                </div>
+              </div>
+              <div class="rx-af-cards">
+                <div><b>Багет</b><span>120 ₽</span></div>
+                <div><b>Чиабатта</b><span>150 ₽</span></div>
+                <div><b>Круассан</b><span>110 ₽</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- BEFORE (clipped layer) -->
+          <div class="rx-ba-layer rx-before" aria-hidden="true">
+            <div class="rx-bf-scale">
+              <div class="rx-bf">
+                <div class="rx-bf-top">
+                  <span class="rx-bf-logo">ХЛЕБНАЯ ЛАВКА</span>
+                  <span class="rx-bf-run">*** Добро пожаловать на наш сайт!!! *** СКИДКИ *** </span>
+                </div>
+                <table class="rx-bf-table">
+                  <tr>
+                    <td class="rx-bf-side">
+                      <a>Главная</a><a>О нас</a><a>Продукция</a><a>Прайс-лист</a><a>Гостевая книга</a><a>Контакты</a>
+                      <div class="rx-bf-count">Вы посетитель №<b>004817</b></div>
+                    </td>
+                    <td class="rx-bf-main">
+                      <h4>Наша продукция</h4>
+                      <p>Наша пекарня работает с 1998 года и выпускает широкий ассортимент хлебобулочных изделий высокого качества по доступным ценам. Для заказа позвоните нам по телефону или напишите на e-mail. Прайс-лист можно скачать ниже (формат .doc).</p>
+                      <p class="rx-bf-link">Скачать прайс (Word, 2.4 МБ)</p>
+                      <table class="rx-bf-price"><tr><td>Батон нарезной</td><td>45 р.</td></tr><tr><td>Хлеб Бородинский</td><td>52 р.</td></tr><tr><td>Булочка с маком</td><td>25 р.</td></tr></table>
+                    </td>
+                  </tr>
+                </table>
+                <div class="rx-bf-foot">© 2009 Все права защищены. Сайт лучше смотреть в Internet Explorer 6.0, разрешение 1024×768</div>
+              </div>
+            </div>
+          </div>
+          <span class="rx-ba-tag rx-ba-tag--l">До</span>
+          <span class="rx-ba-tag rx-ba-tag--r">После</span>
+          <div class="rx-ba-handle" aria-hidden="true"><span><svg viewBox="0 0 24 24"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+          <input class="rx-ba-range" type="range" min="0" max="100" value="50" aria-label="Сравнить старую и новую версию сайта">
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script src="examples.js"></script>
+</body>
+</html>

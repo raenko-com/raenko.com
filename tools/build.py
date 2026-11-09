@@ -78,10 +78,10 @@ def ico(name, cls=""):
 
 
 def logo_svg():
-    # буква R с «тумблером»: буква основным цветом, тумблер акцентом
     return ('<svg viewBox="120 140 840 800" aria-hidden="true">'
-            '<path fill="var(--primary)" fill-rule="evenodd" d="M131 155H640C820 155 920 250 920 390C920 490 870 560 782 602L948 924H778L634 642H290V924H131Z M290 284H634C700 284 750 335 750 399C750 463 700 514 634 514H290Z"/>'
-            '<path fill="var(--accent)" d="M290 312H630A86.5 86.5 0 0 1 630 485H290Z"/>'
+            '<defs><linearGradient id="logo-gradient" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#ff3d9e"/><stop offset=".52" stop-color="#9b43ff"/><stop offset="1" stop-color="#1748d8"/></linearGradient></defs>'
+            '<path fill="url(#logo-gradient)" fill-rule="evenodd" d="M131 155H640C820 155 920 250 920 390C920 490 870 560 782 602L948 924H778L634 642H290V924H131Z M290 284H634C700 284 750 335 750 399C750 463 700 514 634 514H290Z"/>'
+            '<path fill="url(#logo-gradient)" d="M290 312H630A86.5 86.5 0 0 1 630 485H290Z"/>'
             '<circle cx="630" cy="399" r="58" fill="#fff"/></svg>')
 
 
@@ -185,16 +185,13 @@ def header(depth, current=None):
         <div class="drop">{drop}</div>
       </div>
       <a href="{home}#examples">Примеры</a>
-      <a href="{home}#team">Команда</a>
-      <a href="{home}#process">Процесс</a>
       <a href="{home}#faq">Вопросы</a>
-      <a href="{home}#contact">Контакты</a>
+      <a href="{home}#process">Процесс</a>
     </nav>
     <div class="header-act">
       <a class="icon-btn hide-m" href="{TG_HREF}" aria-label="Telegram">{ico("tg")}</a>
       <a class="icon-btn hide-m" href="{MAX_HREF}" aria-label="MAX">{ico("max")}</a>
       <a class="phone" href="{PHONE_HREF}">{PHONE}</a>
-      <a class="btn btn-primary btn-sm" href="{home}#calculator">Рассчитать</a>
       <button class="icon-btn burger" type="button" data-menu-open aria-controls="mnav" aria-expanded="false" aria-label="Открыть меню">{ico("menu")}</button>
     </div>
   </div>
@@ -358,40 +355,27 @@ def page_index():
 <section class="hero">
   <div class="container hero-in">
     <div>
-      <span class="eyebrow reveal">{ico("zap")} Сайты · Боты · ИИ</span>
-      <h1 class="reveal">Сайты, ИИ, боты и <span class="grad">автоматизация</span></h1>
-      <p class="lead reveal">Решения, которые берут рутинные задачи бизнеса на себя: заявки, запись, ответы клиентам и отчёты.</p>
+      <h1 class="reveal">Сайты, ИИ, боты и автоматизация</h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <p class="lead reveal">Решения, которые берут рутинные задачи бизнеса на себя</p>
       <div class="hero-cta reveal">
-        <a class="btn btn-primary" href="#calculator">Рассчитать стоимость {ico("arrow")}</a>
-        <a class="btn btn-ghost" href="#examples">Смотреть примеры</a>
+        <a class="btn btn-primary" href="#contact">Написать {ico("arrow")}</a>
+        <a class="btn btn-ghost" href="#examples">Смотреть примеры {ico("arrow")}</a>
       </div>
-      <ul class="trust reveal">
-        <li>{ico("check")}Фиксированная цена в договоре</li>
-        <li>{ico("check")}Оплата 50/50</li>
-        <li>{ico("check")}30 дней поддержки</li>
-      </ul>
     </div>
-    <div class="scene" aria-hidden="true">
-      <div class="scene-orbit"></div>
-      <div class="scard s-site">
-        <div class="s-bar"><i></i><i></i><i></i></div>
-        <div class="s-line w60"></div><div class="s-hero"></div><div class="s-line w80"></div><div class="s-line w40"></div>
-        <span class="s-btn">Записаться</span>
-      </div>
-      <div class="scard s-tg">
-        <div class="s-tg-h"><span class="s-ava">{ico("bot")}</span><div><b>Бот заявок</b><small>только что</small></div></div>
-        <div class="s-msg"><span class="s-new">Новая заявка</span><br>Анна · стрижка, суббота 13:30</div>
-        <div class="s-btns"><span>Принять</span><span>Позвонить</span></div>
-      </div>
-      <div class="scard s-crm">
-        <b style="margin-bottom:6px">CRM · Заявки</b>
-        <div class="s-row"><span>Анна, стрижка</span><span class="st st-new">Новая</span></div>
-        <div class="s-row"><span>ООО «Вектор», сайт</span><span class="st st-work">В работе</span></div>
-        <div class="s-row"><span>Игорь, доставка</span><span class="st st-done">Оплачено</span></div>
-      </div>
-      <div class="scard s-ai"><span class="ico">{ico("ai")}</span><b>ИИ ответил клиенту</b></div>
+    <div class="hero-art" aria-hidden="true">
+      <img src="assets/img/hero-raenko-3d.png" alt="" width="1536" height="1024">
     </div>
   </div>
+  <svg class="hero-waves" viewBox="0 0 1821 260" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="wave-pink" x1="0" x2="1"><stop offset="0" stop-color="#f72e9d" stop-opacity=".76"/><stop offset="1" stop-color="#ff8bd0" stop-opacity=".28"/></linearGradient>
+      <linearGradient id="wave-blue" x1="0" x2="1"><stop offset="0" stop-color="#6478ff" stop-opacity=".72"/><stop offset="1" stop-color="#b9c4ff" stop-opacity=".16"/></linearGradient>
+    </defs>
+    <path fill="url(#wave-pink)" d="M0 126C188 258 339 230 511 178c178-53 300-82 459 2 196 104 356 98 544 19 116-49 207-83 307-13v74H0z"/>
+    <path fill="url(#wave-blue)" d="M0 176c169 83 310 86 479 11 166-74 293-91 447-31 196 76 343 130 542 55 138-52 243-104 353-164v213H0z"/>
+    <path fill="#f8d4f1" fill-opacity=".48" d="M0 231c185 33 320 19 491-36 186-60 317-52 489 32 197 96 350 57 500-8 142-62 242-82 341-57v98H0z"/>
+  </svg>
 </section>
 
 <section class="section" id="services">

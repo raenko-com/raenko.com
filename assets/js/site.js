@@ -147,6 +147,17 @@
     }
     c.addEventListener('scroll', upd, { passive: true });
     upd();
+    // на телефоне листается сама; касание ставит на паузу, через 6 секунд листает дальше
+    var mq = window.matchMedia('(max-width: 640px)'), pausedUntil = 0, visible = false;
+    function pause() { pausedUntil = Date.now() + 6000; }
+    ['touchstart', 'pointerdown', 'wheel'].forEach(function (ev) { c.addEventListener(ev, pause, { passive: true }); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }, { threshold: 0.5 }).observe(c);
+    setInterval(function () {
+      if (!mq.matches || !visible || reduce || Date.now() < pausedUntil || document.hidden) return;
+      var w = c.firstElementChild.offsetWidth + 12;
+      var end = c.scrollLeft + c.clientWidth >= c.scrollWidth - 4;
+      c.scrollTo({ left: end ? 0 : c.scrollLeft + w, behavior: 'smooth' });
+    }, 2800);
   });
 
   /* ---------- шаги «Как мы работаем»: одна подсвеченная точка ---------- */
@@ -196,7 +207,7 @@
       if (!mq.matches) return;
       var line = window.innerHeight * 0.55, k = -1;
       steps.forEach(function (s, i) { if (s.getBoundingClientRect().top < line) k = i; });
-      if (done && k === steps.length - 1 && done.getBoundingClientRect().top < window.innerHeight * 0.8) k = steps.length;
+      if (done && k === steps.length - 1 && done.getBoundingClientRect().top < line) k = steps.length;
       set(k, true);
     }
     function mode() {

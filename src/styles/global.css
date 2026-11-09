@@ -1,0 +1,27 @@
+:root {
+    --main-color: #FF5A1F;
+    --secondary-color: #1E3A5F;
+    --background-color: #FFFFFF;
+    --background-secondary-color: #F2F2F2;
+}
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    background: none;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: Inter, sans-serif;
+    color: var(--secondary-color)
+}
+
+body {
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    width: 100%;
+}

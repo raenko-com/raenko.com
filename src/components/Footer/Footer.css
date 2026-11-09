@@ -1,0 +1,65 @@
+.footer {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 100px;
+    padding: 20px 50px;
+    background-color: var(--secondary-color);
+    width: 100%;
+}
+
+.footer-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.footer-logo {
+    border-radius: 10px;
+}
+
+.footer-messangers-list {
+    display: flex;
+    gap: 30px;
+}
+
+.footer-messangers-list path {
+    fill: var(--background-color);
+}
+
+.footer-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--background-color);
+}
+
+.footer-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--background-color);
+}
+
+.footer-text {
+    font-size: 16px;
+    font-weight: thin;
+    color: var(--background-color);
+    transition: color 0.15s ease;
+}
+
+.footer-text:hover {
+    color: var(--main-color);
+}
+
+.footer-messangers-list path {
+    transition: fill 0.15s ease;
+}
+
+.footer-messangers-list a:hover path {
+    fill: var(--main-color);
+}
+
+.footer-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

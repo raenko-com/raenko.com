@@ -1,0 +1,33 @@
+---
+import "./Header.css";
+import { MaxIcon, TelegramIcon } from "src/assets";
+import { data } from "src/data";
+---
+
+<header class="header">
+  <div class="header-container">
+    <div class="header-left">
+      <img class="header-logo" src="src/assets/images/logo.png" alt="Logo" />
+      <h2 class="header-name">RAENKO</h2>
+    </div>
+    <div class="header-right">
+      <nav class="header-nav">
+        <a class="header-link" href="#services">Услуги</a>
+        <a class="header-link" href="#examples">Примеры</a>
+        <a class="header-link" href="#contact">Вопросы</a>
+        <a class="header-link" href="#process">Процесс</a>
+      </nav>
+      <div class="header-contacts">
+        <a class="header-contact" href={data.telegram}>
+          <TelegramIcon />
+        </a>
+        <a class="header-contact" href={data.max}>
+          <MaxIcon />
+        </a>
+        <a class="header-contact" href={`tel:${data.phoneLink}`}>
+          {data.phone}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

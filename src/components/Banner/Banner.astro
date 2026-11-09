@@ -1,0 +1,24 @@
+---
+import "./Banner.css";
+import { data } from "src/data";
+---
+
+<section class="banner">
+  <div class="banner-content">
+    <h1 class="banner-title">{data.title}</h1>
+    <p class="banner-description">
+      {data.description}
+    </p>
+    <div class="banner-buttons">
+      <button class="banner-main-action banner-action">Написать</button>
+      <button class="banner-secondary-action banner-action"
+        >Смотреть примеры</button
+      >
+    </div>
+  </div>
+  <img
+    class="banner-image"
+    src="/src/assets/images/hero.png"
+    alt="Banner Image"
+  />
+</section>

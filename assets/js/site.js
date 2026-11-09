@@ -5,23 +5,6 @@
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
   var body = document.body;
 
-  /* ---------- цветовая схема (только для превью) ---------- */
-  var THEMES = ['indigo', 'ultra', 'raspberry'];
-  function setTheme(t, save) {
-    if (THEMES.indexOf(t) < 0) return;
-    body.dataset.theme = t;
-    $$('[data-set-theme]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.setTheme === t); });
-    if (save) { try { localStorage.setItem('raenko-theme', t); } catch (e) {} }
-  }
-  var fromUrl = new URLSearchParams(location.search).get('theme');
-  var saved = null;
-  try { saved = localStorage.getItem('raenko-theme'); } catch (e) {}
-  setTheme(fromUrl || saved || 'indigo', !!fromUrl);
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-set-theme]');
-    if (b) setTheme(b.dataset.setTheme, true);
-  });
-
   /* ---------- шапка ---------- */
   var header = $('.header');
   function onScroll() { header && header.classList.toggle('is-scrolled', window.scrollY > 8); }

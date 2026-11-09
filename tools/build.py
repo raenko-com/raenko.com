@@ -162,7 +162,7 @@ def head(title, desc, depth, extra_css=()):
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={V}">{css}
 </head>
-<body data-theme="indigo">
+<body>
 <a class="sr-only" href="#main">К содержанию</a>
 '''
 
@@ -174,8 +174,6 @@ def header(depth, current=None):
         f'<a href="{r}services/{s["slug"]}.html"{" aria-current=page" if current == s["slug"] else ""}><span class="ico">{ico(s["icon"])}</span><span><b>{s["full"]}</b><small>{s["price"]}{s.get("price_note", "")}</small></span></a>'
         for s in SERVICES)
     mlist = "".join(f'<a href="{r}services/{s["slug"]}.html"><span class="ico">{ico(s["icon"])}</span>{s["full"]}</a>' for s in SERVICES)
-    themes = "".join(f'<button type="button" data-set-theme="{t}" aria-pressed="false"><i style="background:linear-gradient(135deg,{a} 50%,{b} 50%)"></i>{n}</button>'
-                     for t, a, b, n in THEMES)
     return f'''<header class="header">
   <div class="container header-in">
     <a class="logo" href="{home}" aria-label="RAENKO, на главную">{logo_svg()}RAENKO</a>
@@ -207,16 +205,12 @@ def header(depth, current=None):
   <nav class="mnav-list">
     <a href="{home}#examples">Примеры решений</a><a href="{home}#team">Команда</a><a href="{home}#process">Как мы работаем</a><a href="{home}#faq">Частые вопросы</a><a href="{home}#calculator">Калькулятор</a>
   </nav>
-  <div class="mnav-themes"><span>Схема:</span>{themes}</div>
   <div class="mnav-foot">
     <a class="btn btn-primary" href="{PHONE_HREF}">{ico("phone")}{PHONE}</a>
     <a class="btn btn-ghost" href="{TG_HREF}">{ico("tg")}Написать в Telegram</a>
   </div>
 </div>
 '''
-
-
-THEMES = [("indigo", "#5B4CFF", "#C6F432", "Индиго"), ("ultra", "#2340FF", "#FFC83D", "Ультрамарин"), ("raspberry", "#D61F5E", "#2DD4BF", "Малина")]
 
 
 def lead_form(title="Обсудим вашу задачу", sub="Оставьте контакты, ответим в течение часа с 9:00 до 20:00.", msg_placeholder="Расскажите о задаче: что нужно сделать и к какому сроку"):
@@ -296,7 +290,6 @@ def footer(depth):
   <span class="fab-tip">Есть вопрос? Напишите нам</span>
   <button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="Связаться с нами">{ico("phone", "f-i1")}{ico("msg", "f-i2")}{ico("x", "f-x")}<span class="fab-dot"></span></button>
 </div>
-<div class="themes" role="group" aria-label="Цветовая схема (превью)"><span>Схема</span>{"".join(f'<button type="button" data-set-theme="{t}" aria-pressed="false" title="{n}"><i style="background:linear-gradient(135deg,{a} 50%,{b} 50%)"></i></button>' for t, a, b, n in THEMES)}</div>
 '''
 
 

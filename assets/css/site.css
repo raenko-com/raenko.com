@@ -1,11 +1,8 @@
-/* RAENKO — стили сайта (RAE-25). Цвета только через переменные схемы. */
+/* RAENKO — стили сайта (RAE-25). */
 *,*::before,*::after{box-sizing:border-box}
 
-/* ---------- цветовые схемы (топ-3 голосования RAE-29) ---------- */
-:root,[data-theme="indigo"]{--bg:#FAFAFF;--surface:#FFFFFF;--ink:#15123A;--muted:#5E5B7A;--primary:#5B4CFF;--accent:#C6F432;--deep:#221C5C;--on-accent:#15123A}
-[data-theme="ultra"]{--bg:#FFFFFF;--surface:#F3F5FF;--ink:#0D1333;--muted:#545B7A;--primary:#2340FF;--accent:#FFC83D;--deep:#0D1A80;--on-accent:#0D1333}
-[data-theme="raspberry"]{--bg:#FFF8FA;--surface:#FFFFFF;--ink:#1F1020;--muted:#6B5A66;--primary:#D61F5E;--accent:#2DD4BF;--deep:#4A0E2A;--on-accent:#1F1020}
 :root{
+  --bg:#FAFAFF;--surface:#FFFFFF;--ink:#15123A;--muted:#5E5B7A;--primary:#5B4CFF;--accent:#C6F432;--deep:#221C5C;--on-accent:#15123A;
   --line:color-mix(in srgb,var(--ink) 10%,transparent);
   --soft:color-mix(in srgb,var(--primary) 7%,var(--bg));
   --tint:color-mix(in srgb,var(--primary) 12%,transparent);
@@ -93,11 +90,6 @@ button{font:inherit;color:inherit;cursor:pointer}
 .mnav-list a:active{background:var(--soft)}
 .mnav-list .ico{width:38px;height:38px;border-radius:11px}
 .mnav-h{margin:18px 8px 6px;color:var(--muted);font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
-.mnav-themes{display:flex;align-items:center;gap:8px;margin:18px 8px 0}
-.mnav-themes span{font-weight:800;font-size:13px;color:var(--muted);margin-right:4px}
-.mnav-themes button{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:0;border-radius:999px;background:var(--card);box-shadow:0 0 0 1px var(--line);font-weight:600;font-size:13px}
-.mnav-themes button i{width:14px;height:14px;border-radius:50%}
-.mnav-themes button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
 .mnav-foot{display:grid;gap:10px;margin-top:auto;padding-top:24px}
 
 /* иконка в цветной подложке */
@@ -348,13 +340,6 @@ body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#f
 .fab.is-open .fab-tip{opacity:0}
 @keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,currentColor 60%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
 
-/* ---------- переключатель схем (только для превью) ---------- */
-.themes{position:fixed;left:16px;bottom:16px;z-index:45;display:flex;align-items:center;gap:4px;padding:5px;border-radius:999px;background:var(--card);box-shadow:var(--shadow),0 0 0 1px var(--line)}
-.themes span{padding:0 8px 0 10px;font-size:12px;font-weight:800;color:var(--muted)}
-.themes button{display:grid;place-items:center;width:34px;height:34px;padding:0;border:0;border-radius:50%;background:none}
-.themes button i{display:block;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}
-.themes button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--ink)}
-
 /* ---------- страницы услуг ---------- */
 .crumbs{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:22px;font-size:14px;font-weight:700;color:var(--muted)}
 .crumbs a{text-decoration:none}
@@ -479,9 +464,7 @@ body .rx{--rx-navy:var(--deep);--rx-navy-80:color-mix(in srgb,var(--deep) 80%,#f
   .fab{right:16px;bottom:16px}
   .fab-main{width:58px;height:58px}
   .fab-tip{display:none}
-  .themes{display:none}
   .demo-wrap{padding:0;border-radius:0;background:none;box-shadow:none}
-  .mnav-themes{flex-wrap:wrap}
   .person-ph{aspect-ratio:1/0.9}
 }
 /* калькулятор: липкая панель итога не должна перекрывать кнопку контактов */

@@ -1,0 +1,50 @@
+.contacts {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.contacts-button {
+    background-color: var(--main-color);
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+    list-style: none;
+}
+
+.contacts-button::-webkit-details-marker {
+    display: none;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+}
+
+.contact {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: var(--background-color);
+    filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.contact-name {
+    font-weight: bold;
+}
+
+.contact-icon {
+    width: 40px;
+}

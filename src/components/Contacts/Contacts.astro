@@ -1,0 +1,24 @@
+---
+import "./Contacts.css";
+import contactsIcon from "src/assets/images/contacts.svg?url";
+import { data } from "src/data";
+import Contact from "./Contact.astro";
+---
+
+<details class="contacts">
+  <summary class="contacts-button">
+    <img src={contactsIcon} alt="Контакты" />
+  </summary>
+  <div class="contact-list">
+    {
+      data.concacts.map((contact) => (
+        <Contact
+          name={contact.name}
+          description={contact.description}
+          icon={contact.icon}
+          link={contact.link}
+        />
+      ))
+    }
+  </div>
+</details>

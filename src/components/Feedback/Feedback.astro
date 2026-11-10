@@ -5,7 +5,7 @@ import checkboxOff from "src/assets/images/checkbox-off.svg?url";
 import checkboxOn from "src/assets/images/checkbox-on.svg?url";
 ---
 
-<div class="feedback">
+<div class="feedback" id="feedback">
   <Title
     text="Связаться с нами"
     subtitle="Расскажите о задаче! обсудим подходящее решение."
@@ -16,6 +16,12 @@ import checkboxOn from "src/assets/images/checkbox-on.svg?url";
       class="feedback-input"
       type="tel"
       placeholder="Номер телефона"
+      required
+    />
+    <input
+      class="feedback-input"
+      type="text"
+      placeholder="Telegram или MAX"
       required
     />
     <textarea class="feedback-textarea" placeholder="Расскажите о вашей задаче"

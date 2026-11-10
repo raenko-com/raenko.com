@@ -31,7 +31,7 @@
     align-items: center;
     gap: 20px;
     cursor: pointer;
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-size: clamp(1rem, 3vw, 1.25rem);
     font-weight: normal;
     list-style: none;
     width: 100%;

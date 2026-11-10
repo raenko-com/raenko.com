@@ -1,0 +1,20 @@
+---
+import "./Contacts.css";
+
+export interface ContactProps {
+  icon: string;
+  name: string;
+  description: string;
+  link: string;
+}
+
+const { icon, name, description, link } = Astro.props as ContactProps;
+---
+
+<a href={link} class="contact">
+  <img src={icon} alt={name} class="contact-icon" />
+  <div class="contact-info">
+    <span class="contact-name">{name}</span>
+    <span class="contact-description">{description}</span>
+  </div>
+</a>

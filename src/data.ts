@@ -19,15 +19,54 @@ import background6 from "./assets/images/RaenkoBackground6.png?url";
 import alekseyPhoto from "./assets/images/aleksey.png?url";
 import egorPhoto from "./assets/images/egor.png?url";
 import daniilPhoto from "./assets/images/daniil.png?url";
+import emailIcon from "./assets/images/email.svg?url";
+import smallPhoneIcon from "./assets/images/small-phone.svg?url";
+import telegramIcon from "./assets/images/telegram.svg?url";
+import maxIcon from "./assets/images/max.svg?url";
+import feedbackIcon from "./assets/images/feedback.svg?url";
 
 export const data = {
     phoneLink: "+79281788808",
     phone: "+7 (928) 178-88-08",
     email: "info@raenko.com",
     max: "https://max.ru/u/f9LHodD0cOJVyfwOeC8XY_paJkoN12yPvZuUV8yiQBkmuO7Xb2Y3rlfm6Hg",
+    maxUsername: "Алексей",
     telegram: "https://t.me/a_raenko",
+    telegramUsername: "@a_raenko",
     title: "Сайты, ИИ, боты и автоматизация",
     description: "Решения, которые берут рутинные задачи бизнеса на себя",
+    concacts: [
+        {
+            icon: smallPhoneIcon,
+            link: "+79281788808",
+            name: "Телефон",
+            description: "С 9:00 до 20:00"
+        },
+        {
+            icon: emailIcon,
+            link: "mailto:info@raenko.com",
+            name: "Email",
+            description: "Ответим в течение дня"
+        },
+        {
+            icon: telegramIcon,
+            link: "https://t.me/a_raenko",
+            name: "Telegram",
+            description: "@a_raenko"
+        },
+        {
+            icon: maxIcon,
+            link: "https://max.ru/u/f9LHodD0cOJVyfwOeC8XY_paJkoN12yPvZuUV8yiQBkmuO7Xb2Y3rlfm6Hg",
+            name: "MAX",
+            description: "Алексей"
+        },
+        {
+            icon: feedbackIcon,
+            link: "#feedback",
+            name: "Обратная связь",
+            description: "Мы перезвоним"
+        }
+    ],
     services: [
         {
             title: "Сайт",
@@ -107,7 +146,7 @@ export const data = {
         },
         {
             icon: paymentIcon,
-            title: "Поэтапная оплата 50% / 50%",
+            title: "Поэтапная оплата",
             description: "Вы не рискуете всей суммой на старте. 50% перед началом работ, 50% после согласования результата, до публикации."
         },
         {

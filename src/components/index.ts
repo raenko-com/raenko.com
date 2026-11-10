@@ -8,3 +8,4 @@ export { Guarantees } from './Guarantees/index';
 export { Questions } from './Questions/index';
 export { Feedback } from './Feedback/index';
 export { Team } from './Team/index';
+export { Contacts } from './Contacts/index';

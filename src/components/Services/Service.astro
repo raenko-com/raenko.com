@@ -1,0 +1,28 @@
+---
+import "./Services.css";
+
+export interface ServiceProps {
+  title: string;
+  icon: string;
+  background: string;
+  description: string;
+  cost: string;
+  deadline?: string;
+}
+
+const { title, icon, background, description, cost, deadline } =
+  Astro.props as ServiceProps;
+---
+
+<div class="service-container" style={`background-image: ${background}`}>
+  <div class="service-header">
+    <img src={icon} alt={title} class="service-icon" />
+    <h3 class="service-title">{title}</h3>
+    <p class="service-description">{description}</p>
+  </div>
+  <div class="service-details">
+    <p class="service-cost">{cost}</p>
+    {deadline && <p class="service-deadline">{deadline}</p>}
+    <p class="service-cost">Обсудить</p>
+  </div>
+</div>

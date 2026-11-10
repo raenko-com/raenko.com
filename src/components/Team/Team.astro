@@ -1,0 +1,24 @@
+---
+import "./Team.css";
+import { Title } from "src/components";
+import Colleague from "./Colleague.astro";
+import { data } from "src/data";
+---
+
+<div class="team">
+  <Title
+    text="Наша команда"
+    subtitle="Объединяем разработку, дизайн и управление проектом."
+  />
+  <div class="colleagues">
+    {
+      data.team.map((colleague) => (
+        <Colleague
+          name={colleague.name}
+          role={colleague.role}
+          photo={colleague.photo}
+        />
+      ))
+    }
+  </div>
+</div>

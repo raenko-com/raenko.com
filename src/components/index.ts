@@ -1,3 +1,10 @@
 export { Header } from './Header/index';
 export { Footer } from './Footer/index';
 export { Banner } from './Banner/index';
+export { Title } from './Title/index';
+export { Services } from './Services/index';
+export { Process } from './Process/index';
+export { Guarantees } from './Guarantees/index';
+export { Questions } from './Questions/index';
+export { Feedback } from './Feedback/index';
+export { Team } from './Team/index';

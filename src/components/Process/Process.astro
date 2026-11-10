@@ -1,0 +1,21 @@
+---
+import Stage from "./Stage.astro";
+import "./Process.css";
+import { Title } from "src/components";
+import { data } from "src/data";
+---
+
+<section class="process">
+  <Title text="Как мы работаем" subtitle="От брифа до запуска строго по договору" />
+  <div class="stages-container">
+    {
+      data.stages.map((stage) => (
+        <Stage
+          number={stage.number}
+          title={stage.title}
+          description={stage.description}
+        />
+      ))
+    }
+  </div>
+</section>

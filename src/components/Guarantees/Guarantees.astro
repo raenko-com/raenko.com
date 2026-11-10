@@ -1,0 +1,15 @@
+---
+import Guarantee from './Guarantee.astro';
+import './Guarantees.css';
+import { Title } from 'src/components';
+import { data } from 'src/data';
+---
+
+<section class="guarantees">
+    <Title text="Гарантии, которые мы предоставляем" subtitle="Юридическая прозрачность, фиксация сроков и ответственность за результат на каждом этапе разработки" />
+    <div class="guarantees-list">
+        {data.guarantees.map((guarantee) => (
+            <Guarantee title={guarantee.title} description={guarantee.description} icon={guarantee.icon} />
+        ))}
+    </div>
+</section>

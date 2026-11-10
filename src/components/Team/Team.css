@@ -1,0 +1,39 @@
+.team {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+.colleagues {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+}
+
+.colleague {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.colleague-photo {
+    max-width: 400px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 40px;
+    background-color: var(--background-color);
+}
+
+.colleague-name {
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.colleague-role {
+    font-size: 24px;
+    font-weight: normal;
+}

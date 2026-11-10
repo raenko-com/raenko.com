@@ -1,0 +1,38 @@
+.guarantee {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-radius: 20px;
+    background-color: var(--background-secondary-color);
+    aspect-ratio: 1 / 1;
+}
+
+.guarantee-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.guarantee-description {
+    font-size: 20px;
+}
+
+.guarantee-icon {
+    height: 60px;
+}
+
+.guarantees-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.guarantees {
+    padding: 50px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    max-width: 1440px;
+}

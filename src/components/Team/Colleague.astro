@@ -1,0 +1,19 @@
+---
+import "./Team.css";
+
+export interface ColleagueProps {
+  name: string;
+  role: string;
+  photo: string;
+}
+
+const { name, role, photo } = Astro.props as ColleagueProps;
+---
+
+<div class="colleague">
+  <img src={photo} alt={name} class="colleague-photo" />
+  <div class="colleague-info">
+      <h3 class="colleague-name">{name}</h3>
+      <p class="colleague-role">{role}</p>
+  </div>
+</div>

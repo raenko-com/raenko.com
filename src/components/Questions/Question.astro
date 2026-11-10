@@ -1,0 +1,23 @@
+---
+import "./Questions.css";
+
+export interface QuestionProps {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props as QuestionProps;
+---
+
+<details class="question">
+  <summary class="question-title">
+    <span>{question}</span>
+    <img
+      class="question-arrow"
+      src="/src/assets/images/arrow.svg"
+      alt=""
+      aria-hidden="true"
+    />
+  </summary>
+  <p class="question-answer">{answer}</p>
+</details>

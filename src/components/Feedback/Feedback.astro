@@ -1,0 +1,49 @@
+---
+import "./Feedback.css";
+import { Title } from "src/components";
+---
+
+<div class="feedback">
+  <Title
+    text="Связаться с нами"
+    subtitle="Расскажите о задаче! обсудим подходящее решение."
+  />
+  <form class="feedback-form">
+    <input class="feedback-input" type="text" placeholder="Имя" required />
+    <input
+      class="feedback-input"
+      type="tel"
+      placeholder="Номер телефона"
+      required
+    />
+    <textarea class="feedback-textarea" placeholder="Расскажите о вашей задаче"
+    ></textarea>
+    <div class="feedback-consent">
+      <input
+        class="feedback-consent-input"
+        type="checkbox"
+        id="consent"
+        name="consent"
+        value="no"
+        required
+      />
+      <label class="feedback-consent-label" for="consent">
+        <span class="feedback-consent-icon" aria-hidden="true">
+          <img
+            class="checkbox-off"
+            src="src/assets/images/checkbox-off.svg"
+            alt=""
+          />
+          <img
+            class="checkbox-on"
+            src="src/assets/images/checkbox-on.svg"
+            alt=""
+          />
+        </span>
+        <span>Согласен на обработку персональных данных</span>
+      </label>
+    </div>
+    <button class="feedback-button" type="submit">Отправить</button>
+    <p class="feedback-info">Отвечаем в течение часа с 9:00 по 20:00</p>
+  </form>
+</div>

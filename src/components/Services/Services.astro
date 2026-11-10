@@ -1,0 +1,26 @@
+---
+import Service from "./Service.astro";
+import { data } from "src/data";
+import { Title } from "src/components";
+---
+
+<section class="services-section">
+  <Title
+    text="Услуги и стоимость"
+    subtitle="Разрабатываем сайты и внедряем автоматизацию с фиксированной ценой и сроками по договору"
+  />
+  <div class="services-list">
+    {
+      data.services.map((service) => (
+        <Service
+          icon={service.icon}
+          title={service.title}
+          description={service.description}
+          cost={service.cost}
+          deadline={service.deadline}
+          background={service.background}
+        />
+      ))
+    }
+  </div>
+</section>

@@ -395,15 +395,16 @@ def page_index():
   {rx_examples("flow,book,calc,ba", keep_id=True)}
 </section>
 
-<section class="section" id="team">
+<section class="section section--team" id="team">
   <div class="container">
     <div class="section-head reveal"><span class="eyebrow">{ico("users")} Команда</span><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
-    <div class="team">
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
-      <article class="person reveal"><div class="person-ph person-ph--empty"><span>ДР</span><small>фото скоро</small></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
+    <div class="team team-grid">
+      <article class="person person--lead reveal"><div class="person-media"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p class="role">Коммерческий руководитель</p><div class="person-tags tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
+      <article class="person person--compact reveal"><div class="person-media"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p class="role">Fullstack-разработчик</p><div class="person-tags tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
+      <article class="person person--compact reveal"><div class="person-media person-media--mono" role="img" aria-label="Монограмма ДР"><span class="monogram">ДР</span></div><div class="person-body"><h3>Даниил Раенко</h3><p class="role">Fullstack-разработчик</p><div class="person-tags tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
     </div>
   </div>
+  <div class="team-wave" aria-hidden="true"></div>
 </section>
 
 {steps_section()}

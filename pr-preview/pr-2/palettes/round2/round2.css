@@ -1,0 +1,8 @@
+.grp{display:grid;gap:inherit}
+.grp+.grp{margin-top:56px}
+.grp-h{padding:8px 0 4px}
+.grp-h h2{font-size:clamp(26px,3vw,34px);font-weight:800;letter-spacing:-.02em}
+.grp-h p{margin-top:6px;color:#5E5B7A;font-weight:600}
+.jump-g{margin:14px 10px 6px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#7A7896}
+.jump-g:first-child{margin-top:0}
+@media (max-width:900px){.jump-g{display:none}}

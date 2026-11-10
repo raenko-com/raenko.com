@@ -43,7 +43,17 @@ body.rc-page{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Manrop
 .rc-layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:24px;align-items:start}
 .rc-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:28px}
 .rc-h{margin:0;font-size:22px;line-height:1.25;font-weight:800;letter-spacing:-.01em}
-.rc-sub{margin:6px 0 20px;color:var(--muted);font-size:15px}
+.rc-sub{margin:6px 0 20px;color:var(--muted);font-size:15px;line-height:1.5}
+.rc-multi{display:inline-block;margin-right:8px;padding:3px 10px;border-radius:999px;background:var(--accent);color:var(--ink);font-weight:800;font-size:12.5px;vertical-align:1px}
+.rc-more{margin:14px 0 0;padding:12px 14px;border-radius:14px;background:var(--soft);color:var(--ink);font-weight:600;font-size:14.5px;animation:rcIn .35s ease}
+@keyframes rcIn{from{opacity:0;transform:translateY(-6px)}}
+.rc-chips{display:flex;flex-wrap:wrap;gap:8px;margin:-6px 0 18px}
+.rc-chip{display:inline-flex;align-items:center;gap:7px;padding:8px 14px 8px 8px;border-radius:999px;border:1.5px dashed var(--line);background:var(--surface);color:var(--muted);font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.15s}
+.rc-chip:hover{border-color:var(--primary);color:var(--ink)}
+.rc-chip-m{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--soft);color:var(--primary);font-weight:800;font-size:14px;line-height:1}
+.rc-chip[aria-pressed="true"]{border-style:solid;border-color:var(--primary);background:var(--soft);color:var(--ink)}
+.rc-chip[aria-pressed="true"] .rc-chip-m{background:var(--primary);color:#fff}
+.rc-chip:focus-visible{outline:3px solid var(--ring);outline-offset:2px}
 .rc-nav{display:flex;justify-content:flex-end;gap:10px;margin-top:22px}
 .rc-panel[data-step="2"] .rc-nav{justify-content:flex-start}
 
@@ -71,7 +81,7 @@ body.rc-page{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Manrop
 .rc-card-txt b{font-size:16px;line-height:1.3}
 .rc-card-txt span{color:var(--muted);font-size:14px;line-height:1.4}
 .rc-card-txt em{margin-top:6px;font-style:normal;font-size:13px;font-weight:700;color:var(--ink)}
-.rc-check{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line);background:var(--surface)}
+.rc-check{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:7px;border:1.5px solid var(--line);background:var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239a98b0' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E") center/13px no-repeat}
 .rc-card[aria-pressed="true"] .rc-check{border-color:var(--primary);background:var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/15px no-repeat}
 
 /* ---------- шаг 2: опции ---------- */

@@ -10,7 +10,7 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "4"  # версия статики для сброса кэша
+V = "5"  # версия статики для сброса кэша
 
 PHONE = "+7 928 178-88-08"
 PHONE_HREF = "tel:+79281788808"
@@ -19,6 +19,18 @@ TG_HREF = "https://t.me/a_raenko"
 MAX_HREF = "https://max.ru/u/f9LHodD0cOJVyfwOeC8XY_paJkoN12yPvZuUV8yiQBkmuO7Xb2Y3rlfm6Hg"
 # адрес приёма заявок (raenko-bot, POST /api/lead). Пусто: форма покажет телефон и мессенджеры вместо отправки
 LEAD_API = ""
+
+# Политика обработки ПД (RAE-12). Дату вступления в силу поменять при публикации.
+DOMAIN = "raenko.pro"
+POLICY_DATE = "11.11.2026"
+POLICY_EMAIL = "raenkoaleksey@yandex.ru"
+OPERATOR = {
+    "name": "Индивидуальный предприниматель Раенко Екатерина Владимировна",
+    "short": "ИП Раенко Е. В.",
+    "inn": "616484084490",
+    "ogrnip": "317237500104147",
+    "addr": "г. Ростов-на-Дону, пр. Театральный, д. 85",
+}
 
 # ---------------------------------------------------------------- иконки
 I = {
@@ -32,6 +44,8 @@ I = {
     "chev": '<path d="M6 9l6 6 6-6"/>',
     "plus": '<path d="M12 5v14M5 12h14"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    "down": '<path d="M12 4v11M7 10.5l5 5 5-5"/><path d="M5 20h14"/>',
+    "print": '<path d="M7 9V4h10v5"/><rect x="3" y="9" width="18" height="8" rx="2"/><path d="M7 14h10v6H7z"/>',
     "phone": '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
     "msg": '<path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/>',
     "mail": '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6 8.5-6"/>',
@@ -168,9 +182,8 @@ def head(title, desc, depth, extra_css=()):
 <meta name="description" content="{html.escape(desc)}">
 <meta name="theme-color" content="#5B4CFF">
 <link rel="icon" href="{r}assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="{r}assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{r}assets/css/fonts.css?v={V}">
 <link rel="stylesheet" href="{r}assets/css/site.css?v={V}">{css}
 </head>
 <body data-theme="indigo">
@@ -230,22 +243,21 @@ def header(depth, current=None):
 THEMES = [("indigo", "#5B4CFF", "#C6F432", "Индиго"), ("ultra", "#2340FF", "#FFC83D", "Ультрамарин"), ("raspberry", "#D61F5E", "#2DD4BF", "Малина")]
 
 
-def lead_form(title="Обсудим вашу задачу", sub="Оставьте контакты, ответим в течение часа с 9:00 до 20:00.", msg_placeholder="Расскажите о задаче: что нужно сделать и к какому сроку"):
+def lead_form(depth=0, title="Обсудим вашу задачу", sub="Оставьте контакты, ответим в течение часа с 9:00 до 20:00.", msg_placeholder="Расскажите о задаче: что нужно сделать и к какому сроку"):
     return f'''<form class="form" id="lead-form" data-lead="{LEAD_API}" novalidate>
   <h3>{title}</h3>
   <p class="muted">{sub}</p>
   <div class="f-row">
-    <label class="field"><span>Имя</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться" required></label>
-    <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" required></label>
+    <label class="field"><span>Имя</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться" maxlength="100" required></label>
+    <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" maxlength="40" required></label>
   </div>
-  <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username"></label>
+  <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username" maxlength="100"></label>
   <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-  <label class="field"><span>Задача</span><textarea name="msg" placeholder="{msg_placeholder}"></textarea></label>
-  <label class="check"><input type="checkbox" required checked> <span>Согласен на <a href="#">обработку персональных данных</a></span></label>
+  <label class="field"><span>Задача</span><textarea name="msg" placeholder="{msg_placeholder}" maxlength="3000"></textarea></label>
+  <label class="check"><input type="checkbox" name="consent" required> <span>Согласен на обработку персональных данных в соответствии с <a href="{rel(depth)}policy/" target="_blank">Политикой обработки персональных данных</a></span></label>
   <button class="btn btn-primary btn-block" type="submit">Отправить заявку {ico("arrow")}</button>
   <div class="f-ok" role="status">{ico("check")} Спасибо! Заявка у нас, ответим в течение часа с 9:00 до 20:00.</div>
   <div class="f-err" role="alert">Не получилось отправить. Позвоните <a href="{PHONE_HREF}">{PHONE}</a> или напишите в <a href="{TG_HREF}" target="_blank" rel="noopener">Telegram</a>.</div>
-  <p class="f-fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
 </form>'''
 
 
@@ -274,7 +286,7 @@ def contact_section(depth, title="Связаться с нами", lead="Рас�
         </div>
         <p class="c-hours">На связи с 9:00 до 20:00 каждый день</p>
       </div>
-      {lead_form(form_title)}
+      {lead_form(depth, form_title)}
     </div>
   </div>
 </section>'''
@@ -294,9 +306,9 @@ def footer(depth):
       </div>
       <div><h4>Услуги</h4><ul>{svc}</ul></div>
       <div><h4>Компания</h4><ul><li><a href="{home}#examples">Примеры решений</a></li><li><a href="{home}#team">Команда</a></li><li><a href="{home}#process">Как мы работаем</a></li><li><a href="{home}#faq">Вопросы</a></li><li><a href="{home}#calculator">Калькулятор</a></li></ul></div>
-      <div><h4>Контакты</h4><ul><li><a href="{PHONE_HREF}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><a href="#">Политика обработки персональных данных</a></li><li><a href="#">Политика конфиденциальности</a></li></ul></div>
+      <div><h4>Контакты</h4><ul><li><a href="{PHONE_HREF}">{PHONE}</a></li><li><a href="mailto:{EMAIL}">{EMAIL}</a></li><li><a href="{r}policy/">Политика обработки персональных данных</a></li></ul></div>
     </div>
-    <div class="footer-bot"><span>© 2026 RAENKO. ИП Раенко А.</span><span>raenko.com</span></div>
+    <div class="footer-bot"><span>© 2026 RAENKO. {OPERATOR["short"]}, ИНН {OPERATOR["inn"]}</span><a href="{r}policy/">Политика обработки ПД</a></div>
   </div>
 </footer>
 <div class="fab">
@@ -318,12 +330,12 @@ def scripts(depth, extra=()):
 
 
 def steps_section(dark=True):
-    items = "".join(f'''<div class="step reveal"><div class="step-n" aria-label="Шаг {i + 1}">{ico(ic)}</div><h3>{t}</h3><p>{d}</p><span class="step-chip">{c}</span></div>'''
+    items = "".join(f'''<div class="step"><div class="step-n" aria-label="Шаг {i + 1}">{ico(ic)}</div><h3>{t}</h3><p>{d}</p><span class="step-chip">{c}</span></div>'''
                     for i, (ic, t, d, c) in enumerate(STEPS))
     return f'''<section class="section section--deep" id="process">
   <div class="container">
     <div class="section-head reveal"><h2 class="h2">Как мы работаем</h2><p class="lead">От брифа до запуска, строго по договору</p></div>
-    <div class="steps" data-steps>{items}<div class="steps-done reveal" aria-hidden="true"><span class="sd-ico">{ico("check")}</span><span><b>Проект запущен!</b><small>Сайт работает, заявки идут</small></span><span class="confetti"></span></div></div>
+    <div class="steps reveal" data-steps>{items}<div class="steps-done" aria-hidden="true"><span class="sd-ico">{ico("check")}</span><span><b>Проект запущен!</b><small>Сайт работает, заявки идут</small></span><span class="confetti"></span></div></div>
   </div>
 </section>'''
 
@@ -380,14 +392,24 @@ def page_index():
       </ul>
     </div>
     <div class="scene" aria-hidden="true">
-      <div class="sc-glow"></div>
-      <div class="sc-ring sc-ring--1"></div>
-      <div class="sc-ring sc-ring--2"></div>
-      <div class="sc-core"></div>
-      <div class="sc-pill"></div>
-      <i class="sc-dot sc-dot--1"></i><i class="sc-dot sc-dot--2"></i><i class="sc-dot sc-dot--3"></i>
-      <i class="sc-sq"></i><i class="sc-tri"></i>
-      <div class="sc-grid"></div>
+      <div class="scene-orbit"></div>
+      <div class="scard s-site">
+        <div class="s-bar"><i></i><i></i><i></i></div>
+        <div class="s-line w60"></div><div class="s-hero"><i></i><i></i><i></i></div><div class="s-line w80"></div><div class="s-line w40"></div>
+        <div class="s-line s-line--acc w30"></div>
+      </div>
+      <div class="scard s-tg">
+        <div class="s-tg-h"><span class="s-ava">{ico("bot")}</span><div class="s-hd"><div class="s-line w70"></div><div class="s-line s-line--sm w40"></div></div></div>
+        <div class="s-msg"><span class="s-new"></span><div class="s-line w90"></div><div class="s-line w60"></div></div>
+        <div class="s-msg s-msg--me"><div class="s-line w70"></div></div>
+      </div>
+      <div class="scard s-crm">
+        <div class="s-line s-line--b w40"></div>
+        <div class="s-row"><div class="s-line w60"></div><i class="st st-new"></i></div>
+        <div class="s-row"><div class="s-line w70"></div><i class="st st-work"></i></div>
+        <div class="s-row"><div class="s-line w50"></div><i class="st st-done"></i></div>
+      </div>
+      <div class="scard s-ai"><span class="ico">{ico("ai")}</span><span class="s-wave"><i></i><i></i><i></i><i></i><i></i></span></div>
     </div>
   </div>
 </section>
@@ -411,9 +433,9 @@ def page_index():
   <div class="container">
     <div class="section-head reveal"><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
     <div class="team">
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
-      <article class="person reveal"><div class="person-ph person-ph--empty"><span>ДР</span><small>фото скоро</small></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-daniil.jpg" alt="Даниил Раенко" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
     </div>
   </div>
 </section>
@@ -697,6 +719,104 @@ def page_service(slug):
     (ROOT / "services" / f"{slug}.html").write_text(body, encoding="utf-8")
 
 
+# ---------------------------------------------------------------- политика обработки ПД (/policy/)
+def policy_html():
+    """tools/policy-pd.md -> HTML разделов. Разметка: ## раздел, ### подраздел, - пункт, **жирный**, !заметка."""
+    em = f'<a href="mailto:{POLICY_EMAIL}">{POLICY_EMAIL}</a>'
+    op = OPERATOR
+    subs = {
+        "{DOMAIN}": DOMAIN,
+        "{EMAIL_LINK}": em,
+        "{OPERATOR}": f'<dl class="pd-op"><div><dt>Оператор</dt><dd>{op["name"]}</dd></div><div><dt>ИНН</dt><dd>{op["inn"]}</dd></div><div><dt>ОГРНИП</dt><dd>{op["ogrnip"]}</dd></div><div><dt>Адрес</dt><dd>{op["addr"]}</dd></div><div><dt>Почта</dt><dd>{em}</dd></div><div><dt>Телефон</dt><dd><a href="{PHONE_HREF}">{PHONE}</a></dd></div></dl>',
+        "{OPERATOR_SHORT}": f'<dl class="pd-op pd-op--short"><div><dt>Оператор</dt><dd>ИП Раенко Екатерина Владимировна</dd></div><div><dt>Почта</dt><dd>{em}</dd></div><div><dt>Телефон</dt><dd><a href="{PHONE_HREF}">{PHONE}</a></dd></div></dl>',
+    }
+    md = (ROOT / "tools" / "policy-pd.md").read_text(encoding="utf-8")
+    secs, toc, out, ul = [], [], [], False
+    n = 0
+
+    def inline(t):
+        t = html.escape(t, quote=False)
+        t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+        t = re.sub(r"^(\d+\.\d+\.)\s", r'<span class="pd-num">\1</span> ', t)
+        for k, v in subs.items():
+            t = t.replace(html.escape(k, quote=False), v)
+        return t
+
+    def close_ul():
+        nonlocal ul
+        if ul:
+            out.append("</ul>")
+            ul = False
+
+    for line in md.splitlines():
+        line = line.rstrip()
+        if not line:
+            close_ul()
+            continue
+        if line.startswith("## "):
+            close_ul()
+            if out:
+                out.append("</section>")
+            n += 1
+            title = line[3:]
+            toc.append(f'<a href="#pd-{n}"><span>{n}</span>{title}</a>')
+            out.append(f'<section class="pd-sec" id="pd-{n}"><h2><span class="pd-h-n">{n}</span>{title}</h2>')
+        elif line.startswith("### "):
+            close_ul()
+            out.append(f"<h3>{inline(line[4:])}</h3>")
+        elif line.startswith("- "):
+            if not ul:
+                out.append("<ul>")
+                ul = True
+            out.append(f"<li>{inline(line[2:])}</li>")
+        elif line.startswith("!"):
+            close_ul()
+            out.append(f'<p class="pd-note">{ico("shield")}<span>{inline(line[1:])}</span></p>')
+        elif line.strip() in subs:
+            close_ul()
+            out.append(subs[line.strip()])
+        else:
+            close_ul()
+            out.append(f"<p>{inline(line)}</p>")
+    close_ul()
+    out.append("</section>")
+    return "".join(toc), "\n".join(out)
+
+
+def page_policy():
+    d = 1
+    toc, doc = policy_html()
+    body = f"""{head("Политика обработки персональных данных — RAENKO", f"Политика в отношении обработки персональных данных пользователей сайта {DOMAIN}.", d, ["policy.css"])}{header(d)}
+<main id="main" class="pd">
+<section class="pd-hero">
+  <div class="container">
+    <nav class="crumbs" aria-label="Навигация"><a href="../index.html">Главная</a><span>/</span><span>Документы</span></nav>
+    <h1>Политика в отношении обработки персональных данных</h1>
+    <div class="pd-meta">
+      <span class="pd-chip">{ico("check")}Действует с {POLICY_DATE}</span>
+      <span class="pd-chip">{ico("shield")}152-ФЗ «О персональных данных»</span>
+    </div>
+    <div class="pd-act">
+      <a class="btn btn-primary" href="../assets/docs/policy-pd.pdf" download="RAENKO-politika-obrabotki-PD.pdf">{ico("down")}Скачать PDF</a>
+      <button class="btn btn-ghost" type="button" data-print>{ico("print")}Распечатать</button>
+    </div>
+  </div>
+</section>
+<section class="pd-body">
+  <div class="container pd-in">
+    <aside class="pd-toc" aria-label="Содержание"><p>Содержание</p><nav>{toc}</nav></aside>
+    <article class="pd-doc">
+{doc}
+      <p class="pd-upd">Дата вступления в силу: {POLICY_DATE}</p>
+    </article>
+  </div>
+</section>
+</main>
+{footer(d)}{scripts(d)}"""
+    (ROOT / "policy").mkdir(exist_ok=True)
+    (ROOT / "policy" / "index.html").write_text(body, encoding="utf-8")
+
+
 def favicon():
     svg = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 140 840 800">'
            '<path fill="#5B4CFF" fill-rule="evenodd" d="M131 155H640C820 155 920 250 920 390C920 490 870 560 782 602L948 924H778L634 642H290V924H131Z M290 284H634C700 284 750 335 750 399C750 463 700 514 634 514H290Z"/>'
@@ -710,4 +830,5 @@ if __name__ == "__main__":
     page_index()
     for slug in PAGES:
         page_service(slug)
+    page_policy()
     print("ok:", "index.html +", ", ".join(f"services/{s}.html" for s in PAGES))

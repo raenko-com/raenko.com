@@ -7,12 +7,11 @@
 <meta name="description" content="Разрабатываем сайты, ботов в Telegram и MAX, автоматизацию и ИИ для бизнеса. Фиксированная цена и сроки по договору.">
 <meta name="theme-color" content="#5B4CFF">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/site.css?v=4">
-<link rel="stylesheet" href="assets/css/calc.css?v=4">
-<link rel="stylesheet" href="assets/css/examples.css?v=4">
+<link rel="preload" href="assets/fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/fonts.css?v=5">
+<link rel="stylesheet" href="assets/css/site.css?v=5">
+<link rel="stylesheet" href="assets/css/calc.css?v=5">
+<link rel="stylesheet" href="assets/css/examples.css?v=5">
 </head>
 <body data-theme="indigo">
 <a class="sr-only" href="#main">К содержанию</a>
@@ -73,14 +72,24 @@
       </ul>
     </div>
     <div class="scene" aria-hidden="true">
-      <div class="sc-glow"></div>
-      <div class="sc-ring sc-ring--1"></div>
-      <div class="sc-ring sc-ring--2"></div>
-      <div class="sc-core"></div>
-      <div class="sc-pill"></div>
-      <i class="sc-dot sc-dot--1"></i><i class="sc-dot sc-dot--2"></i><i class="sc-dot sc-dot--3"></i>
-      <i class="sc-sq"></i><i class="sc-tri"></i>
-      <div class="sc-grid"></div>
+      <div class="scene-orbit"></div>
+      <div class="scard s-site">
+        <div class="s-bar"><i></i><i></i><i></i></div>
+        <div class="s-line w60"></div><div class="s-hero"><i></i><i></i><i></i></div><div class="s-line w80"></div><div class="s-line w40"></div>
+        <div class="s-line s-line--acc w30"></div>
+      </div>
+      <div class="scard s-tg">
+        <div class="s-tg-h"><span class="s-ava"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6.5A2.5 2.5 0 0 1 7.5 4h9A2.5 2.5 0 0 1 19 6.5v7a2.5 2.5 0 0 1-2.5 2.5H11l-4 4v-4A2 2 0 0 1 5 14z"/><path d="M9.5 10h.01M14.5 10h.01"/></svg></span><div class="s-hd"><div class="s-line w70"></div><div class="s-line s-line--sm w40"></div></div></div>
+        <div class="s-msg"><span class="s-new"></span><div class="s-line w90"></div><div class="s-line w60"></div></div>
+        <div class="s-msg s-msg--me"><div class="s-line w70"></div></div>
+      </div>
+      <div class="scard s-crm">
+        <div class="s-line s-line--b w40"></div>
+        <div class="s-row"><div class="s-line w60"></div><i class="st st-new"></i></div>
+        <div class="s-row"><div class="s-line w70"></div><i class="st st-work"></i></div>
+        <div class="s-row"><div class="s-line w50"></div><i class="st st-done"></i></div>
+      </div>
+      <div class="scard s-ai"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7L18.5 9.5l-4.7 1.8L12 16l-1.8-4.7L5.5 9.5l4.7-1.8z"/><path d="M18.5 15l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></span><span class="s-wave"><i></i><i></i><i></i><i></i><i></i></span></div>
     </div>
   </div>
 </section>
@@ -432,9 +441,9 @@
   <div class="container">
     <div class="section-head reveal"><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
     <div class="team">
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
-      <article class="person reveal"><div class="person-ph person-ph--empty"><span>ДР</span><small>фото скоро</small></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-daniil.jpg" alt="Даниил Раенко" loading="lazy" width="720" height="756"></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
     </div>
   </div>
 </section>
@@ -442,7 +451,7 @@
 <section class="section section--deep" id="process">
   <div class="container">
     <div class="section-head reveal"><h2 class="h2">Как мы работаем</h2><p class="lead">От брифа до запуска, строго по договору</p></div>
-    <div class="steps" data-steps><div class="step reveal"><div class="step-n" aria-label="Шаг 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></div><h3>Обсуждаем задачу</h3><p>30-минутный созвон: разбираем задачу, фиксируем объём, цену и сроки в договоре.</p><span class="step-chip">30 минут</span></div><div class="step reveal"><div class="step-n" aria-label="Шаг 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div><h3>Проектируем и показываем макет</h3><p>Структура и дизайн до утверждения. Три раунда правок включены.</p><span class="step-chip">3 раунда правок</span></div><div class="step reveal"><div class="step-n" aria-label="Шаг 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></div><h3>Разрабатываем</h3><p>Вёрстка под все экраны, формы, бот и интеграции с CRM.</p><span class="step-chip">Тестовый адрес</span></div><div class="step reveal"><div class="step-n" aria-label="Шаг 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 15.5C4 17 3.5 20.5 3.5 20.5s3.5-.5 5-2"/><path d="M9 12.5l2.5 2.5"/><path d="M11.5 15c4-1.6 8.5-5.4 8.5-11.5-6.1 0-9.9 4.5-11.5 8.5z"/><circle cx="15" cy="9" r="1.6"/><path d="M8.5 12H5l2.5-3.5h3.5M12 15.5V19l3.5-2.5V13"/></svg></div><h3>Запускаем и обучаем</h3><p>Переносим на ваш домен, подключаем аналитику, записываем видеоинструкцию.</p><span class="step-chip">30 дней поддержки</span></div><div class="steps-done reveal" aria-hidden="true"><span class="sd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Проект запущен!</b><small>Сайт работает, заявки идут</small></span><span class="confetti"></span></div></div>
+    <div class="steps reveal" data-steps><div class="step"><div class="step-n" aria-label="Шаг 1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg></div><h3>Обсуждаем задачу</h3><p>30-минутный созвон: разбираем задачу, фиксируем объём, цену и сроки в договоре.</p><span class="step-chip">30 минут</span></div><div class="step"><div class="step-n" aria-label="Шаг 2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></div><h3>Проектируем и показываем макет</h3><p>Структура и дизайн до утверждения. Три раунда правок включены.</p><span class="step-chip">3 раунда правок</span></div><div class="step"><div class="step-n" aria-label="Шаг 3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg></div><h3>Разрабатываем</h3><p>Вёрстка под все экраны, формы, бот и интеграции с CRM.</p><span class="step-chip">Тестовый адрес</span></div><div class="step"><div class="step-n" aria-label="Шаг 4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 15.5C4 17 3.5 20.5 3.5 20.5s3.5-.5 5-2"/><path d="M9 12.5l2.5 2.5"/><path d="M11.5 15c4-1.6 8.5-5.4 8.5-11.5-6.1 0-9.9 4.5-11.5 8.5z"/><circle cx="15" cy="9" r="1.6"/><path d="M8.5 12H5l2.5-3.5h3.5M12 15.5V19l3.5-2.5V13"/></svg></div><h3>Запускаем и обучаем</h3><p>Переносим на ваш домен, подключаем аналитику, записываем видеоинструкцию.</p><span class="step-chip">30 дней поддержки</span></div><div class="steps-done" aria-hidden="true"><span class="sd-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><b>Проект запущен!</b><small>Сайт работает, заявки идут</small></span><span class="confetti"></span></div></div>
   </div>
 </section>
 
@@ -491,8 +500,9 @@
       <div class="rc-main">
         <div class="rc-panel" data-step="1">
           <h3 class="rc-h">Что вы хотите запустить или улучшить?</h3>
-          <p class="rc-sub">Можно выбрать несколько направлений</p>
+          <p class="rc-sub"><span class="rc-multi">Можно несколько</span>Отметьте всё, что нужно: например, сайт и бота для заявок</p>
           <div class="rc-cards" id="rc-cards"></div>
+          <p class="rc-more" id="rc-more" hidden>Нужно что-то ещё? Отметьте и другие направления, посчитаем всё вместе</p>
           <div class="rc-nav">
             <button class="rc-btn rc-btn-primary" id="rc-next" type="button" disabled>Дальше <span aria-hidden="true">→</span></button>
           </div>
@@ -501,6 +511,7 @@
         <div class="rc-panel" data-step="2" hidden>
           <h3 class="rc-h">Уточните, что нужно</h3>
           <p class="rc-sub">Мы отметили самое частое, поправьте под себя</p>
+          <div class="rc-chips" id="rc-chips" aria-label="Направления"></div>
           <div id="rc-groups"></div>
           <div class="rc-nav">
             <button class="rc-btn rc-btn-ghost" id="rc-back" type="button"><span aria-hidden="true">←</span> Назад</button>
@@ -561,17 +572,16 @@
   <h3>Обсудим вашу задачу</h3>
   <p class="muted">Оставьте контакты, ответим в течение часа с 9:00 до 20:00.</p>
   <div class="f-row">
-    <label class="field"><span>Имя</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться" required></label>
-    <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" required></label>
+    <label class="field"><span>Имя</span><input name="name" autocomplete="name" placeholder="Как к вам обращаться" maxlength="100" required></label>
+    <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" maxlength="40" required></label>
   </div>
-  <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username"></label>
+  <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username" maxlength="100"></label>
   <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
-  <label class="field"><span>Задача</span><textarea name="msg" placeholder="Расскажите о задаче: что нужно сделать и к какому сроку"></textarea></label>
-  <label class="check"><input type="checkbox" required checked> <span>Согласен на <a href="#">обработку персональных данных</a></span></label>
+  <label class="field"><span>Задача</span><textarea name="msg" placeholder="Расскажите о задаче: что нужно сделать и к какому сроку" maxlength="3000"></textarea></label>
+  <label class="check"><input type="checkbox" name="consent" required> <span>Согласен на обработку персональных данных в соответствии с <a href="policy/" target="_blank">Политикой обработки персональных данных</a></span></label>
   <button class="btn btn-primary btn-block" type="submit">Отправить заявку <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
   <div class="f-ok" role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg> Спасибо! Заявка у нас, ответим в течение часа с 9:00 до 20:00.</div>
   <div class="f-err" role="alert">Не получилось отправить. Позвоните <a href="tel:+79281788808">+7 928 178-88-08</a> или напишите в <a href="https://t.me/a_raenko" target="_blank" rel="noopener">Telegram</a>.</div>
-  <p class="f-fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
 </form>
     </div>
   </div>
@@ -587,9 +597,9 @@
       </div>
       <div><h4>Услуги</h4><ul><li><a href="services/site.html">Сайт</a></li><li><a href="services/bots.html">Боты в Telegram и MAX</a></li><li><a href="services/automation.html">Автоматизация и интеграции</a></li><li><a href="services/ai.html">ИИ для бизнеса</a></li><li><a href="services/support.html">Поддержка и безопасность</a></li><li><a href="services/promo.html">Продвижение</a></li></ul></div>
       <div><h4>Компания</h4><ul><li><a href="index.html#examples">Примеры решений</a></li><li><a href="index.html#team">Команда</a></li><li><a href="index.html#process">Как мы работаем</a></li><li><a href="index.html#faq">Вопросы</a></li><li><a href="index.html#calculator">Калькулятор</a></li></ul></div>
-      <div><h4>Контакты</h4><ul><li><a href="tel:+79281788808">+7 928 178-88-08</a></li><li><a href="mailto:info@raenko.com">info@raenko.com</a></li><li><a href="#">Политика обработки персональных данных</a></li><li><a href="#">Политика конфиденциальности</a></li></ul></div>
+      <div><h4>Контакты</h4><ul><li><a href="tel:+79281788808">+7 928 178-88-08</a></li><li><a href="mailto:info@raenko.com">info@raenko.com</a></li><li><a href="policy/">Политика обработки персональных данных</a></li></ul></div>
     </div>
-    <div class="footer-bot"><span>© 2026 RAENKO. ИП Раенко А.</span><span>raenko.com</span></div>
+    <div class="footer-bot"><span>© 2026 RAENKO. ИП Раенко Е. В., ИНН 616484084490</span><a href="policy/">Политика обработки ПД</a></div>
   </div>
 </footer>
 <div class="fab">
@@ -603,9 +613,9 @@
   <button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="Связаться с нами"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class='f-i1'><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class='f-i2'><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class='f-x'><path d="M6 6l12 12M18 6L6 18"/></svg><span class="fab-dot"></span></button>
 </div>
 
-<script src="assets/js/examples.js?v=4"></script>
-<script src="assets/js/prices.js?v=4"></script>
-<script src="assets/js/calc.js?v=4"></script>
-<script src="assets/js/site.js?v=4"></script>
+<script src="assets/js/examples.js?v=5"></script>
+<script src="assets/js/prices.js?v=5"></script>
+<script src="assets/js/calc.js?v=5"></script>
+<script src="assets/js/site.js?v=5"></script>
 </body>
 </html>

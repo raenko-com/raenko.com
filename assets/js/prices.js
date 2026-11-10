@@ -44,7 +44,7 @@ window.RC_PRICES = {
         { id: "booking", type: "base", title: "Запись или заказ через бота", note: "С напоминаниями клиенту", price: [55000, 100000], days: [10, 15] },
         { id: "shop", type: "base", title: "Магазин в боте", note: "Каталог, корзина и статус заказа", price: [70000, 130000], days: [12, 20] },
         { id: "tg", type: "extra", section: "Где будет работать бот", needsBase: true, on: true, title: "Telegram", note: "Входит в стоимость основы", price: [0, 0] },
-        { id: "max", type: "extra", section: "Где будет работать бот", needsBase: true, title: "MAX", note: "Дороже из-за регистрации и проверки бота в MAX", price: [20000, 35000], days: [3, 7] },
+        { id: "max", type: "extra", section: "Где будет работать бот", needsBase: true, title: "MAX", note: "Дороже из-за регистрации и проверки бота в MAX", price: [15000, 30000], days: [3, 7] },
         { id: "pay", type: "extra", section: "Дополнительно", needsBase: true, title: "Приём оплаты через бота", price: [15000, 30000], days: [3, 7] },
         { id: "crm", type: "extra", section: "Дополнительно", needsBase: true, title: "Заявки из бота в CRM или таблицу", price: [10000, 25000], days: [2, 5] },
         { id: "admin", type: "extra", section: "Дополнительно", needsBase: true, title: "Панель для сотрудников", note: "Просмотр заявок и ответы клиентам", price: [15000, 30000], days: [3, 7] },

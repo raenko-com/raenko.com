@@ -9,12 +9,12 @@
 }
 
 .guarantee-title {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .guarantee-description {
-    font-size: 20px;
+    font-size: 1.25rem;
 }
 
 .guarantee-icon {
@@ -23,16 +23,22 @@
 
 .guarantees-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 20px;
 }
 
 .guarantees {
-    padding: 50px;
+    padding: clamp(15px, 5vw, 50px);
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 50px;
     width: 100%;
     max-width: 1440px;
+}
+
+@media (max-width: 1000px) {
+    .guarantee {
+        aspect-ratio: auto;
+    }
 }

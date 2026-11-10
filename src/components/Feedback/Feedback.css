@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 50px;
+    padding: clamp(15px, 5vw, 50px);
     width: 100%;
     gap: 50px;
     max-width: 1440px;
@@ -22,7 +22,7 @@
     padding: 10px;
     background-color: var(--background-secondary-color);
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 1rem;
     padding: 10px 20px;
     width: 100%;
 }
@@ -37,7 +37,7 @@
     background-color: var(--main-color);
     color: var(--background-color);
     border-radius: 20px;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     width: 100%;
 }

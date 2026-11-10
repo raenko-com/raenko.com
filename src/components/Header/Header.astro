@@ -10,18 +10,18 @@ import { data } from "src/data";
       <img class="header-logo" src="src/assets/images/logo.png" alt="Logo" />
       <h2 class="header-name">RAENKO</h2>
     </div>
-    <div class="header-right">
-      <nav class="header-nav">
+    <div class="header-desktop-right">
+      <nav class="header-nav" aria-label="Основная навигация">
         <a class="header-link" href="#services">Услуги</a>
         <a class="header-link" href="#examples">Примеры</a>
         <a class="header-link" href="#contact">Вопросы</a>
         <a class="header-link" href="#process">Процесс</a>
       </nav>
       <div class="header-contacts">
-        <a class="header-contact" href={data.telegram}>
+        <a class="header-contact" href={data.telegram} aria-label="Telegram">
           <TelegramIcon />
         </a>
-        <a class="header-contact" href={data.max}>
+        <a class="header-contact" href={data.max} aria-label="MAX">
           <MaxIcon />
         </a>
         <a class="header-contact" href={`tel:${data.phoneLink}`}>
@@ -29,5 +29,31 @@ import { data } from "src/data";
         </a>
       </div>
     </div>
+    <details class="header-menu">
+      <summary class="header-menu-toggle" aria-label="Меню сайта">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <div class="header-menu-content">
+        <nav class="header-nav" aria-label="Основная навигация">
+          <a class="header-link" href="#services">Услуги</a>
+          <a class="header-link" href="#examples">Примеры</a>
+          <a class="header-link" href="#contact">Вопросы</a>
+          <a class="header-link" href="#process">Процесс</a>
+        </nav>
+        <div class="header-contacts">
+          <a class="header-contact" href={data.telegram} aria-label="Telegram">
+            <TelegramIcon />
+          </a>
+          <a class="header-contact" href={data.max} aria-label="MAX">
+            <MaxIcon />
+          </a>
+          <a class="header-contact" href={`tel:${data.phoneLink}`}>
+            {data.phone}
+          </a>
+        </div>
+      </div>
+    </details>
   </div>
 </header>

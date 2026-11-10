@@ -51,7 +51,7 @@ export const data = {
             icon: "src/assets/images/share.svg",
             description: "Настраиваем рекламу в Яндекс Директе, карточки на Яндекс Картах и 2ГИС, базовое SEO и аналитику, чтобы было видно, откуда приходят заявки.",
             cost: "от 10 000 ₽",
-            deadline: "от 2-х дней",
+            deadline: "от 2 дней",
             background: "url('src/assets/images/RaenkoBackground6.png')"
         },
     ],
@@ -153,7 +153,7 @@ export const data = {
         {
             name: "Даниил Раенко",
             role: "Fullstack-разработчик",
-            photo: "src/assets/images/aleksey.png"
+            photo: "src/assets/images/daniil.png"
         }
     ]
 }

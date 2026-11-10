@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     gap: 50px;
-    padding: 50px;
+    padding: clamp(15px, 5vw, 50px);
     width: 100%;
     max-width: 1440px;
 }
@@ -31,13 +31,13 @@
 }
 
 .service-title {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--background-color);
 }
 
 .service-description {
-    font-size: 16px;
+    font-size: 1rem;
     color: var(--background-color);
 }
 
@@ -48,7 +48,7 @@
 }
 
 .service-cost {
-    font-size: 16px;
+    font-size: 1rem;
     padding: 4px 8px;
     background-color: var(--main-color);
     color: var(--background-color);
@@ -56,7 +56,7 @@
 }
 
 .service-deadline {
-    font-size: 16px;
+    font-size: 1rem;
     padding: 4px 8px;
     background-color: var(--background-color);
     color: var(--secondary-color);
@@ -65,6 +65,7 @@
 
 .services-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit,
+            minmax(min(100%, max(400px, calc(33.333% - 13.333px))), 1fr));
     gap: 20px;
 }

@@ -1,5 +1,5 @@
 .team {
-    padding: 50px;
+    padding: clamp(15px, 5vw, 50px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,6 +21,7 @@
 
 .colleague-photo {
     max-width: 400px;
+    width: clamp(150px, 100vw, 400px);
     aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: center;
@@ -29,11 +30,48 @@
 }
 
 .colleague-name {
-    font-size: 36px;
+    font-size: 2.25rem;
     font-weight: bold;
 }
 
 .colleague-role {
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: normal;
+}
+
+@media (max-width: 600px) {
+    .team {
+        width: 100%;
+        gap: 32px;
+    }
+
+    .colleagues {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+    }
+
+    .colleague {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .colleague-photo {
+        width: clamp(150px, 45vw, 190px);
+        border-radius: 28px;
+    }
+
+    .colleague-info {
+        width: 100%;
+    }
+
+    .colleague-name {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+    }
+
+    .colleague-role {
+        font-size: clamp(1.125rem, 4.5vw, 1.375rem);
+    }
 }

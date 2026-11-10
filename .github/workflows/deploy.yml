@@ -1,0 +1,23 @@
+# Публикация main на GitHub Pages (ветка gh-pages), превью PR не затираются.
+name: Deploy main
+
+on:
+  push:
+    branches: [main]
+
+concurrency: deploy-main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .
+          branch: gh-pages
+          clean-exclude: pr-preview/
+          force: false

@@ -5,22 +5,10 @@
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
   var body = document.body;
 
-  /* ---------- цветовая схема (только для превью) ---------- */
+  /* ---------- цветовая схема: индиго-лайм; ?theme= оставлен для сравнения вариантов ---------- */
   var THEMES = ['indigo', 'ultra', 'raspberry'];
-  function setTheme(t, save) {
-    if (THEMES.indexOf(t) < 0) return;
-    body.dataset.theme = t;
-    $$('[data-set-theme]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.setTheme === t); });
-    if (save) { try { localStorage.setItem('raenko-theme', t); } catch (e) {} }
-  }
   var fromUrl = new URLSearchParams(location.search).get('theme');
-  var saved = null;
-  try { saved = localStorage.getItem('raenko-theme'); } catch (e) {}
-  setTheme(fromUrl || saved || 'indigo', !!fromUrl);
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest('[data-set-theme]');
-    if (b) setTheme(b.dataset.setTheme, true);
-  });
+  body.dataset.theme = THEMES.indexOf(fromUrl) >= 0 ? fromUrl : 'indigo';
 
   /* ---------- шапка ---------- */
   var header = $('.header');
@@ -65,14 +53,27 @@
     }, 6000);
   }
 
-  /* ---------- форма заявки (в превью ничего не отправляется) ---------- */
+  /* ---------- форма заявки: отправка в raenko-bot (он шлёт в Telegram-группу и на почту) ---------- */
   $$('form[data-lead]').forEach(function (f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!f.reportValidity()) return;
-      f.classList.add('is-sent');
-      var btn = $('button[type=submit]', f);
-      if (btn) { btn.disabled = true; btn.textContent = 'Заявка отправлена'; }
+      var api = f.dataset.lead, btn = $('button[type=submit]', f);
+      f.classList.remove('is-err');
+      var data = {
+        name: f.elements.name.value.trim(), phone: f.elements.phone.value.trim(), contact: f.elements.tg.value.trim(),
+        message: f.elements.msg.value.trim(), page: location.pathname.replace(/^.*\//, '') || 'index.html', website: f.elements.website.value
+      };
+      function fail() { f.classList.remove('is-busy'); f.classList.add('is-err'); }
+      if (!api || !window.fetch) { fail(); return; }
+      f.classList.add('is-busy');
+      fetch(api, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          f.classList.remove('is-busy'); f.classList.add('is-sent');
+          if (btn) { btn.disabled = true; btn.textContent = 'Заявка отправлена'; }
+        })
+        .catch(fail);
     });
   });
 

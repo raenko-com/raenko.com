@@ -55,13 +55,17 @@
       var html = '<fieldset class="rc-group"><legend><span class="rc-group-ico">' + ico(g.icon) + "</span>" + g.title + "</legend>";
       if (bases.length) html += '<p class="rc-group-k">Основа, выберите одно</p>';
       g.options.forEach(function (o, i) {
-        if (o.type === "extra" && bases.length && (i === 0 || g.options[i - 1].type === "base")) {
+        var prev = g.options[i - 1];
+        if (o.section) {
+          if (!prev || prev.section !== o.section) html += '<p class="rc-group-k">' + o.section + "</p>";
+        } else if (o.type === "extra" && bases.length && (i === 0 || prev.type === "base")) {
           html += '<p class="rc-group-k">Дополнительно</p>';
         }
         var key = g.id + ":" + o.id;
         var radio = o.type === "base";
         var dis = !available(g, o);
-        var price = o.quote ? "по оценке" : o.monthly ? fmt(o.price[0]) + "/мес" :
+        var free = o.price && !o.price[1];
+        var price = o.quote ? "по оценке" : free ? "входит" : o.monthly ? fmt(o.price[0]) + "/мес" :
           (o.type === "extra" && o.needsBase ? "+" : "") + fmt(o.price[0]).replace(" ₽", "") + "–" + fmt(o.price[1]);
         var note = included(o) ? "Уже входит в сайт" : o.needsBase && !hasBase(g) ? "Сначала выберите основу" : o.note || "";
         html += '<label class="rc-opt' + (dis ? " is-dis" : "") + '">' +
@@ -86,6 +90,7 @@
         any = true;
         if (o.quote) { res.quote = true; res.lines.push({ t: o.title, p: "по оценке" }); return; }
         if (o.monthly) { res.monthly += o.price[0]; return; }
+        if (!o.price[1]) { res.lines.push({ t: o.title, p: "входит" }); return; }
         res.min += o.price[0]; res.max += o.price[1];
         if (o.days) { dmin += o.days[0]; dmax += o.days[1]; }
         res.lines.push({ t: o.title, p: short(o.price[0]) + "–" + short(o.price[1]) });
@@ -139,7 +144,7 @@
     $("rc-bar-total").textContent = total;
 
     var lines = state.step === 2 ? r.lines : [];
-    if (state.step === 2 && r.monthly && r.max) lines = lines.concat([{ t: "Поддержка", p: short(r.monthly) + "/мес", extra: true }]);
+    if (state.step === 2 && r.monthly && r.max) lines = lines.concat([{ t: "Ежемесячно", p: short(r.monthly) + "/мес", extra: true }]);
     $("rc-lines").innerHTML = lines.map(function (l) {
       return '<li class="' + (l.warn ? "is-warn" : "") + '"><span>' + l.t + "</span><b>" + l.p + "</b></li>";
     }).join("");
@@ -202,7 +207,7 @@
       var picked = g.options.filter(function (o) { return isOn(g, o) && available(g, o); }).map(function (o) { return o.title; });
       txt.push(g.title + (picked.length && state.step === 2 ? ": " + picked.join("; ") : ""));
     });
-    if (r.monthly && state.step === 2) txt.push("Поддержка: " + fmt(r.monthly) + " в месяц");
+    if (r.monthly && state.step === 2) txt.push("Ежемесячно: " + fmt(r.monthly));
     txt.push("", "Оценка калькулятора: " + $("rc-total").textContent + (r.days[1] && state.step === 2 ? ", " + daysText(r.days) : ""));
     /* на сайте: подставляем расчёт в форму заявки рядом */
     var msg = document.querySelector("#lead-form textarea[name=msg]");

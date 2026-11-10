@@ -10,13 +10,15 @@ import pathlib
 import re
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
-V = "3"  # версия статики для сброса кэша
+V = "4"  # версия статики для сброса кэша
 
-PHONE = "+7 928 128-88-08"
-PHONE_HREF = "tel:+79281288808"
+PHONE = "+7 928 178-88-08"
+PHONE_HREF = "tel:+79281788808"
 EMAIL = "info@raenko.com"
-TG_HREF = "#"   # TODO: ссылка на Telegram
-MAX_HREF = "#"  # TODO: ссылка на MAX
+TG_HREF = "https://t.me/a_raenko"
+MAX_HREF = "https://max.ru/u/f9LHodD0cOJVyfwOeC8XY_paJkoN12yPvZuUV8yiQBkmuO7Xb2Y3rlfm6Hg"
+# адрес приёма заявок (raenko-bot, POST /api/lead). Пусто: форма покажет телефон и мессенджеры вместо отправки
+LEAD_API = ""
 
 # ---------------------------------------------------------------- иконки
 I = {
@@ -60,6 +62,8 @@ I = {
     "map": '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
     "target": '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',
     "users": '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 4 6"/>',
+    "code": '<path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/>',
+    "rocket": '<path d="M5.5 15.5C4 17 3.5 20.5 3.5 20.5s3.5-.5 5-2"/><path d="M9 12.5l2.5 2.5"/><path d="M11.5 15c4-1.6 8.5-5.4 8.5-11.5-6.1 0-9.9 4.5-11.5 8.5z"/><circle cx="15" cy="9" r="1.6"/><path d="M8.5 12H5l2.5-3.5h3.5M12 15.5V19l3.5-2.5V13"/>',
     "zap": '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',
 }
 
@@ -141,10 +145,10 @@ FAQ = [
 ]
 
 STEPS = [
-    ("Обсуждаем задачу", "30-минутный созвон: разбираем задачу, фиксируем объём, цену и сроки в договоре.", "30 минут"),
-    ("Проектируем и показываем макет", "Структура и дизайн до утверждения. Три раунда правок включены.", "3 раунда правок"),
-    ("Разрабатываем", "Вёрстка под все экраны, формы, бот и интеграции с CRM.", "Тестовый адрес"),
-    ("Запускаем и обучаем", "Переносим на ваш домен, подключаем аналитику, записываем видеоинструкцию.", "30 дней поддержки"),
+    ("msg", "Обсуждаем задачу", "30-минутный созвон: разбираем задачу, фиксируем объём, цену и сроки в договоре.", "30 минут"),
+    ("pen", "Проектируем и показываем макет", "Структура и дизайн до утверждения. Три раунда правок включены.", "3 раунда правок"),
+    ("code", "Разрабатываем", "Вёрстка под все экраны, формы, бот и интеграции с CRM.", "Тестовый адрес"),
+    ("rocket", "Запускаем и обучаем", "Переносим на ваш домен, подключаем аналитику, записываем видеоинструкцию.", "30 дней поддержки"),
 ]
 
 # ---------------------------------------------------------------- общие блоки
@@ -181,8 +185,6 @@ def header(depth, current=None):
         f'<a href="{r}services/{s["slug"]}.html"{" aria-current=page" if current == s["slug"] else ""}><span class="ico">{ico(s["icon"])}</span><span><b>{s["full"]}</b><small>{s["price"]}{s.get("price_note", "")}</small></span></a>'
         for s in SERVICES)
     mlist = "".join(f'<a href="{r}services/{s["slug"]}.html"><span class="ico">{ico(s["icon"])}</span>{s["full"]}</a>' for s in SERVICES)
-    themes = "".join(f'<button type="button" data-set-theme="{t}" aria-pressed="false"><i style="background:linear-gradient(135deg,{a} 50%,{b} 50%)"></i>{n}</button>'
-                     for t, a, b, n in THEMES)
     return f'''<header class="header">
   <div class="container header-in">
     <a class="logo" href="{home}" aria-label="RAENKO, на главную">{logo_svg()}RAENKO</a>
@@ -198,8 +200,8 @@ def header(depth, current=None):
       <a href="{home}#contact">Контакты</a>
     </nav>
     <div class="header-act">
-      <a class="icon-btn hide-m" href="{TG_HREF}" aria-label="Telegram">{ico("tg")}</a>
-      <a class="icon-btn hide-m" href="{MAX_HREF}" aria-label="MAX">{ico("max")}</a>
+      <a class="icon-btn hide-m" href="{TG_HREF}" target="_blank" rel="noopener" aria-label="Telegram">{ico("tg")}</a>
+      <a class="icon-btn hide-m" href="{MAX_HREF}" target="_blank" rel="noopener" aria-label="MAX">{ico("max")}</a>
       <a class="phone" href="{PHONE_HREF}">{PHONE}</a>
       <a class="btn btn-primary btn-sm" href="{home}#calculator">Рассчитать</a>
       <button class="icon-btn burger" type="button" data-menu-open aria-controls="mnav" aria-expanded="false" aria-label="Открыть меню">{ico("menu")}</button>
@@ -217,10 +219,9 @@ def header(depth, current=None):
   <nav class="mnav-list">
     <a href="{home}#examples">Примеры решений</a><a href="{home}#team">Команда</a><a href="{home}#process">Как мы работаем</a><a href="{home}#faq">Частые вопросы</a><a href="{home}#calculator">Калькулятор</a>
   </nav>
-  <div class="mnav-themes"><span>Схема:</span>{themes}</div>
   <div class="mnav-foot">
     <a class="btn btn-primary" href="{PHONE_HREF}">{ico("phone")}{PHONE}</a>
-    <a class="btn btn-ghost" href="{TG_HREF}">{ico("tg")}Написать в Telegram</a>
+    <a class="btn btn-ghost" href="{TG_HREF}" target="_blank" rel="noopener">{ico("tg")}Написать в Telegram</a>
   </div>
 </div>
 '''
@@ -230,7 +231,7 @@ THEMES = [("indigo", "#5B4CFF", "#C6F432", "Индиго"), ("ultra", "#2340FF",
 
 
 def lead_form(title="Обсудим вашу задачу", sub="Оставьте контакты, ответим в течение часа с 9:00 до 20:00.", msg_placeholder="Расскажите о задаче: что нужно сделать и к какому сроку"):
-    return f'''<form class="form" id="lead-form" data-lead novalidate>
+    return f'''<form class="form" id="lead-form" data-lead="{LEAD_API}" novalidate>
   <h3>{title}</h3>
   <p class="muted">{sub}</p>
   <div class="f-row">
@@ -238,10 +239,12 @@ def lead_form(title="Обсудим вашу задачу", sub="Оставьт�
     <label class="field"><span>Телефон</span><input name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" required></label>
   </div>
   <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username"></label>
+  <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
   <label class="field"><span>Задача</span><textarea name="msg" placeholder="{msg_placeholder}"></textarea></label>
   <label class="check"><input type="checkbox" required checked> <span>Согласен на <a href="#">обработку персональных данных</a></span></label>
   <button class="btn btn-primary btn-block" type="submit">Отправить заявку {ico("arrow")}</button>
-  <div class="f-ok" role="status">{ico("check")} Спасибо! Это превью, заявка никуда не ушла. На сайте здесь будет отправка в Telegram и CRM.</div>
+  <div class="f-ok" role="status">{ico("check")} Спасибо! Заявка у нас, ответим в течение часа с 9:00 до 20:00.</div>
+  <div class="f-err" role="alert">Не получилось отправить. Позвоните <a href="{PHONE_HREF}">{PHONE}</a> или напишите в <a href="{TG_HREF}" target="_blank" rel="noopener">Telegram</a>.</div>
   <p class="f-fine">Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности</p>
 </form>'''
 
@@ -249,7 +252,7 @@ def lead_form(title="Обсудим вашу задачу", sub="Оставьт�
 def calc_section():
     return f'''<section class="section" id="calculator">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("ruble")} Калькулятор</span><h2 class="h2">Сколько стоит ваш проект</h2><p class="lead">Отметьте, что нужно, и сразу увидите ориентир по цене и срокам. Расчёт можно одним нажатием отправить нам в заявке.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Сколько стоит ваш проект</h2><p class="lead">Отметьте, что нужно, и сразу увидите ориентир по цене и срокам. Расчёт можно одним нажатием отправить нам в заявке.</p></div>
     <div class="calc-wrap reveal">{CALC_HTML}</div>
   </div>
 </section>'''
@@ -258,15 +261,15 @@ def calc_section():
 def contact_section(depth, title="Связаться с нами", lead="Расскажите о задаче, подскажем подходящее решение и назовём цену.", form_title="Обсудим вашу задачу"):
     return f'''<section class="section section--soft" id="contact">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("msg")} Контакты</span><h2 class="h2">{title}</h2><p class="lead">{lead}</p></div>
+    <div class="section-head reveal"><h2 class="h2">{title}</h2><p class="lead">{lead}</p></div>
     <div class="contact reveal">
       <div class="c-info">
         <h2>Ответим в течение часа</h2>
         <p class="lead">Пишите, как вам удобнее. Обсудим задачу и предложим решение без лишних обязательств.</p>
         <div class="c-links">
           <a class="c-link" href="{PHONE_HREF}"><span class="ico">{ico("phone")}</span><span>{PHONE}<small>Позвонить</small></span></a>
-          <a class="c-link" href="{TG_HREF}"><span class="ico">{ico("tg")}</span><span>Telegram<small>Быстрее всего</small></span></a>
-          <a class="c-link" href="{MAX_HREF}"><span class="ico">{ico("max")}</span><span>MAX<small>Мессенджер</small></span></a>
+          <a class="c-link" href="{TG_HREF}" target="_blank" rel="noopener"><span class="ico">{ico("tg")}</span><span>Telegram<small>Быстрее всего</small></span></a>
+          <a class="c-link" href="{MAX_HREF}" target="_blank" rel="noopener"><span class="ico">{ico("max")}</span><span>MAX<small>Мессенджер</small></span></a>
           <a class="c-link" href="mailto:{EMAIL}"><span class="ico">{ico("mail")}</span><span>{EMAIL}<small>Почта</small></span></a>
         </div>
         <p class="c-hours">На связи с 9:00 до 20:00 каждый день</p>
@@ -287,7 +290,7 @@ def footer(depth):
       <div>
         <a class="logo" href="{home}">{logo_svg_white()}RAENKO</a>
         <p>Сайты, боты, автоматизация и ИИ для бизнеса. Работаем по договору с фиксированной ценой.</p>
-        <div class="f-soc"><a href="{TG_HREF}" aria-label="Telegram">{ico("tg")}</a><a href="{MAX_HREF}" aria-label="MAX">{ico("max")}</a><a href="mailto:{EMAIL}" aria-label="Почта">{ico("mail")}</a></div>
+        <div class="f-soc"><a href="{TG_HREF}" target="_blank" rel="noopener" aria-label="Telegram">{ico("tg")}</a><a href="{MAX_HREF}" target="_blank" rel="noopener" aria-label="MAX">{ico("max")}</a><a href="mailto:{EMAIL}" aria-label="Почта">{ico("mail")}</a></div>
       </div>
       <div><h4>Услуги</h4><ul>{svc}</ul></div>
       <div><h4>Компания</h4><ul><li><a href="{home}#examples">Примеры решений</a></li><li><a href="{home}#team">Команда</a></li><li><a href="{home}#process">Как мы работаем</a></li><li><a href="{home}#faq">Вопросы</a></li><li><a href="{home}#calculator">Калькулятор</a></li></ul></div>
@@ -299,14 +302,13 @@ def footer(depth):
 <div class="fab">
   <div class="fab-menu" id="fab-menu">
     <a href="{PHONE_HREF}"><span class="ico">{ico("phone")}</span><span>Позвонить<small>{PHONE}</small></span></a>
-    <a href="{TG_HREF}"><span class="ico">{ico("tg")}</span><span>Telegram<small>Ответим быстрее всего</small></span></a>
-    <a href="{MAX_HREF}"><span class="ico">{ico("max")}</span><span>MAX<small>Мессенджер</small></span></a>
+    <a href="{TG_HREF}" target="_blank" rel="noopener"><span class="ico">{ico("tg")}</span><span>Telegram<small>Ответим быстрее всего</small></span></a>
+    <a href="{MAX_HREF}" target="_blank" rel="noopener"><span class="ico">{ico("max")}</span><span>MAX<small>Мессенджер</small></span></a>
     <a href="#lead-form"><span class="ico">{ico("mail")}</span><span>Оставить заявку<small>Перезвоним сами</small></span></a>
   </div>
   <span class="fab-tip">Есть вопрос? Напишите нам</span>
   <button class="fab-main" type="button" aria-expanded="false" aria-controls="fab-menu" aria-label="Связаться с нами">{ico("phone", "f-i1")}{ico("msg", "f-i2")}{ico("x", "f-x")}<span class="fab-dot"></span></button>
 </div>
-<div class="themes" role="group" aria-label="Цветовая схема (превью)"><span>Схема</span>{"".join(f'<button type="button" data-set-theme="{t}" aria-pressed="false" title="{n}"><i style="background:linear-gradient(135deg,{a} 50%,{b} 50%)"></i></button>' for t, a, b, n in THEMES)}</div>
 '''
 
 
@@ -316,11 +318,11 @@ def scripts(depth, extra=()):
 
 
 def steps_section(dark=True):
-    items = "".join(f'''<div class="step reveal"><div class="step-n">{i + 1:02d}</div><h3>{t}</h3><p>{d}</p><span class="step-chip">{c}</span></div>'''
-                    for i, (t, d, c) in enumerate(STEPS))
+    items = "".join(f'''<div class="step reveal"><div class="step-n" aria-label="Шаг {i + 1}">{ico(ic)}</div><h3>{t}</h3><p>{d}</p><span class="step-chip">{c}</span></div>'''
+                    for i, (ic, t, d, c) in enumerate(STEPS))
     return f'''<section class="section section--deep" id="process">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("clock")} Процесс</span><h2 class="h2">Как мы работаем</h2><p class="lead">От брифа до запуска, строго по договору</p></div>
+    <div class="section-head reveal"><h2 class="h2">Как мы работаем</h2><p class="lead">От брифа до запуска, строго по договору</p></div>
     <div class="steps" data-steps>{items}<div class="steps-done reveal" aria-hidden="true"><span class="sd-ico">{ico("check")}</span><span><b>Проект запущен!</b><small>Сайт работает, заявки идут</small></span><span class="confetti"></span></div></div>
   </div>
 </section>'''
@@ -365,7 +367,6 @@ def page_index():
 <section class="hero">
   <div class="container hero-in">
     <div>
-      <span class="eyebrow reveal">{ico("zap")} Сайты · Боты · ИИ</span>
       <h1 class="reveal">Сайты, ИИ, боты и <span class="grad">автоматизация</span></h1>
       <p class="lead reveal">Решения, которые берут рутинные задачи бизнеса на себя: заявки, запись, ответы клиентам и отчёты.</p>
       <div class="hero-cta reveal">
@@ -379,31 +380,21 @@ def page_index():
       </ul>
     </div>
     <div class="scene" aria-hidden="true">
-      <div class="scene-orbit"></div>
-      <div class="scard s-site">
-        <div class="s-bar"><i></i><i></i><i></i></div>
-        <div class="s-line w60"></div><div class="s-hero"></div><div class="s-line w80"></div><div class="s-line w40"></div>
-        <span class="s-btn">Записаться</span>
-      </div>
-      <div class="scard s-tg">
-        <div class="s-tg-h"><span class="s-ava">{ico("bot")}</span><div><b>Бот заявок</b><small>только что</small></div></div>
-        <div class="s-msg"><span class="s-new">Новая заявка</span><br>Анна · стрижка, суббота 13:30</div>
-        <div class="s-btns"><span>Принять</span><span>Позвонить</span></div>
-      </div>
-      <div class="scard s-crm">
-        <b style="margin-bottom:6px">CRM · Заявки</b>
-        <div class="s-row"><span>Анна, стрижка</span><span class="st st-new">Новая</span></div>
-        <div class="s-row"><span>ООО «Вектор», сайт</span><span class="st st-work">В работе</span></div>
-        <div class="s-row"><span>Игорь, доставка</span><span class="st st-done">Оплачено</span></div>
-      </div>
-      <div class="scard s-ai"><span class="ico">{ico("ai")}</span><b>ИИ ответил клиенту</b></div>
+      <div class="sc-glow"></div>
+      <div class="sc-ring sc-ring--1"></div>
+      <div class="sc-ring sc-ring--2"></div>
+      <div class="sc-core"></div>
+      <div class="sc-pill"></div>
+      <i class="sc-dot sc-dot--1"></i><i class="sc-dot sc-dot--2"></i><i class="sc-dot sc-dot--3"></i>
+      <i class="sc-sq"></i><i class="sc-tri"></i>
+      <div class="sc-grid"></div>
     </div>
   </div>
 </section>
 
 <section class="section" id="services">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("ruble")} Услуги</span><h2 class="h2">Услуги и стоимость</h2><p class="lead">Фиксированная цена и сроки по договору. Нажмите на услугу, чтобы посмотреть подробности и живые примеры.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Услуги и стоимость</h2><p class="lead">Фиксированная цена и сроки по договору. Нажмите на услугу, чтобы посмотреть подробности и живые примеры.</p></div>
     <div class="svc-grid">{"".join(cards)}</div>
     <p class="svc-note reveal">Не знаете, что выбрать? <a href="#calculator">Посчитайте в калькуляторе</a> или <a href="#contact">напишите нам</a></p>
   </div>
@@ -411,14 +402,14 @@ def page_index():
 
 <section class="section section--soft" id="examples">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("zap")} Живые демо</span><h2 class="h2">Примеры решений</h2><p class="lead">Нажимайте и пробуйте. Клиенты и данные придуманы, ничего никуда не отправляется.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Примеры решений</h2><p class="lead">Нажимайте и пробуйте. Клиенты и данные придуманы, ничего никуда не отправляется.</p></div>
     <div class="demo-wrap reveal">{rx_examples("flow,book,calc,ba")}</div>
   </div>
 </section>
 
 <section class="section" id="team">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("users")} Команда</span><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
+    <div class="section-head reveal"><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
     <div class="team">
       <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
       <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
@@ -431,7 +422,7 @@ def page_index():
 
 <section class="section" id="guarantees">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("shield")} Гарантии</span><h2 class="h2">Гарантии, которые мы даём</h2><p class="lead">Прозрачные условия на каждом этапе</p></div>
+    <div class="section-head reveal"><h2 class="h2">Гарантии, которые мы даём</h2><p class="lead">Прозрачные условия на каждом этапе</p></div>
     <div class="gar">
       <div class="g g--a reveal"><span class="ico">{ico("doc")}</span><h3>Официальный договор</h3><p>Работаем с физлицами и компаниями. Объём, цена и сроки фиксируются в договоре, без скрытых платежей.</p><div class="g-doc"><span>{ico("check")} Физлица</span><span>{ico("check")} Юрлица и ИП</span></div></div>
       <div class="g g--b reveal"><span class="ico">{ico("wallet")}</span><h3>Поэтапная оплата</h3><p>Вы не рискуете всей суммой на старте.</p><div class="g-pay"><div><b>50%</b><small>перед началом работ</small></div><div><b>50%</b><small>после согласования результата</small></div></div></div>
@@ -445,7 +436,7 @@ def page_index():
 
 <section class="section section--soft" id="faq">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("msg")} Вопросы</span><h2 class="h2">Частые вопросы</h2><p class="lead">Ответы на вопросы о работе над проектом</p></div>
+    <div class="section-head reveal"><h2 class="h2">Частые вопросы</h2><p class="lead">Ответы на вопросы о работе над проектом</p></div>
     <div class="faq">{faq}</div>
   </div>
 </section>
@@ -653,7 +644,6 @@ def page_service(slug):
   <div class="container p-hero-in">
     <div>
       <nav class="crumbs reveal" aria-label="Навигация"><a href="../index.html">Главная</a><span>/</span><a href="../index.html#services">Услуги</a><span>/</span><span>{s["full"]}</span></nav>
-      <span class="eyebrow reveal">{ico(s["icon"])} {s["full"]}</span>
       <h1 class="reveal">{p["h1"]}</h1>
       <p class="lead reveal">{p["lead"]}</p>
       <div class="hero-cta reveal"><a class="btn btn-primary" href="#lead-form" data-topic="{html.escape(s["full"])}">Обсудить проект {ico("arrow")}</a><a class="btn btn-ghost" href="#demo">Попробовать демо</a></div>
@@ -664,21 +654,21 @@ def page_service(slug):
 
 <section class="section section--soft">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("check")} Что входит</span><h2 class="h2">Что вы получаете</h2></div>
+    <div class="section-head reveal"><h2 class="h2">Что вы получаете</h2></div>
     <div class="feat">{feat}</div>
   </div>
 </section>
 
 <section class="section" id="demo">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("zap")} Живое демо</span><h2 class="h2">Попробуйте сами</h2><p class="lead">Это рабочие примеры: нажимайте и смотрите, как это будет у вас. Данные придуманы.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Попробуйте сами</h2><p class="lead">Это рабочие примеры: нажимайте и смотрите, как это будет у вас. Данные придуманы.</p></div>
     {"".join(demos)}
   </div>
 </section>
 
 <section class="section section--soft">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("target")} Для каких задач</span><h2 class="h2">Кому подходит</h2></div>
+    <div class="section-head reveal"><h2 class="h2">Кому подходит</h2></div>
     <div class="usecases reveal" data-carousel>{cases}</div>
     <div class="uc-dots" aria-hidden="true"></div>
   </div>
@@ -686,7 +676,7 @@ def page_service(slug):
 
 <section class="section" id="prices">
   <div class="container">
-    <div class="section-head reveal"><span class="eyebrow">{ico("ruble")} Цены</span><h2 class="h2">Варианты и стоимость</h2><p class="lead">Ориентиры по цене и срокам. Точную сумму фиксируем в договоре после обсуждения.</p></div>
+    <div class="section-head reveal"><h2 class="h2">Варианты и стоимость</h2><p class="lead">Ориентиры по цене и срокам. Точную сумму фиксируем в договоре после обсуждения.</p></div>
     <div class="plans">{plans}</div>
     <p class="svc-note reveal">Нужно несколько услуг сразу? <a href="../index.html#calculator">Посчитайте в калькуляторе</a></p>
   </div>

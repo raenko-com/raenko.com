@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор стоимости — RAENKO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="calc.css">
+</head>
+<body class="rc-page" data-theme="indigo">
+
+<!-- Только для превью: переключатель цветовых схем. На сайт не переносится. -->
+<div class="rc-demo" role="radiogroup" aria-label="Цветовая схема">
+  <span class="rc-demo-t">Схема:</span>
+  <button class="rc-demo-b" role="radio" data-set-theme="indigo" aria-checked="true"><i style="background:#5B4CFF"></i><i style="background:#C6F432"></i>Индиго + лайм</button>
+  <button class="rc-demo-b" role="radio" data-set-theme="ultra" aria-checked="false"><i style="background:#2340FF"></i><i style="background:#FFC83D"></i>Ультрамарин + солнце</button>
+  <button class="rc-demo-b" role="radio" data-set-theme="raspberry" aria-checked="false"><i style="background:#D61F5E"></i><i style="background:#2DD4BF"></i>Малина + мята</button>
+</div>
+
+<section class="rc" id="calculator" aria-labelledby="rc-title">
+  <div class="rc-container">
+    <header class="rc-head">
+      <p class="rc-eyebrow">Калькулятор</p>
+      <h2 class="rc-title" id="rc-title">Сколько стоит ваш проект</h2>
+      <p class="rc-lead">Отметьте, что нужно, и сразу увидите ориентир по цене и срокам. Это займёт около минуты.</p>
+    </header>
+
+    <ol class="rc-steps" aria-label="Шаги">
+      <li class="rc-step is-active" data-step-dot="1"><span>1</span>Что запустить</li>
+      <li class="rc-step" data-step-dot="2"><span>2</span>Детали</li>
+    </ol>
+
+    <div class="rc-layout">
+      <div class="rc-main">
+        <div class="rc-panel" data-step="1">
+          <h3 class="rc-h">Что вы хотите запустить или улучшить?</h3>
+          <p class="rc-sub"><span class="rc-multi">Можно несколько</span>Отметьте всё, что нужно: например, сайт и бота для заявок</p>
+          <div class="rc-cards" id="rc-cards"></div>
+          <p class="rc-more" id="rc-more" hidden>Нужно что-то ещё? Отметьте и другие направления, посчитаем всё вместе</p>
+          <div class="rc-nav">
+            <button class="rc-btn rc-btn-primary" id="rc-next" type="button" disabled>Дальше <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+
+        <div class="rc-panel" data-step="2" hidden>
+          <h3 class="rc-h">Уточните, что нужно</h3>
+          <p class="rc-sub">Мы отметили самое частое, поправьте под себя</p>
+          <div class="rc-chips" id="rc-chips" aria-label="Направления"></div>
+          <div id="rc-groups"></div>
+          <div class="rc-nav">
+            <button class="rc-btn rc-btn-ghost" id="rc-back" type="button"><span aria-hidden="true">←</span> Назад</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="rc-sum" id="rc-sum" aria-live="polite">
+        <p class="rc-sum-t">Предварительная оценка</p>
+        <div class="rc-total" id="rc-total">—</div>
+        <div class="rc-time" id="rc-time">Выберите направление, и мы покажем ориентир</div>
+        <ul class="rc-lines" id="rc-lines"></ul>
+        <ul class="rc-notes" id="rc-notes"></ul>
+        <button class="rc-btn rc-btn-cta" id="rc-cta" type="button" disabled>Обсудить проект <span aria-hidden="true">→</span></button>
+        <p class="rc-fine">Это ориентир, а не оферта. Точную стоимость и срок назовём после короткого созвона.</p>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Липкая панель итога на телефоне -->
+  <div class="rc-bar" id="rc-bar" hidden>
+    <div class="rc-bar-txt">
+      <span class="rc-bar-t">Оценка</span>
+      <b id="rc-bar-total">—</b>
+    </div>
+    <a class="rc-btn rc-btn-primary rc-bar-btn" href="#rc-sum">Итог</a>
+  </div>
+
+  <dialog class="rc-dialog" id="rc-dialog" aria-labelledby="rc-dlg-t">
+    <form method="dialog">
+      <h3 class="rc-h" id="rc-dlg-t">Обсудить проект</h3>
+      <p class="rc-sub">Выбранные опции уже подставлены в заявку.</p>
+      <textarea class="rc-req" id="rc-req" rows="8" readonly></textarea>
+      <p class="rc-fine">В превью ничего не отправляется. На сайте здесь будет форма заявки (имя, телефон или Telegram, согласие на обработку персональных данных).</p>
+      <div class="rc-nav"><button class="rc-btn rc-btn-primary" value="close">Понятно</button></div>
+    </form>
+  </dialog>
+</section>
+
+<script src="prices.js"></script>
+<script src="calc.js"></script>
+</body>
+</html>

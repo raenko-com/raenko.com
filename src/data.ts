@@ -1,3 +1,25 @@
+import siteIcon from "./assets/images/site.svg?url";
+import botIcon from "./assets/images/bot.svg?url";
+import gearIcon from "./assets/images/gear.svg?url";
+import businessIcon from "./assets/images/business.svg?url";
+import terminalIcon from "./assets/images/terminal.svg?url";
+import shareIcon from "./assets/images/share.svg?url";
+import documentIcon from "./assets/images/document.svg?url";
+import paymentIcon from "./assets/images/payment.svg?url";
+import phoneIcon from "./assets/images/phone.svg?url";
+import penIcon from "./assets/images/pen.svg?url";
+import codeIcon from "./assets/images/code.svg?url";
+import devicesIcon from "./assets/images/devices.svg?url";
+import background1 from "./assets/images/RaenkoBackground1.png?url";
+import background2 from "./assets/images/RaenkoBackground2.png?url";
+import background3 from "./assets/images/RaenkoBackground3.png?url";
+import background4 from "./assets/images/RaenkoBackground4.png?url";
+import background5 from "./assets/images/RaenkoBackground5.png?url";
+import background6 from "./assets/images/RaenkoBackground6.png?url";
+import alekseyPhoto from "./assets/images/aleksey.png?url";
+import egorPhoto from "./assets/images/egor.png?url";
+import daniilPhoto from "./assets/images/daniil.png?url";
+
 export const data = {
     phoneLink: "+79281288808",
     phone: "+7 (928) 128-88-08",
@@ -9,50 +31,50 @@ export const data = {
     services: [
         {
             title: "Сайт",
-            icon: "src/assets/images/site.svg",
+            icon: siteIcon,
             description: "Лендинги, сайты-визитки и корпоративные сайты с каталогом. Адаптивная вёрстка, базовое SEO и подключение аналитики. Если нужно, сделаем панель, чтобы вы сами меняли тексты и фото.",
             cost: "от 50 000 ₽",
             deadline: "от 7 дней",
-            background: "url('src/assets/images/RaenkoBackground1.png')"
+            background: `url('${background1}')`
         },
         {
             title: "Боты в Telegram и MAX",
-            icon: "src/assets/images/bot.svg",
+            icon: botIcon,
             description: "Бот принимает записи и заказы 24/7, отвечает на частые вопросы, собирает заявки, принимает оплату и сам напоминает клиентам о записи.",
             cost: "от 40 000 ₽",
             deadline: "от 7 дней",
-            background: "url('src/assets/images/RaenkoBackground2.png')"
+            background: `url('${background2}')`
         },
         {
             title: "Автоматизация и интеграции",
-            icon: "src/assets/images/gear.svg",
+            icon: gearIcon,
             description: "Заявки с сайта сразу приходят в Telegram и попадают в таблицу или CRM (amoCRM, Битрикс24, 1С). Без дублей и ручного переписывания, а отчёты по заявкам приходят сами.",
             cost: "от 35 000 ₽",
             deadline: "от 7 дней",
-            background: "url('src/assets/images/RaenkoBackground3.png')"
+            background: `url('${background3}')`
         },
         {
             title: "ИИ для бизнеса",
-            icon: "src/assets/images/business.svg",
+            icon: businessIcon,
             description: "Подключаем нейросети к рабочим процессам: ИИ разбирает входящие заявки и письма, готовит черновики ответов и КП, отвечает сотрудникам по базе знаний компании, расшифровывает звонки.",
             cost: "от 40 000 ₽",
             deadline: "от 14 дней",
-            background: "url('src/assets/images/RaenkoBackground4.png')"
+            background: `url('${background4}')`
         },
         {
             title: "Поддержка и безопасность",
-            icon: "src/assets/images/terminal.svg",
+            icon: terminalIcon,
             description: "Следим за работой сайта и ботов, делаем резервные копии и обновления. Исправляем ошибки, в том числе после других разработчиков, и дорабатываем функционал.",
             cost: "от 25 000 ₽ / мес",
-            background: "url('src/assets/images/RaenkoBackground5.png')"
+            background: `url('${background5}')`
         },
         {
             title: "Продвижение",
-            icon: "src/assets/images/share.svg",
+            icon: shareIcon,
             description: "Настраиваем рекламу в Яндекс Директе, карточки на Яндекс Картах и 2ГИС, базовое SEO и аналитику, чтобы было видно, откуда приходят заявки.",
             cost: "от 10 000 ₽",
             deadline: "от 2 дней",
-            background: "url('src/assets/images/RaenkoBackground6.png')"
+            background: `url('${background6}')`
         },
     ],
     stages: [
@@ -79,32 +101,32 @@ export const data = {
     ],
     guarantees: [
         {
-            icon: "src/assets/images/document.svg",
+            icon: documentIcon,
             title: "Официальный договор",
             description: "Работаем официально с физическими и юридическими лицами. Все этапы, перечень работ, финальная стоимость и дедлайны фиксируются в договоре без скрытых платежей."
         },
         {
-            icon: "src/assets/images/payment.svg",
+            icon: paymentIcon,
             title: "Поэтапная оплата 50% / 50%",
             description: "Вы не рискуете всей суммой на старте. 50% перед началом работ, 50% после согласования результата, до публикации."
         },
         {
-            icon: "src/assets/images/phone.svg",
+            icon: phoneIcon,
             title: "30 дней поддержки бесплатно",
             description: "После сдачи проекта остаемся на связи: бесплатно исправляем технические ошибки по нашей вине, помогаем с настройкой и обучаем команду работе с сайтом и ботом. Доработки оплачиваются отдельно."
         },
         {
-            icon: "src/assets/images/pen.svg",
+            icon: penIcon,
             title: "Правки до утверждения",
             description: "Пишем код только после полного утверждения прототипа и дизайна. Вносим необходимые корректировки на этапе макета, вам доступно бесплатно три раунда правок макета."
         },
         {
-            icon: "src/assets/images/code.svg",
+            icon: codeIcon,
             title: "Передача всех файлов",
             description: "Исходный код, домен, учетные записи и хостинг регистрируются строго на вас. После запуска передаем полные права владения и исходные файлы без скрытых привязок."
         },
         {
-            icon: "src/assets/images/devices.svg",
+            icon: devicesIcon,
             title: "Адаптивность и чистый код",
             description: "Проверяем корректную работу проекта во всех актуальных браузерах и на любых устройствах. Чистая верстка обеспечивает быструю загрузку страниц и стабильную работу."
         }
@@ -143,17 +165,17 @@ export const data = {
         {
             name: "Алексей Раенко",
             role: "Коммерческий руководитель",
-            photo: "src/assets/images/aleksey.png"
+            photo: alekseyPhoto
         },
         {
             name: "Егор Холкин",
             role: "Fullstack-разработчик",
-            photo: "src/assets/images/egor.png"
+            photo: egorPhoto
         },
         {
             name: "Даниил Раенко",
             role: "Fullstack-разработчик",
-            photo: "src/assets/images/daniil.png"
+            photo: daniilPhoto
         }
     ]
 }

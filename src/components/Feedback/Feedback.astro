@@ -1,6 +1,8 @@
 ---
 import "./Feedback.css";
 import { Title } from "src/components";
+import checkboxOff from "src/assets/images/checkbox-off.svg?url";
+import checkboxOn from "src/assets/images/checkbox-on.svg?url";
 ---
 
 <div class="feedback">
@@ -31,12 +33,12 @@ import { Title } from "src/components";
         <span class="feedback-consent-icon" aria-hidden="true">
           <img
             class="checkbox-off"
-            src="src/assets/images/checkbox-off.svg"
+            src={checkboxOff}
             alt=""
           />
           <img
             class="checkbox-on"
-            src="src/assets/images/checkbox-on.svg"
+            src={checkboxOn}
             alt=""
           />
         </span>

@@ -1,5 +1,6 @@
 ---
 import "./Questions.css";
+import arrow from "src/assets/images/arrow.svg?url";
 
 export interface QuestionProps {
   question: string;
@@ -14,7 +15,7 @@ const { question, answer } = Astro.props as QuestionProps;
     <span>{question}</span>
     <img
       class="question-arrow"
-      src="/src/assets/images/arrow.svg"
+      src={arrow}
       alt=""
       aria-hidden="true"
     />

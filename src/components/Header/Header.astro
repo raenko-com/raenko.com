@@ -2,12 +2,13 @@
 import "./Header.css";
 import { MaxIcon, TelegramIcon } from "src/assets";
 import { data } from "src/data";
+import logo from "src/assets/images/logo.png?url";
 ---
 
 <header class="header">
   <div class="header-container">
     <div class="header-left">
-      <img class="header-logo" src="src/assets/images/logo.png" alt="Logo" />
+      <img class="header-logo" src={logo} alt="Logo" />
       <h2 class="header-name">RAENKO</h2>
     </div>
     <div class="header-desktop-right">

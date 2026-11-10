@@ -21,11 +21,11 @@ import egorPhoto from "./assets/images/egor.png?url";
 import daniilPhoto from "./assets/images/daniil.png?url";
 
 export const data = {
-    phoneLink: "+79281288808",
-    phone: "+7 (928) 128-88-08",
+    phoneLink: "+79281788808",
+    phone: "+7 (928) 178-88-08",
     email: "info@raenko.com",
-    max: "https://max.ru/",
-    telegram: "https://t.me/",
+    max: "https://max.ru/u/f9LHodD0cOJVyfwOeC8XY_paJkoN12yPvZuUV8yiQBkmuO7Xb2Y3rlfm6Hg",
+    telegram: "https://t.me/a_raenko",
     title: "Сайты, ИИ, боты и автоматизация",
     description: "Решения, которые берут рутинные задачи бизнеса на себя",
     services: [

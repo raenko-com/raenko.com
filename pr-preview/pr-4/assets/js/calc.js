@@ -48,6 +48,16 @@
     }).join("");
   }
 
+  /* ---------- шаг 2: чипы направлений (добавить или убрать без возврата назад) ---------- */
+  function renderChips() {
+    $("rc-chips").innerHTML = DATA.groups.map(function (g) {
+      var on = state.groups[g.id];
+      return '<button type="button" class="rc-chip" data-group="' + g.id + '" aria-pressed="' + on + '">' +
+        '<span class="rc-chip-m" aria-hidden="true">' + (on ? "✓" : "+") + "</span>" + g.title + "</button>";
+    }).join("");
+  }
+  function countSel() { return DATA.groups.filter(function (g) { return state.groups[g.id]; }).length; }
+
   /* ---------- шаг 2: опции выбранных направлений ---------- */
   function renderGroups() {
     $("rc-groups").innerHTML = DATA.groups.filter(function (g) { return state.groups[g.id]; }).map(function (g) {
@@ -157,6 +167,9 @@
 
     $("rc-cta").disabled = !any;
     $("rc-next").disabled = !any;
+    var n = countSel();
+    $("rc-next").innerHTML = n ? "Дальше: " + n + " " + plural(n, "направление", "направления", "направлений") + ' <span aria-hidden="true">→</span>' : 'Дальше <span aria-hidden="true">→</span>';
+    $("rc-more").hidden = n !== 1;
     $("rc-bar").hidden = !any || sumVisible;
   }
 
@@ -168,7 +181,7 @@
       s.classList.toggle("is-active", n === step);
       s.classList.toggle("is-done", n < step);
     });
-    if (step === 2) renderGroups();
+    if (step === 2) { renderChips(); renderGroups(); }
     renderSum();
     var top = $("calculator").getBoundingClientRect().top;
     if (top < 0) $("calculator").scrollIntoView({ behavior: "smooth", block: "start" });
@@ -185,6 +198,16 @@
   });
   $("rc-next").addEventListener("click", function () { goto(2); });
   $("rc-back").addEventListener("click", function () { goto(1); });
+  $("rc-chips").addEventListener("click", function (e) {
+    var b = e.target.closest(".rc-chip");
+    if (!b) return;
+    var id = b.dataset.group;
+    if (state.groups[id] && countSel() === 1) return; // хотя бы одно направление остаётся
+    state.groups[id] = !state.groups[id];
+    var card = document.querySelector('.rc-card[data-group="' + id + '"]');
+    if (card) card.setAttribute("aria-pressed", state.groups[id]);
+    renderChips(); renderGroups(); renderSum();
+  });
 
   $("rc-groups").addEventListener("change", function (e) {
     var inp = e.target;

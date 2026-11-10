@@ -36,8 +36,9 @@
       <div class="rc-main">
         <div class="rc-panel" data-step="1">
           <h3 class="rc-h">Что вы хотите запустить или улучшить?</h3>
-          <p class="rc-sub">Можно выбрать несколько направлений</p>
+          <p class="rc-sub"><span class="rc-multi">Можно несколько</span>Отметьте всё, что нужно: например, сайт и бота для заявок</p>
           <div class="rc-cards" id="rc-cards"></div>
+          <p class="rc-more" id="rc-more" hidden>Нужно что-то ещё? Отметьте и другие направления, посчитаем всё вместе</p>
           <div class="rc-nav">
             <button class="rc-btn rc-btn-primary" id="rc-next" type="button" disabled>Дальше <span aria-hidden="true">→</span></button>
           </div>
@@ -46,6 +47,7 @@
         <div class="rc-panel" data-step="2" hidden>
           <h3 class="rc-h">Уточните, что нужно</h3>
           <p class="rc-sub">Мы отметили самое частое, поправьте под себя</p>
+          <div class="rc-chips" id="rc-chips" aria-label="Направления"></div>
           <div id="rc-groups"></div>
           <div class="rc-nav">
             <button class="rc-btn rc-btn-ghost" id="rc-back" type="button"><span aria-hidden="true">←</span> Назад</button>

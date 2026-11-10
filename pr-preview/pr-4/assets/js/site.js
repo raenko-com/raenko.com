@@ -10,6 +10,9 @@
   var fromUrl = new URLSearchParams(location.search).get('theme');
   body.dataset.theme = THEMES.indexOf(fromUrl) >= 0 ? fromUrl : 'indigo';
 
+  /* ---------- печать документа (страница политики) ---------- */
+  $$('[data-print]').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
+
   /* ---------- шапка ---------- */
   var header = $('.header');
   function onScroll() { header && header.classList.toggle('is-scrolled', window.scrollY > 8); }

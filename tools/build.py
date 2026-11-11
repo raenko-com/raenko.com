@@ -241,7 +241,7 @@ def lead_form(title="Обсудим вашу задачу", sub="Оставьт�
   <label class="field"><span>Telegram или MAX <small>(необязательно)</small></span><input name="tg" placeholder="@username"></label>
   <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
   <label class="field"><span>Задача</span><textarea name="msg" placeholder="{msg_placeholder}"></textarea></label>
-  <label class="check"><input type="checkbox" required checked> <span>Согласен на <a href="#">обработку персональных данных</a></span></label>
+  <label class="check"><input type="checkbox" required> <span>Согласен на <a href="#">обработку персональных данных</a></span></label>
   <button class="btn btn-primary btn-block" type="submit">Отправить заявку {ico("arrow")}</button>
   <div class="f-ok" role="status">{ico("check")} Спасибо! Заявка у нас, ответим в течение часа с 9:00 до 20:00.</div>
   <div class="f-err" role="alert">Не получилось отправить. Позвоните <a href="{PHONE_HREF}">{PHONE}</a> или напишите в <a href="{TG_HREF}" target="_blank" rel="noopener">Telegram</a>.</div>
@@ -411,9 +411,9 @@ def page_index():
   <div class="container">
     <div class="section-head reveal"><h2 class="h2">Наша команда</h2><p class="lead">Разработка, дизайн и управление проектом в одних руках</p></div>
     <div class="team">
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-alexey.jpg" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
-      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.jpg" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
-      <article class="person reveal"><div class="person-ph person-ph--empty"><span>ДР</span><small>фото скоро</small></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-egor.png" alt="Егор Холкин" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Егор Холкин</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Бэкенд</span><span>ИИ</span><span>Интеграции</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-daniil.png" alt="Даниил Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Даниил Раенко</h3><p>Fullstack-разработчик</p><div class="person-tags"><span>Фронтенд</span><span>Дизайн</span><span>Боты</span></div></div></article>
+      <article class="person reveal"><div class="person-ph"><img src="assets/img/team-aleksey.png" alt="Алексей Раенко" loading="lazy" width="600" height="600"></div><div class="person-body"><h3>Алексей Раенко</h3><p>Коммерческий руководитель</p><div class="person-tags"><span>Договор</span><span>Смета</span><span>Сроки</span></div></div></article>
     </div>
   </div>
 </section>

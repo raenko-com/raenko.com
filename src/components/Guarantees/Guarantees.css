@@ -19,9 +19,13 @@
     display: flex;
     flex-direction: column;
     align-items: start;
-    gap: 25px;
+    gap: 10px;
     border-radius: 20px;
-    background-color: var(--background-secondary-color);
+    background: color-mix(in srgb, var(--background-color) 50%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
 }
 
 .guarantee-title {
@@ -34,26 +38,91 @@
 }
 
 .guarantee-icon {
+    height: 40px;
+    width: 40px;
+}
+
+.guarantee-title-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+}
+
+.guarantee-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    line-height: 3rem;
+}
+
+.guarantee-accent {
+    font-size: 5rem;
+    color: var(--secondary-color);
+}
+
+.guarantee-icon path {
+    color: var(--secondary-color);
+}
+
+.guarantee-third {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.guarantee-icon-wrapper {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.guarantee-big-icon {
     height: 60px;
+    width: 60px;
 }
 
-.guarantees-list > *:nth-child(1),
-.guarantees-list > *:nth-child(2) {
-  grid-column: span 3;
+.guarantee-big-icon path {
+    color: var(--secondary-color);
 }
 
-.guarantees-list > *:nth-child(3),
-.guarantees-list > *:nth-child(4),
-.guarantees-list > *:nth-child(5) {
-  grid-column: span 2;
+.guarantees-list>*:nth-child(1),
+.guarantees-list>*:nth-child(2) {
+    grid-column: span 3;
 }
 
-.guarantees-list > *:nth-child(6) {
-  grid-column: span 6;
+.guarantees-list>*:nth-child(3),
+.guarantees-list>*:nth-child(4),
+.guarantees-list>*:nth-child(5) {
+    grid-column: span 2;
 }
 
-@media (max-width: 1000px) {
-    .guarantee {
-        aspect-ratio: auto;
+.guarantees-list>*:nth-child(6) {
+    grid-column: span 6;
+}
+
+@media (max-width: 1200px) {
+    .guarantees-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .guarantees-list>* {
+        grid-column: span 1 !important;
+    }
+
+    .guarantee-third {
+        align-items: start;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .guarantees-list {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .guarantees-list>* {
+        grid-column: span 1 !important;
     }
 }

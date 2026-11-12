@@ -4,12 +4,6 @@ import gearIcon from "./assets/images/gear.svg?url";
 import businessIcon from "./assets/images/business.svg?url";
 import terminalIcon from "./assets/images/terminal.svg?url";
 import shareIcon from "./assets/images/share.svg?url";
-import documentIcon from "./assets/images/document.svg?url";
-import paymentIcon from "./assets/images/payment.svg?url";
-import phoneIcon from "./assets/images/phone.svg?url";
-import penIcon from "./assets/images/pen.svg?url";
-import codeIcon from "./assets/images/code.svg?url";
-import devicesIcon from "./assets/images/devices.svg?url";
 import background1 from "./assets/images/RaenkoBackground1.png?url";
 import background2 from "./assets/images/RaenkoBackground2.png?url";
 import background3 from "./assets/images/RaenkoBackground3.png?url";
@@ -19,11 +13,11 @@ import background6 from "./assets/images/RaenkoBackground6.png?url";
 import alekseyPhoto from "./assets/images/aleksey.png?url";
 import egorPhoto from "./assets/images/egor.png?url";
 import daniilPhoto from "./assets/images/daniil.png?url";
-import emailIcon from "./assets/images/email.svg?url";
-import smallPhoneIcon from "./assets/images/small-phone.svg?url";
-import telegramIcon from "./assets/images/telegram.svg?url";
-import maxIcon from "./assets/images/max.svg?url";
-import feedbackIcon from "./assets/images/feedback.svg?url";
+import emailIcon from "./assets/images/email.svg";
+import smallPhoneIcon from "./assets/images/small-phone.svg";
+import telegramIcon from "./assets/images/telegram.svg";
+import maxIcon from "./assets/images/max.svg";
+import feedbackIcon from "./assets/images/feedback.svg";
 import discussionIcon from "./assets/images/message.svg";
 import prototypeIcon from "./assets/images/pen.svg";
 import codingIcon from "./assets/images/code.svg";
@@ -76,15 +70,15 @@ export const data = {
         {
             title: "Сайт",
             icon: siteIcon,
-            description: "Лендинги, сайты-визитки и корпоративные сайты с каталогом.",
+            description: "Лендинги, визитки и сайты с каталогом",
             cost: "от 50 000 ₽",
             background: `url('${background1}')`,
-            tags: ["Лендинг", "Каталог", "SEO", "Аналитика"]
+            tags: ["Лендинг", "Каталог", "Аналитика"]
         },
         {
             title: "Боты в Telegram и MAX",
             icon: botIcon,
-            description: "Бот принимает записи и заказы 24/7, отвечает на частые вопросы, собирает заявки",
+            description: "Принимают заявки, записи и оплату 24/7",
             cost: "от 40 000 ₽",
             background: `url('${background2}')`,
             tags: ["Telegram", "MAX", "Запись"]
@@ -92,7 +86,7 @@ export const data = {
         {
             title: "Автоматизация и интеграции",
             icon: gearIcon,
-            description: "Заявки с сайта сразу приходят в Telegram и попадают в таблицу или CRM",
+            description: "Заявки сами попадают в Telegram, таблицу или CRM",
             cost: "от 35 000 ₽",
             background: `url('${background3}')`,
             tags: ["amoCRM", "Битрикс24", "1С"]
@@ -100,7 +94,7 @@ export const data = {
         {
             title: "ИИ для бизнеса",
             icon: businessIcon,
-            description: "Подключаем нейросети к рабочим процессам",
+            description: "Нейросети разбирают заявки и готовят ответы",
             cost: "от 40 000 ₽",
             background: `url('${background4}')`,
             tags: ["Заявки", "Звонки", "КП"]
@@ -108,7 +102,7 @@ export const data = {
         {
             title: "Поддержка и безопасность",
             icon: terminalIcon,
-            description: "Следим за работой сайта и ботов, делаем резервные копии и обновления.",
+            description: "Следим за сайтом и ботами, делаем бэкапы",
             cost: "от 25 000 ₽ / мес",
             background: `url('${background5}')`,
             tags: ["Мониторинг", "Бэкапы", "Доработки"]
@@ -116,7 +110,7 @@ export const data = {
         {
             title: "Продвижение",
             icon: shareIcon,
-            description: "Настраиваем рекламу в Яндекс Директе, карточки на Яндекс Картах и 2ГИС",
+            description: "Директ, Карты, 2ГИС и аналитика заявок",
             cost: "от 10 000 ₽",
             background: `url('${background6}')`,
             tags: ["Директ", "SEO", "Карты"]
@@ -148,38 +142,7 @@ export const data = {
             description: "Переносим на ваш домен, подключаем аналитику, составляем документацию."
         }
     ],
-    guarantees: [
-        {
-            icon: documentIcon,
-            title: "Официальный договор",
-            description: "Работаем официально с физическими и юридическими лицами. Все этапы, перечень работ, финальная стоимость и дедлайны фиксируются в договоре без скрытых платежей."
-        },
-        {
-            icon: paymentIcon,
-            title: "Поэтапная оплата",
-            description: "Вы не рискуете всей суммой на старте. 50% перед началом работ, 50% после согласования результата, до публикации."
-        },
-        {
-            icon: phoneIcon,
-            title: "30 дней поддержки бесплатно",
-            description: "После сдачи проекта остаемся на связи: бесплатно исправляем технические ошибки по нашей вине, помогаем с настройкой и обучаем команду работе с сайтом и ботом. Доработки оплачиваются отдельно."
-        },
-        {
-            icon: penIcon,
-            title: "Правки до утверждения",
-            description: "Пишем код только после полного утверждения прототипа и дизайна. Вносим необходимые корректировки на этапе макета, вам доступно бесплатно три раунда правок макета."
-        },
-        {
-            icon: codeIcon,
-            title: "Передача всех файлов",
-            description: "Исходный код, домен, учетные записи и хостинг регистрируются строго на вас. После запуска передаем полные права владения и исходные файлы без скрытых привязок."
-        },
-        {
-            icon: devicesIcon,
-            title: "Адаптивность и чистый код",
-            description: "Проверяем корректную работу проекта во всех актуальных браузерах и на любых устройствах. Чистая верстка обеспечивает быструю загрузку страниц и стабильную работу."
-        }
-    ],
+    guarantees: ["Официальный договор", "Поэтапная оплата", "30 дней поддержки бесплатно", "Правки до утверждения", "Передача всех файлов", "Адаптивность и чистый код"],
     questions: [
         {
             question: "Сколько стоит разработка и от чего зависит цена?",

@@ -14,7 +14,11 @@
     justify-content: space-between;
     padding: 20px;
     gap: 10px;
-    background-color: var(--background-color);
+    background: color-mix(in srgb, var(--background-color) 50%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     border-radius: 20px;
     background-size: cover;
@@ -108,4 +112,23 @@
             minmax(min(100%, max(300px, calc(33.333% - 13.333px))), 1fr));
     gap: 20px;
     width: 100%;
+}
+
+.service-arrow-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.service-arrow-icon path {
+    color: var(--text-color);
+    transition: color 0.15s;
+}
+
+.service-container:hover path {
+    color: var(--secondary-color);
+}
+
+.service-icon {
+    width: 40px;
+    height: 40px;
 }

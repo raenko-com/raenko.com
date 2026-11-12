@@ -1,13 +1,13 @@
 ---
 import "./Contacts.css";
-import contactsIcon from "src/assets/images/contacts.svg?url";
+import ContactsIcon from "src/assets/images/contacts.svg";
 import { data } from "src/data";
 import Contact from "./Contact.astro";
 ---
 
 <details class="contacts">
   <summary class="contacts-button">
-    <img src={contactsIcon} alt="Контакты" />
+    <ContactsIcon class="contact-icon" />
   </summary>
   <div class="contact-list">
     {

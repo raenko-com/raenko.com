@@ -1,15 +1,55 @@
 ---
-import Guarantee from './Guarantee.astro';
 import './Guarantees.css';
 import { Title } from 'src/components';
-import { data } from 'src/data';
+import DocumentIcon from 'src/assets/images/document.svg';
+import ComputerIcon from 'src/assets/images/computer.svg';
+import CodeIcon from 'src/assets/images/code.svg';
+import DevicesIcon from 'src/assets/images/devices.svg';
 ---
 
 <section class="guarantees">
-    <Title text="Гарантии, которые мы предоставляем" subtitle="Юридическая прозрачность, фиксация сроков и ответственность за результат на каждом этапе разработки" />
+    <Title text="Гарантии, которые мы даём" subtitle="Юридическая прозрачность, фиксация сроков и ответственность за результат на каждом этапе разработки" />
     <div class="guarantees-list">
-        {data.guarantees.map((guarantee) => (
-            <Guarantee title={guarantee.title} description={guarantee.description} icon={guarantee.icon} />
-        ))}
+        <div class="guarantee guarantee-first">
+            <DocumentIcon class="guarantee-icon" />
+            <h3 class="guarantee-title">Официальный договор</h3>
+            <p>Работаем с физлицами и компаниями. Объём, цена и сроки фиксируются в договоре, без скрытых платежей.</p>
+        </div>
+        <div class="guarantee guarantee-first">
+            <CodeIcon class="guarantee-icon" />
+            <h3 class="guarantee-title">Всё остаётся у вас</h3>
+            <p>Код, домен, доступы и исходники передаём после оплаты.</p>
+        </div>
+        <div class="guarantee guarantee-second">
+            <div class="guarantee-title-wrapper">
+                <h3 class="guarantee-number"><span class="guarantee-accent">30</span> дней</h3>
+                <h3 class="guarantee-title">Поддержки бесплатно</h3>
+            </div>
+            <p>Исправляем технические ошибки по нашей вине и помогаем освоиться.</p>
+        </div>
+        <div class="guarantee guarantee-second">
+            <div class="guarantee-title-wrapper">
+                <h3 class="guarantee-number"><span class="guarantee-accent">3</span> раунда</h3>
+                <h3 class="guarantee-title">Правок макета</h3>
+            </div>
+            <p>Код пишем только после того, как вы утвердите дизайн.</p>
+        </div>
+        <div class="guarantee guarantee-second">
+            <div class="guarantee-title-wrapper">
+                <h3 class="guarantee-number"><span class="guarantee-accent">50</span>%</h3>
+                <h3 class="guarantee-title">Постоплаты</h3>
+            </div>
+            <p>50% перед началом работ, остальные 50% после согласования результата.</p>
+        </div>
+        <div class="guarantee guarantee-third">
+            <div class="guarantee-icon-wrapper">
+                <ComputerIcon class="guarantee-big-icon" />
+                <DevicesIcon class="guarantee-big-icon" />
+            </div>
+            <div class="guarantee-title-wrapper">
+                <h3>Работает на любых устройствах</h3>
+                <p>Проверяем в актуальных браузерах, на телефонах и планшетах. Быстрая загрузка и чистый код.</p>
+            </div>
+        </div>
     </div>
 </section>

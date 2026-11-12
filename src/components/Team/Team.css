@@ -17,6 +17,9 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: var(--background-color);
+    padding: 20px;
+    border-radius: 60px;
 }
 
 .colleague-photo {
@@ -27,6 +30,17 @@
     object-position: center;
     border-radius: 40px;
     background-color: var(--background-color);
+    transition: transform 0.3s ease;
+}
+
+.colleague-photo:hover {
+    transform: scale(1.02);
+}
+
+.colleague-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .colleague-name {
@@ -37,6 +51,23 @@
 .colleague-role {
     font-size: 1.5rem;
     font-weight: normal;
+    color: var(--text-color-secondary);
+}
+
+.colleague-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.colleague-tag {
+    background-color: var(--background-secondary-color);
+    color: var(--text-color-secondary);
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 1rem;
+    margin: 2px;
 }
 
 @media (max-width: 600px) {

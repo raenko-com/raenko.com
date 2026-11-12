@@ -24,6 +24,11 @@ import smallPhoneIcon from "./assets/images/small-phone.svg?url";
 import telegramIcon from "./assets/images/telegram.svg?url";
 import maxIcon from "./assets/images/max.svg?url";
 import feedbackIcon from "./assets/images/feedback.svg?url";
+import discussionIcon from "./assets/images/message.svg";
+import prototypeIcon from "./assets/images/pen.svg";
+import codingIcon from "./assets/images/code.svg";
+import launchIcon from "./assets/images/cloud.svg";
+
 
 export const data = {
     phoneLink: "+79281788808",
@@ -35,7 +40,7 @@ export const data = {
     telegramUsername: "@a_raenko",
     title: "Сайты, ИИ, боты и автоматизация",
     description: "Решения, которые берут рутинные задачи бизнеса на себя",
-    concacts: [
+    contacts: [
         {
             icon: smallPhoneIcon,
             link: "+79281788808",
@@ -71,71 +76,76 @@ export const data = {
         {
             title: "Сайт",
             icon: siteIcon,
-            description: "Лендинги, сайты-визитки и корпоративные сайты с каталогом. Адаптивная вёрстка, базовое SEO и подключение аналитики. Если нужно, сделаем панель, чтобы вы сами меняли тексты и фото.",
+            description: "Лендинги, сайты-визитки и корпоративные сайты с каталогом.",
             cost: "от 50 000 ₽",
-            deadline: "от 7 дней",
-            background: `url('${background1}')`
+            background: `url('${background1}')`,
+            tags: ["Лендинг", "Каталог", "SEO", "Аналитика"]
         },
         {
             title: "Боты в Telegram и MAX",
             icon: botIcon,
-            description: "Бот принимает записи и заказы 24/7, отвечает на частые вопросы, собирает заявки, принимает оплату и сам напоминает клиентам о записи.",
+            description: "Бот принимает записи и заказы 24/7, отвечает на частые вопросы, собирает заявки",
             cost: "от 40 000 ₽",
-            deadline: "от 7 дней",
-            background: `url('${background2}')`
+            background: `url('${background2}')`,
+            tags: ["Telegram", "MAX", "Запись"]
         },
         {
             title: "Автоматизация и интеграции",
             icon: gearIcon,
-            description: "Заявки с сайта сразу приходят в Telegram и попадают в таблицу или CRM (amoCRM, Битрикс24, 1С). Без дублей и ручного переписывания, а отчёты по заявкам приходят сами.",
+            description: "Заявки с сайта сразу приходят в Telegram и попадают в таблицу или CRM",
             cost: "от 35 000 ₽",
-            deadline: "от 7 дней",
-            background: `url('${background3}')`
+            background: `url('${background3}')`,
+            tags: ["amoCRM", "Битрикс24", "1С"]
         },
         {
             title: "ИИ для бизнеса",
             icon: businessIcon,
-            description: "Подключаем нейросети к рабочим процессам: ИИ разбирает входящие заявки и письма, готовит черновики ответов и КП, отвечает сотрудникам по базе знаний компании, расшифровывает звонки.",
+            description: "Подключаем нейросети к рабочим процессам",
             cost: "от 40 000 ₽",
-            deadline: "от 14 дней",
-            background: `url('${background4}')`
+            background: `url('${background4}')`,
+            tags: ["Заявки", "Звонки", "КП"]
         },
         {
             title: "Поддержка и безопасность",
             icon: terminalIcon,
-            description: "Следим за работой сайта и ботов, делаем резервные копии и обновления. Исправляем ошибки, в том числе после других разработчиков, и дорабатываем функционал.",
+            description: "Следим за работой сайта и ботов, делаем резервные копии и обновления.",
             cost: "от 25 000 ₽ / мес",
-            background: `url('${background5}')`
+            background: `url('${background5}')`,
+            tags: ["Мониторинг", "Бэкапы", "Доработки"]
         },
         {
             title: "Продвижение",
             icon: shareIcon,
-            description: "Настраиваем рекламу в Яндекс Директе, карточки на Яндекс Картах и 2ГИС, базовое SEO и аналитику, чтобы было видно, откуда приходят заявки.",
+            description: "Настраиваем рекламу в Яндекс Директе, карточки на Яндекс Картах и 2ГИС",
             cost: "от 10 000 ₽",
-            deadline: "от 2 дней",
-            background: `url('${background6}')`
+            background: `url('${background6}')`,
+            tags: ["Директ", "SEO", "Карты"]
         },
     ],
     stages: [
         {
-            number: 1,
-            title: "Обсуждаем задачу и составляем смету",
-            description: "Проводим короткий 30-минутный созвон. Помогаем сформулировать требования, определяем архитектуру проекта и фиксируем финальную стоимость и сроки в договоре."
+            icon: discussionIcon,
+            tag: "30 минут",
+            title: "Обсуждаем задачу",
+            description: "30-минутный созвон: разбираем задачу, фиксируем объём, цену и сроки."
         },
         {
-            number: 2,
-            title: "Проектируем прототип и согласовываем дизайн",
-            description: "Разрабатываем смысловую структуру и визуальный макет. Вносим необходимые правки до полного утверждения. К верстке и коду переходим только после того, как вам понравится результат"
+            icon: prototypeIcon,
+            tag: "3 раунда правок",
+            title: "Проектируем прототип",
+            description: "Разрабатываем смысловую структуру и визуальный макет."
         },
         {
-            number: 3,
-            title: "Верстаем сайт и программируем автоматизацию",
-            description: "Создаем адаптивный код под все разрешения экранов, настраиваем формы заявок, подключаем Telegram-бота и интегрируем передачу данных в CRM."
+            icon: codingIcon,
+            tag: "Тестовый запуск",
+            title: "Разрабатываем",
+            description: "Вёрстка под все экраны, формы, бот и интеграции с CRM."
         },
         {
-            number: 4,
-            title: "Тестируем, запускаем и обучаем работе",
-            description: "Переносим проект на рабочий домен и хостинг, подключаем аналитику. Записываем понятную видеоинструкцию по управлению сайтом и активируем 30 дней бесплатной техподдержки."
+            icon: launchIcon,
+            title: "Тестируем и запускаем",
+            tag: "30 дней поддержки",
+            description: "Переносим на ваш домен, подключаем аналитику, составляем документацию."
         }
     ],
     guarantees: [
@@ -202,19 +212,22 @@ export const data = {
     ],
     team: [
         {
-            name: "Алексей Раенко",
-            role: "Коммерческий руководитель",
-            photo: alekseyPhoto
-        },
-        {
             name: "Егор Холкин",
             role: "Fullstack-разработчик",
-            photo: egorPhoto
+            photo: egorPhoto,
+            tags: ["Бэкенд", "ИИ", "Интеграция"]
         },
         {
             name: "Даниил Раенко",
             role: "Fullstack-разработчик",
-            photo: daniilPhoto
+            photo: daniilPhoto,
+            tags: ["Фронтенд", "Дизайн", "Боты"]
+        },
+        {
+            name: "Алексей Раенко",
+            role: "Коммерческий руководитель",
+            photo: alekseyPhoto,
+            tags: ["Коммерция", "Руководство"]
         }
     ]
 }

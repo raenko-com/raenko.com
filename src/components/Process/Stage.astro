@@ -1,19 +1,24 @@
 ---
+import type { SvgComponent } from "astro/types";
 import "./Process.css";
 
 export interface StageProps {
-  number: number;
   title: string;
   description: string;
+  icon: SvgComponent;
+  tag: string;
 }
 
-const { number, title, description } = Astro.props as StageProps;
+const { title, description, icon: Icon, tag } = Astro.props as StageProps;
 ---
 
-<div class:list={["stage-container", { "stage-container-large": number > 2 }]}>
-  <div class="stage-header">
-    <p class="stage-number">0{number}</p>
-    <h3 class="stage-title">{title}</h3>
+<div class="stage-container">
+  <div class="stage-icon-container">
+    <Icon class="stage-icon" />
   </div>
-  <p class="stage-description">{description}</p>
+  <div class="stage-info">
+    <h3 class="stage-title">{title}</h3>
+    <p class="stage-description">{description}</p>
+    <span class="stage-tag">{tag}</span>
+  </div>
 </div>

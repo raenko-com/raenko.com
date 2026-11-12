@@ -4,6 +4,7 @@
     align-items: center;
     text-align: center;
     max-width: 700px;
+    gap: 20px;
 }
 
 .title-text {
@@ -14,4 +15,13 @@
 .title-subtitle {
     font-weight: normal;
     font-size: clamp(1rem, 3vw, 1.5rem);
+    color: var(--text-secondary-color);
+}
+
+.title-container.white .title-text {
+    color: var(--background-color);
+}
+
+.title-container.white .title-subtitle {
+    color: var(--background-secondary-color);
 }

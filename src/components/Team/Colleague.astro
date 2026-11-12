@@ -5,9 +5,10 @@ export interface ColleagueProps {
   name: string;
   role: string;
   photo: string;
+  tags: string[];
 }
 
-const { name, role, photo } = Astro.props as ColleagueProps;
+const { name, role, photo, tags } = Astro.props as ColleagueProps;
 ---
 
 <div class="colleague">
@@ -15,5 +16,10 @@ const { name, role, photo } = Astro.props as ColleagueProps;
   <div class="colleague-info">
       <h3 class="colleague-name">{name}</h3>
       <p class="colleague-role">{role}</p>
+      <div class="colleague-tags">
+        {tags.map(tag => (
+          <span class="colleague-tag">{tag}</span>
+        ))}
+      </div>
   </div>
 </div>

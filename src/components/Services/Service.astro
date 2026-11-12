@@ -7,22 +7,26 @@ export interface ServiceProps {
   background: string;
   description: string;
   cost: string;
-  deadline?: string;
+  tags: string[];
 }
 
-const { title, icon, background, description, cost, deadline } =
+const { title, icon, background, description, cost, tags } =
   Astro.props as ServiceProps;
 ---
 
-<div class="service-container" style={`background-image: ${background}`}>
+<a href="#" class="service-container" style={`background-image: ${background}`}>
   <div class="service-header">
     <img src={icon} alt={title} class="service-icon" />
     <h3 class="service-title">{title}</h3>
     <p class="service-description">{description}</p>
   </div>
+  <div class="service-tags">
+    {tags.map(tag => (
+      <span class="service-tag">{tag}</span>
+    ))}
+  </div>
   <div class="service-details">
     <p class="service-cost">{cost}</p>
-    {deadline && <p class="service-deadline">{deadline}</p>}
-    <p class="service-cost">Обсудить</p>
+    <p class="service-buy">Обсудить</p>
   </div>
-</div>
+</a>

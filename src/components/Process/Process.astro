@@ -6,19 +6,23 @@ import { data } from "src/data";
 ---
 
 <section class="process" id="process">
-  <Title
-    text="Как мы работаем"
-    subtitle="От брифа до запуска строго по договору"
-  />
-  <div class="stages-container">
-    {
-      data.stages.map((stage) => (
-        <Stage
-          number={stage.number}
-          title={stage.title}
-          description={stage.description}
-        />
-      ))
-    }
+  <div class="process-container">
+    <Title
+      text="Как мы работаем"
+      subtitle="От брифа до запуска строго по договору"
+      white={true}
+    />
+    <div class="stages-container">
+      {
+        data.stages.map((stage) => (
+          <Stage
+            icon={stage.icon}
+            tag={stage.tag}
+            title={stage.title}
+            description={stage.description}
+          />
+        ))
+      }
+    </div>
   </div>
 </section>

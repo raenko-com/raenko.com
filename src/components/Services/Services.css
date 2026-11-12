@@ -1,0 +1,134 @@
+.services-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: clamp(15px, 5vw, 50px);
+    width: 100%;
+    max-width: 1440px;
+}
+
+.service-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 10px;
+    background: color-mix(in srgb, var(--background-color) 50%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+    color: var(--text-color);
+    border-radius: 20px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease, border 0.3s ease;
+    border: 3px solid var(--background-color);
+}
+
+.service-container:hover {
+    transform: translateY(-5px);
+    border: 3px solid var(--secondary-color);
+}
+
+.service-header {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
+}
+
+.service-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.service-description {
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+.service-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 15px;
+}
+
+.service-cost {
+    font-size: 1.25rem;
+    padding: 4px 8px;
+    color: var(--text-color);
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.service-buy {
+    font-size: 1.25rem;
+    padding: 8px 15px;
+    color: var(--text-color);
+    background-color: var(--background-secondary-color);
+    border-radius: 15px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-container:hover :is(.service-buy, .service-tag) {
+    background-color: var(--secondary-color);
+    color: var(--background-color);
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.service-tag {
+    font-size: 1rem;
+    padding: 4px 10px;
+    background-color: var(--background-secondary-color);
+    color: var(--text-secondary-color);
+    border-radius: 10px;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.1));
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.service-deadline {
+    font-size: 1rem;
+    padding: 4px 8px;
+    background-color: var(--background-color);
+    color: var(--secondary-color);
+    border-radius: 15px;
+}
+
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,
+            minmax(min(100%, max(300px, calc(33.333% - 13.333px))), 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.service-arrow-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.service-arrow-icon path {
+    color: var(--text-color);
+    transition: color 0.15s;
+}
+
+.service-container:hover path {
+    color: var(--secondary-color);
+}
+
+.service-icon {
+    width: 40px;
+    height: 40px;
+}

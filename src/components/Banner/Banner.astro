@@ -1,0 +1,30 @@
+---
+import "./Banner.css";
+import { data } from "src/data";
+import hero from "src/assets/images/hero.png?url";
+import checkIcon from "src/assets/images/check.svg?url";
+---
+
+<section class="banner">
+  <div class="banner-content">
+    <h1 class="banner-title">{data.title}</h1>
+    <p class="banner-description">
+      {data.description}
+    </p>
+    <div class="banner-buttons">
+      <a href="#feedback" class="banner-main-action banner-action">Рассчитать стоимость</a>
+      <a href="#" class="banner-secondary-action banner-action"
+        >Смотреть примеры</a
+      >
+    </div>
+    <div class="banner-guarantees">
+      {data.guarantees.slice(0, 3).map(guarantee => (
+        <div class="banner-guarantee">
+          <img src={checkIcon} class="banner-guarantee-check" alt="Check Icon" />
+          <p class="banner-guarantee-name">{guarantee}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+  <img class="banner-image" src={hero} alt="Banner Image" />
+</section>

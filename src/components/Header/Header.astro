@@ -1,0 +1,61 @@
+---
+import "./Header.css";
+import MaxIcon from "src/assets/images/max.svg";
+import TelegramIcon from "src/assets/images/telegram.svg";
+import { data } from "src/data";
+import logo from "src/assets/images/logo.png?url";
+---
+
+<header class="header">
+  <div class="header-container">
+    <a href="/" class="header-left">
+      <img class="header-logo" src={logo} alt="Logo" />
+      <h2 class="header-name">RAENKO</h2>
+    </a>
+    <div class="header-desktop-right">
+      <nav class="header-nav" aria-label="Основная навигация">
+        <a class="header-link" href="#services">Услуги</a>
+        <a class="header-link" href="#examples">Примеры</a>
+        <a class="header-link" href="#questions">Вопросы</a>
+        <a class="header-link" href="#process">Процесс</a>
+      </nav>
+      <div class="header-contacts">
+        <a class="header-contact" href={data.telegram} aria-label="Telegram">
+          <TelegramIcon />
+        </a>
+        <a class="header-contact" href={data.max} aria-label="MAX">
+          <MaxIcon />
+        </a>
+        <a class="header-contact" href={`tel:${data.phoneLink}`}>
+          {data.phone}
+        </a>
+      </div>
+    </div>
+    <details class="header-menu">
+      <summary class="header-menu-toggle" aria-label="Меню сайта">
+        <span></span>
+        <span></span>
+        <span></span>
+      </summary>
+      <div class="header-menu-content">
+        <nav class="header-nav" aria-label="Основная навигация">
+          <a class="header-link" href="#services">Услуги</a>
+          <a class="header-link" href="#examples">Примеры</a>
+          <a class="header-link" href="#questions">Вопросы</a>
+          <a class="header-link" href="#process">Процесс</a>
+        </nav>
+        <div class="header-contacts">
+          <a class="header-contact" href={data.telegram} aria-label="Telegram">
+            <TelegramIcon />
+          </a>
+          <a class="header-contact" href={data.max} aria-label="MAX">
+            <MaxIcon />
+          </a>
+          <a class="header-contact" href={`tel:${data.phoneLink}`}>
+            {data.phone}
+          </a>
+        </div>
+      </div>
+    </details>
+  </div>
+</header>

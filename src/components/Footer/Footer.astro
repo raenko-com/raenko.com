@@ -1,0 +1,34 @@
+---
+import "./Footer.css";
+import MaxIcon from "src/assets/images/max.svg";
+import TelegramIcon from "src/assets/images/telegram.svg";
+import { data } from "src/data";
+import logo from "src/assets/images/logo.png?url";
+---
+
+<footer class="footer">
+  <div class="footer-logo-container">
+    <img class="footer-logo" src={logo} alt="Logo" />
+    <h2 class="footer-name">RAENKO</h2>
+  </div>
+  <div class="footer-block">
+    <h3 class="footer-title">Мессенджеры</h3>
+    <div class="footer-messangers-list">
+      <a href={data.telegram}><TelegramIcon /></a>
+      <a href={data.max}><MaxIcon /></a>
+    </div>
+  </div>
+  <div class="footer-block">
+    <h3 class="footer-title">Контакты</h3>
+    <a class="footer-text" href={`mailto:${data.email}`}>{data.email}</a>
+    <a class="footer-text" href={`tel:${data.phoneLink}`}>{data.phone}</a>
+  </div>
+  <div class="footer-block">
+    <h3 class="footer-title">Документы</h3>
+    <a class="footer-text" href="/privacy-policy">Политика конфиденциальности</a
+    >
+    <a class="footer-text" href="/personal-data-policy"
+      >Политика обработки персональных данных</a
+    >
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+---
+import "./Questions.css";
+import Arrow from "src/assets/images/arrow.svg";
+
+export interface QuestionProps {
+  question: string;
+  answer: string;
+}
+
+const { question, answer } = Astro.props as QuestionProps;
+---
+
+<details class="question">
+  <summary class="question-title">
+    <span>{question}</span>
+    <Arrow
+      class="question-arrow"
+      aria-hidden="true"
+    />
+  </summary>
+  <p class="question-answer">{answer}</p>
+</details>

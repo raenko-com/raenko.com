@@ -1,3 +1,5 @@
+@import "./fonts.css";
+
 :root {
     --main-color: #C6F432;
     --secondary-color: #5B4CFF;
@@ -31,7 +33,6 @@ body {
         radial-gradient(circle at 88% 18%, rgba(114, 105, 239, 0.22) 0%, rgba(114, 105, 239, 0) 25%),
         radial-gradient(circle at 6% 85%, rgba(182, 240, 114, 0.25) 0%, rgba(182, 240, 114, 0) 20%);
     background-attachment: fixed;
-    background-size: 100vw 100vh; 
+    background-size: 100vw 100vh;
     background-repeat: no-repeat;
-
 }

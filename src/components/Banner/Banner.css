@@ -62,14 +62,14 @@
 }
 
 .banner-main-action:hover {
-    filter: drop-shadow(0 20px 20px color-mix(in srgb, var(--secondary-color) 80%, transparent));
+    filter: drop-shadow(0 20px 10px color-mix(in srgb, var(--secondary-color) 80%, transparent));
     transform: translateY(-5px);
 }
 
 .banner-main-action {
     background-color: var(--secondary-color);
     color: var(--background-color);
-    filter: drop-shadow(0 10px 20px color-mix(in srgb, var(--secondary-color) 80%, transparent));
+    filter: drop-shadow(0 10px 10px color-mix(in srgb, var(--secondary-color) 80%, transparent));
 }
 
 .banner-secondary-action {
@@ -89,5 +89,10 @@
 @media (max-width: 900px) {
     .banner {
         flex-direction: column;
+    }
+
+    .banner-action {
+        width: 100%;
+        text-align: center;
     }
 }

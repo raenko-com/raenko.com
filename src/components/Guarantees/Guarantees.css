@@ -15,7 +15,7 @@
 }
 
 .guarantee {
-    padding: 20px;
+    padding: 40px;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -26,6 +26,18 @@
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+}
+
+.guarantee-accent-block {
+    background-color: var(--secondary-color);
+}
+
+.guarantee-accent-block h3, .guarantee-accent-block p {
+    color: var(--background-color);
+}
+
+.guarantee-accent-block .guarantee-icon path {
+    color: var(--background-color);
 }
 
 .guarantee-title {
@@ -78,8 +90,7 @@
 }
 
 .guarantee-big-icon {
-    height: 60px;
-    width: 60px;
+    height: 100px;
 }
 
 .guarantee-big-icon path {

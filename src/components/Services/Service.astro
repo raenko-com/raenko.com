@@ -1,0 +1,35 @@
+---
+import "./Services.css";
+import ArrowRight from "src/assets/images/arrow-right.svg";
+
+export interface ServiceProps {
+  title: string;
+  icon: string;
+  background: string;
+  description: string;
+  cost: string;
+  tags: string[];
+}
+
+const { title, icon, background, description, cost, tags } =
+  Astro.props as ServiceProps;
+---
+
+<a href="#" class="service-container" style={`background-image: ${background}`}>
+  <div class="service-header">
+    <img src={icon} alt={title} class="service-icon" />
+    <h3 class="service-title">{title}</h3>
+    <p class="service-description">{description}</p>
+  </div>
+  <div class="service-footer">
+    <div class="service-tags">
+      {tags.map(tag => (
+        <span class="service-tag">{tag}</span>
+      ))}
+    </div>
+    <div class="service-details">
+      <p class="service-cost">{cost}</p>
+      <ArrowRight class="service-arrow-icon" />
+    </div>
+  </div>
+</a>

@@ -1,0 +1,20 @@
+---
+import "./Contacts.css";
+import { data } from "src/data";
+---
+
+<div class="feedback-contacts">
+    <h3 class="feedback-contacts-title">Ответим в течение часа</h3>
+    <p class="feedback-contacts-description">Пишите, как вам удобнее. Обсудим задачу и предложим решение без лишних обязательств.</p>
+    <div class="feedback-contacts-list">
+        {data.contacts.slice(0, 4).map(({ icon: Icon, name, description, link }) => (
+        <a href={link} class="feedback-contact">
+            <Icon class="feedback-contact-icon" />
+            <div class="feedback-contact-info">
+                <span class="feedback-contact-name">{name}</span>
+                <span class="feedback-contact-description">{description}</span>
+            </div>
+        </a>
+        ))}
+    </div>
+</div>

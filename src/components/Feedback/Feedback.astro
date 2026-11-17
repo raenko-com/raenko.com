@@ -1,0 +1,61 @@
+---
+import "./Feedback.css";
+import { Title } from "src/components";
+import checkboxOff from "src/assets/images/checkbox-off.svg?url";
+import checkboxOn from "src/assets/images/checkbox-on.svg?url";
+import Contacts from "./Contacts.astro";
+---
+
+<div class="feedback" id="feedback">
+  <Title
+    text="Связаться с нами"
+    subtitle="Расскажите о задаче! обсудим подходящее решение."
+  />
+  <div class="feedback-container">
+    <Contacts />
+    <form class="feedback-form">
+      <input class="feedback-input" type="text" placeholder="Имя" required />
+      <input
+        class="feedback-input"
+        type="tel"
+        placeholder="Номер телефона"
+        required
+      />
+      <input
+        class="feedback-input"
+        type="text"
+        placeholder="Telegram или MAX"
+        required
+      />
+      <textarea class="feedback-textarea" placeholder="Расскажите о вашей задаче"
+      ></textarea>
+      <div class="feedback-consent">
+        <input
+          class="feedback-consent-input"
+          type="checkbox"
+          id="consent"
+          name="consent"
+          value="no"
+          required
+        />
+        <label class="feedback-consent-label" for="consent">
+          <span class="feedback-consent-icon" aria-hidden="true">
+            <img
+              class="checkbox-off"
+              src={checkboxOff}
+              alt=""
+            />
+            <img
+              class="checkbox-on"
+              src={checkboxOn}
+              alt=""
+            />
+          </span>
+          <span>Согласен на обработку персональных данных</span>
+        </label>
+      </div>
+      <button class="feedback-button" type="submit">Отправить</button>
+      <p class="feedback-info">На связи с 9:00 по 20:00 каждый день</p>
+    </form>
+  </div>
+</div>

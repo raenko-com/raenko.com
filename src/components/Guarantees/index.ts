@@ -1,0 +1,1 @@
+export { default as Guarantees } from "./Guarantees.astro";

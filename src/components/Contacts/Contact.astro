@@ -1,0 +1,21 @@
+---
+import type { SvgComponent } from "astro/types";
+import "./Contacts.css";
+
+export interface ContactProps {
+  icon: SvgComponent;
+  name: string;
+  description: string;
+  link: string;
+}
+
+const { icon: Icon, name, description, link } = Astro.props as ContactProps;
+---
+
+<a href={link} class="contact">
+  <Icon class="contact-icon" />
+  <div class="contact-info">
+    <span class="contact-name">{name}</span>
+    <span class="contact-description">{description}</span>
+  </div>
+</a>

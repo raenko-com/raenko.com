@@ -1,0 +1,16 @@
+---
+import "./Title.css";
+
+export interface TitleProps {
+  text: string;
+  subtitle: string;
+  white: boolean;
+}
+
+const { text, subtitle, white } = Astro.props as TitleProps;
+---
+
+<div class:list={['title-container', white ? 'white' : '']}>
+  <h2 class="title-text">{text}</h2>
+  <h3 class="title-subtitle">{subtitle}</h3>
+</div>
